@@ -38,14 +38,39 @@ public class Player : MonoBehaviour {
 
 		}
 	
-		if (Input.GetKey (KeyCode.RightArrow) && rb.velocity.x < 5.0f) {
+		else if (Input.GetKey (KeyCode.RightArrow) && rb.velocity.x < 5.0f) {
 			rb.velocity += new Vector2 (+speed, 0); 
 			temp.x = 1;
 			this.transform.localScale = temp; 
 		}
 
-		// PIED SAUT 
-		if (Input.GetKey (KeyCode.Space)
+        else
+        {
+            if (rb.velocity.x > 0)
+            {
+                if (rb.velocity.x - speed <= 0)
+                {
+                    rb.velocity -= new Vector2(rb.velocity.x, 0);
+                }
+                else
+                {
+                    rb.velocity += new Vector2(-speed, 0);
+                }
+            }
+            else
+            {
+                if (rb.velocity.x + speed >= 0)
+                {
+                    rb.velocity += new Vector2(rb.velocity.x, 0);
+                }
+                else
+                {
+                    rb.velocity += new Vector2(speed, 0);
+                }
+            }
+        }
+        // PIED SAUT 
+        if (Input.GetKey (KeyCode.Space)
 			&& (Physics2D.OverlapBox(new Vector2 (feet.transform.position.x, feet.transform.position.y), new Vector2 (0.728853f, 0.1633179f),0,isJumpable)))
 			rb.velocity = new Vector2 (rb.velocity.x, jumpPower);
 
