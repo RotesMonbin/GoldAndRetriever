@@ -15,6 +15,7 @@ TagManager:
   - 
   - 
   - 
+  - Enemies
   - 
   - 
   - 
@@ -24,6 +25,7 @@ TagManager:
   - 
   - 
   - 
+  - decors
   - 
   - 
   - 
@@ -33,9 +35,7 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
-  - 
+  - Player
   - 
   m_SortingLayers:
   - name: Default
