@@ -582,6 +582,7 @@ MonoBehaviour:
   jumpPower: 5.5
   rb: {fileID: 50792270509024428}
   feet: {fileID: 1481170544471804}
+  capsuleCollider: {fileID: 70758799268058154}
   isJumpable:
     serializedVersion: 2
     m_Bits: 1048576
@@ -590,10 +591,13 @@ MonoBehaviour:
   bomb: {fileID: 0}
   bombThrow: 0
   toucheDroite: 100
+  J1actif: 0
   toucheGauche: 113
   toucheSaut: 122
   toucheBomb: 102
   toucheAccroupi: 274
+  toucheAction: 103
+  rope: {fileID: 1718647762000076, guid: 64b11e0ce7de94a4b94746f3c5ecbe63, type: 2}
 --- !u!124 &124672591619587540
 Behaviour:
   m_ObjectHideFlags: 1

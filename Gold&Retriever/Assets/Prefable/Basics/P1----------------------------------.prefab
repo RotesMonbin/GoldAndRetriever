@@ -500,11 +500,13 @@ MonoBehaviour:
   bomb: {fileID: 1769960141452492, guid: c660ea44e85fa4f48899cd54630f2802, type: 2}
   bombThrow: 15
   toucheDroite: 275
+  J1actif: 0
   toucheGauche: 276
   toucheSaut: 273
-  toucheBomb: 102
+  toucheBomb: 109
   toucheAccroupi: 274
-  toucheAction: 32
+  toucheAction: 108
+  rope: {fileID: 1718647762000076, guid: 64b11e0ce7de94a4b94746f3c5ecbe63, type: 2}
 --- !u!114 &114878247669317280
 MonoBehaviour:
   m_ObjectHideFlags: 1

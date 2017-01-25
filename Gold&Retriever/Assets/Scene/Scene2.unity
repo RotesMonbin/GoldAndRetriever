@@ -565,6 +565,11 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
+--- !u!70 &115983020 stripped
+CapsuleCollider2D:
+  m_PrefabParentObject: {fileID: 70758799268058154, guid: 9a154be1d595d0d438e46a52b66e9305,
+    type: 2}
+  m_PrefabInternal: {fileID: 1038283057}
 --- !u!1 &179160826
 GameObject:
   m_ObjectHideFlags: 0
@@ -2615,6 +2620,33 @@ Prefab:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 114598933684071250, guid: 9a154be1d595d0d438e46a52b66e9305,
+        type: 2}
+      propertyPath: toucheAction
+      value: 104
+      objectReference: {fileID: 0}
+    - target: {fileID: 114598933684071250, guid: 9a154be1d595d0d438e46a52b66e9305,
+        type: 2}
+      propertyPath: bomb
+      value: 
+      objectReference: {fileID: 1769960141452492, guid: c660ea44e85fa4f48899cd54630f2802,
+        type: 2}
+    - target: {fileID: 114598933684071250, guid: 9a154be1d595d0d438e46a52b66e9305,
+        type: 2}
+      propertyPath: bombThrow
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 114598933684071250, guid: 9a154be1d595d0d438e46a52b66e9305,
+        type: 2}
+      propertyPath: rope
+      value: 
+      objectReference: {fileID: 1718647762000076, guid: 64b11e0ce7de94a4b94746f3c5ecbe63,
+        type: 2}
+    - target: {fileID: 114598933684071250, guid: 9a154be1d595d0d438e46a52b66e9305,
+        type: 2}
+      propertyPath: capsuleCollider
+      value: 
+      objectReference: {fileID: 115983020}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9a154be1d595d0d438e46a52b66e9305, type: 2}
   m_IsPrefabParent: 0
