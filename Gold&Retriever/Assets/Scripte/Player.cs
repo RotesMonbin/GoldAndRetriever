@@ -17,6 +17,13 @@ public class Player : MonoBehaviour {
 	private float jumpTime = 0f ; 
 	public Animator animator ;
 
+
+	// Touche clavier :
+
+	public KeyCode toucheDroite; 
+	public KeyCode toucheGauche; 
+	public KeyCode toucheSaut; 
+
 	//private Manager manager ; 
 	// Use this for initialization
 	void Start () {
@@ -31,14 +38,14 @@ public class Player : MonoBehaviour {
 
 		
 		Vector3 temp = this.transform.localScale;
-		if (Input.GetKey (KeyCode.LeftArrow) && rb.velocity.x > -5.0f) {
+		if (Input.GetKey (toucheGauche) && rb.velocity.x > -5.0f) {
 			rb.velocity += new Vector2 (-speed, 0); 
 			temp.x = -1;
 			this.transform.localScale = temp; 
 
 		}
 	
-		else if (Input.GetKey (KeyCode.RightArrow) && rb.velocity.x < 5.0f) {
+		else if (Input.GetKey (toucheDroite) && rb.velocity.x < 5.0f) {
 			rb.velocity += new Vector2 (+speed, 0); 
 			temp.x = 1;
 			this.transform.localScale = temp; 
@@ -70,7 +77,7 @@ public class Player : MonoBehaviour {
             }
         }
         // PIED SAUT 
-        if (Input.GetKey (KeyCode.Space)
+		if (Input.GetKey (toucheSaut)
 			&& (Physics2D.OverlapBox(new Vector2 (feet.transform.position.x, feet.transform.position.y), new Vector2 (0.728853f, 0.1633179f),0,isJumpable)))
 			rb.velocity = new Vector2 (rb.velocity.x, jumpPower);
 
