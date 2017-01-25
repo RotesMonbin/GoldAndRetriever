@@ -501,7 +501,8 @@ MonoBehaviour:
   toucheDroite: 275
   toucheGauche: 276
   toucheSaut: 273
-  toucheBomb: 102
+  toucheBomb: 306
+  toucheAccroupi: 274
 --- !u!114 &114878247669317280
 MonoBehaviour:
   m_ObjectHideFlags: 1
