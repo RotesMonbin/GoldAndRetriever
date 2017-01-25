@@ -16,17 +16,18 @@ public class Player : MonoBehaviour {
 	public float jumpDuration = 0.2f ;
 	private float jumpTime = 0f ; 
 	public Animator animator ;
-
-
+    public GameObject bomb;
+    public float bombThrow;
 	// Touche clavier :
 
 	public KeyCode toucheDroite; 
 	public KeyCode toucheGauche; 
-	public KeyCode toucheSaut; 
+	public KeyCode toucheSaut;
+    public KeyCode toucheBomb;
 
-	//private Manager manager ; 
-	// Use this for initialization
-	void Start () {
+    //private Manager manager ; 
+    // Use this for initialization
+    void Start () {
 		//manager = GameObject.Find ("Manager").GetComponent<Manager> ();
 	}
 	
@@ -75,6 +76,14 @@ public class Player : MonoBehaviour {
                     rb.velocity += new Vector2(speed, 0);
                 }
             }
+        }
+
+        //BOMBE
+        if(Input.GetKeyDown(toucheBomb))
+        {
+            GameObject b = GameObject.Instantiate(bomb);
+            b.transform.position = this.transform.position;
+            b.GetComponent<Rigidbody2D>().velocity = new Vector2(bombThrow * this.transform.localScale.x, bombThrow);
         }
         // PIED SAUT 
 		if (Input.GetKey (toucheSaut)
