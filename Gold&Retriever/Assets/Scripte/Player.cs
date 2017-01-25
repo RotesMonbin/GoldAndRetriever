@@ -24,6 +24,7 @@ public class Player : MonoBehaviour {
 	public KeyCode toucheGauche; 
 	public KeyCode toucheSaut;
     public KeyCode toucheBomb;
+    public KeyCode toucheAccroupi;
 
     //private Manager manager ; 
     // Use this for initialization
@@ -83,7 +84,15 @@ public class Player : MonoBehaviour {
         {
             GameObject b = GameObject.Instantiate(bomb);
             b.transform.position = this.transform.position;
-            b.GetComponent<Rigidbody2D>().velocity = new Vector2(bombThrow * this.transform.localScale.x, bombThrow);
+            if (Input.GetKey(toucheAccroupi))
+            {
+                b.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+
+            }
+            else
+            {
+                b.GetComponent<Rigidbody2D>().velocity = new Vector2(bombThrow * this.transform.localScale.x, bombThrow);
+            }
         }
         // PIED SAUT 
 		if (Input.GetKey (toucheSaut)

@@ -496,9 +496,12 @@ MonoBehaviour:
     m_Bits: 1048576
   jumpDuration: 0.2
   animator: {fileID: 95052670525783728}
+  bomb: {fileID: 1769960141452492, guid: c660ea44e85fa4f48899cd54630f2802, type: 2}
+  bombThrow: 15
   toucheDroite: 275
   toucheGauche: 276
   toucheSaut: 273
+  toucheBomb: 102
 --- !u!114 &114878247669317280
 MonoBehaviour:
   m_ObjectHideFlags: 1
