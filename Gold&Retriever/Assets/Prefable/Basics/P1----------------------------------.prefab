@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 212669907723831516}
   m_Layer: 30
   m_Name: PLAYER1----------------------------
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -273,7 +273,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1608397027453456}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 146, y: 0, z: 0}
+  m_LocalPosition: {x: 12, y: 4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4311576160578962}
@@ -499,14 +499,17 @@ MonoBehaviour:
   animator: {fileID: 95052670525783728}
   bomb: {fileID: 1769960141452492, guid: c660ea44e85fa4f48899cd54630f2802, type: 2}
   bombThrow: 15
+  J1actif: 1
   toucheDroite: 275
-  J1actif: 0
   toucheGauche: 276
-  toucheSaut: 273
+  toucheHaut: 273
+  toucheSaut: 305
   toucheBomb: 109
   toucheAccroupi: 274
   toucheAction: 108
+  climbSpeed: 5
   rope: {fileID: 1718647762000076, guid: 64b11e0ce7de94a4b94746f3c5ecbe63, type: 2}
+  ropeDeb: {fileID: 1672038747845474, guid: 1a3271d546a28a54fb3ef8a90b02ba1a, type: 2}
 --- !u!114 &114878247669317280
 MonoBehaviour:
   m_ObjectHideFlags: 1

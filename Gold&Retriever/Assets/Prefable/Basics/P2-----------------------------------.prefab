@@ -104,7 +104,6 @@ GameObject:
   - component: {fileID: 20176603159536426}
   - component: {fileID: 92760930771195350}
   - component: {fileID: 124672591619587540}
-  - component: {fileID: 81194544686550964}
   m_Layer: 30
   m_Name: CameraP2
   m_TagString: MainCamera
@@ -206,7 +205,7 @@ GameObject:
   - component: {fileID: 114598933684071250}
   m_Layer: 30
   m_Name: 'PLAYER2---------------------------- '
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -289,7 +288,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1523377290886086}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 5.04, y: 8.17, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4173479359181414}
@@ -445,13 +444,6 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: -0.1491308}
   m_Size: {x: 1.007432, y: 1.4377086}
   m_Direction: 0
---- !u!81 &81194544686550964
-AudioListener:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1404740790962324}
-  m_Enabled: 1
 --- !u!92 &92760930771195350
 Behaviour:
   m_ObjectHideFlags: 1
@@ -590,14 +582,17 @@ MonoBehaviour:
   animator: {fileID: 95755103511524838}
   bomb: {fileID: 1769960141452492, guid: c660ea44e85fa4f48899cd54630f2802, type: 2}
   bombThrow: 15
-  toucheDroite: 100
   J1actif: 0
+  toucheDroite: 100
   toucheGauche: 113
+  toucheHaut: 0
   toucheSaut: 122
   toucheBomb: 102
   toucheAccroupi: 274
   toucheAction: 103
+  climbSpeed: 0
   rope: {fileID: 1718647762000076, guid: 64b11e0ce7de94a4b94746f3c5ecbe63, type: 2}
+  ropeDeb: {fileID: 1672038747845474, guid: 1a3271d546a28a54fb3ef8a90b02ba1a, type: 2}
 --- !u!124 &124672591619587540
 Behaviour:
   m_ObjectHideFlags: 1

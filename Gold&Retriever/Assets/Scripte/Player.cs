@@ -12,40 +12,50 @@ public class Player : MonoBehaviour {
 	public GameObject feet ;
     public CapsuleCollider2D capsuleCollider;
 
-	private bool isJumping = false;
+
 	public LayerMask isJumpable ; 
 	public float jumpDuration = 0.2f ;
-	private float jumpTime = 0f ; 
 	public Animator animator ;
     public GameObject bomb;
     public float bombThrow;
+
+	private float jumpTime = 0f ; 
+	private bool isJumping = false;
+
     private bool holdSomething=false;
     private GameObject heldObject;
 
     // Touche clavier :
+	public bool J1actif; 
 
     public KeyCode toucheDroite; 
-	public bool J1actif; 
-	public KeyCode toucheGauche; 
+	public KeyCode toucheGauche;
+	public KeyCode toucheHaut;
 	public KeyCode toucheSaut;
     public KeyCode toucheBomb;
     public KeyCode toucheAccroupi;
     public KeyCode toucheAction;
+
 	private bool dontMove = false ; 
 
 	private List<GameObject> listRope; 
 
+
+	public bool onLadder { get ; set; } 
+
+	[SerializeField]
+	private float climbSpeed; 
 
 	//private Manager manager ; 
 
 
 	// Prefab : 
 	public GameObject rope ; 
+	public GameObject ropeDeb ; 
 
     // Use this for initialization
     void Start () {
 		//manager = GameObject.Find ("Manager").GetComponent<Manager> ();
-
 		listRope = new List<GameObject>() ; 
 	}
 	
@@ -111,15 +121,15 @@ public class Player : MonoBehaviour {
 				animator.SetBool ("crush", true);
 			else
 				animator.SetBool ("crush", false);
+
+		
+			touchLadder (); 
+
 		}
 
 
-        //Action
-
-        if (Input.GetKeyDown(toucheAction))
-        {
-            doAction();
-        }
+		// touche action 
+		actionOn (temp.x);  
 
         // DEPLACE OBJET TENU
         if (holdSomething)
@@ -134,17 +144,38 @@ public class Player : MonoBehaviour {
 		if (rb.velocity.y == 0.0f)
 			animator.SetFloat ("vitesse", Mathf.Abs (rb.velocity.x));  
 
-		if (!J1actif && Input.GetKeyDown (toucheAction) && isTouchingGround()) {
-			ropeAction (temp.x); 
-			rb.velocity = new Vector2 (0, 0); // a voir si enlever ( fréinage direct) 
-			dontMove = true;
-		}
-		if (!J1actif && Input.GetKeyUp (toucheAction)) {
-			ropeActionReverse (temp.x); 
-			dontMove = false;
-		}
-			
 	}
+		
+	#region Touche action
+	void actionOn(float direction) 
+	{
+		//Action
+		if (Input.GetKeyDown(toucheAction))
+		{
+			if (!J1actif) { // fille 
+				if (isTouchingGround ()) {
+					ropeAction (direction); 
+					rb.velocity = new Vector2 (0, 0); // a voir si enlever ( fréinage direct) 
+					dontMove = true;
+				}
+			} else {
+				doAction();
+
+			}
+
+		}
+
+		if (Input.GetKeyUp (toucheAction)) {
+			if (!J1actif) {
+				ropeActionReverse (); 
+				dontMove = false;
+			}
+
+
+		}
+
+	}
+	#endregion 
 
 	// ENEMIES
 	void OnCollisionEnter2D(Collision2D coll)
@@ -161,6 +192,7 @@ public class Player : MonoBehaviour {
 			rb.velocity += new Vector2 (0, jumpPower*3);
 			animator.SetBool ("Saut", true);
 		}
+
 	}
 
 
@@ -170,9 +202,8 @@ public class Player : MonoBehaviour {
 		if (coll.gameObject.tag == "deathZone") {
 			//manager.ChangementMort (); 
 			dead (); 
-		}
+		}	
 	}
-
 
 	void dead()
 	{
@@ -220,6 +251,7 @@ public class Player : MonoBehaviour {
         }
        
     }
+	// si les pied touch le sol
 	bool isTouchingGround()
 	{
 		return (Physics2D.OverlapBox (new Vector2 (feet.transform.position.x, feet.transform.position.y), new Vector2 (0.728853f, 0.1633179f), 0, isJumpable));
@@ -227,36 +259,79 @@ public class Player : MonoBehaviour {
 
 	void ropeAction(float direction)
 	{
-		GameObject ropei = Instantiate (rope); 
-
+		GameObject ropei = Instantiate (ropeDeb); 
 		Vector3 temp = this.transform.position; 
-		temp.x = temp.x + direction - 0.2f;
+
+		Vector3 temp2 = this.transform.localScale; 
+		temp2.x = direction; 
+		ropei.transform.localScale = temp2; 
+		temp.x = temp.x + direction * 0.8f;
 		temp.y = temp.y - 0.373f;
 		ropei.transform.position = temp; 
-
 		listRope.Add (ropei); 
-
-		float ftemp = 0.0f; 
+	
 		Vector3 tempWhile = ropei.transform.position ; 
-		/*while(Physics2D.OverlapBox (new Vector2 (tempWhile.x,tempWhile.y - 1), new Vector2 (0.2409988f, 0.358952f), 0, isJumpable))
+		float ftemp = 0.0f; 
+
+		while(!Physics2D.OverlapBox (new Vector2 (tempWhile.x,tempWhile.y - 1), new Vector2 (0.2409988f, 0.358952f), 0, isJumpable) && ftemp != -10.0f)
 		{
 			ftemp -= 1.0f; 
 			ropei = Instantiate (rope); 
 			temp = this.transform.position; 
-			temp.x = temp.x + direction - 0.2f;
+			temp2 = this.transform.localScale; 
+
+			ropei.transform.parent = listRope [0].transform; 
+				
+			temp2.x = direction; 
+			ropei.transform.localScale = temp2; 
+			temp.x = temp.x + direction * 0.8f;
 			temp.y = temp.y - 0.373f + ftemp;
 			ropei.transform.position = temp; 
 
 			listRope.Add (ropei); 
+			tempWhile = ropei.transform.position ; 
 		}
-*/
+
+
+		BoxCollider2D c2D = listRope [0].AddComponent<BoxCollider2D>() ;
+		c2D.isTrigger = true;
+		c2D.size = new Vector2 (0.25f,listRope.Count); 
+		c2D.offset = new Vector2(0, -listRope.Count / 2 ) ; 
 	}
 
-	void ropeActionReverse(float direction)
+	void ropeActionReverse()
 	{
-		foreach (GameObject i in listRope) {
-			Destroy (i); 
+		Debug.Log ("lalalalalalal : "+ listRope.Count ); 
+		for(int i = 1; i < listRope.Count ; i++)
+			Destroy (listRope[i]); 
+		Destroy (listRope[0]); 
+		listRope.Clear ();
+	}	
+
+
+	void touchLadder() 
+	{
+		Collider2D[] cols = Physics2D.OverlapCapsuleAll(capsuleCollider.transform.position, capsuleCollider.size, capsuleCollider.direction, 0);
+
+		onLadder = false; 
+		foreach (Collider2D c in cols)
+			if (c.gameObject.tag == "rope") 
+				onLadder = true; 
+		
+		animator.SetBool ("Climb", onLadder);		
+		if (onLadder && J1actif) {
+			if (Input.GetKey (toucheHaut))
+				rb.velocity = new Vector2 (0, speed * climbSpeed); 
+			else if (Input.GetKey (toucheAccroupi))
+				rb.velocity = new Vector2 (0, -speed * climbSpeed); 
+		
+			rb.gravityScale = 0;
+		} else {
+			rb.gravityScale = 1.2f;
+			animator.SetBool ("Climb", false);
 		}
+
 	}
+		
 }
 

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Breakable
   - unBreakable
+  - rope
   layers:
   - Default
   - TransparentFX
