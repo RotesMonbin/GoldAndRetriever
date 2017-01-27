@@ -129,7 +129,7 @@ public class Player : MonoBehaviour {
 
 
 		// touche action 
-		actionOn (temp.x);  
+		actionOn ();  
 
         // DEPLACE OBJET TENU
         if (holdSomething)
@@ -147,14 +147,14 @@ public class Player : MonoBehaviour {
 	}
 		
 	#region Touche action
-	void actionOn(float direction) 
+	void actionOn() 
 	{
 		//Action
 		if (Input.GetKeyDown(toucheAction))
 		{
 			if (!J1actif) { // fille 
 				if (isTouchingGround ()) {
-					ropeAction (direction); 
+					ropeAction (); 
 					rb.velocity = new Vector2 (0, 0); // a voir si enlever ( fréinage direct) 
 					dontMove = true;
 				}
@@ -167,8 +167,10 @@ public class Player : MonoBehaviour {
 
 		if (Input.GetKeyUp (toucheAction)) {
 			if (!J1actif) {
-				ropeActionReverse (); 
-				dontMove = false;
+				if (isTouchingGround ()) {
+					ropeActionReverse (); 
+					dontMove = false;
+				}
 			}
 
 
@@ -177,6 +179,7 @@ public class Player : MonoBehaviour {
 	}
 	#endregion 
 
+	#region Collision 2D
 	// ENEMIES
 	void OnCollisionEnter2D(Collision2D coll)
 	{
@@ -194,8 +197,7 @@ public class Player : MonoBehaviour {
 		}
 
 	}
-
-
+		
 	// Death zone 
 	void OnTriggerEnter2D(Collider2D coll)
 	{
@@ -205,11 +207,14 @@ public class Player : MonoBehaviour {
 		}	
 	}
 
+	#endregion
+
 	void dead()
 	{
 		SceneManager.LoadScene (SceneManager.GetActiveScene ().name); 
 	}
 
+	#region Porte obj
     void moveHeldObject()
     {
         Transform t = heldObject.transform;
@@ -251,21 +256,19 @@ public class Player : MonoBehaviour {
         }
        
     }
-	// si les pied touch le sol
-	bool isTouchingGround()
-	{
-		return (Physics2D.OverlapBox (new Vector2 (feet.transform.position.x, feet.transform.position.y), new Vector2 (0.728853f, 0.1633179f), 0, isJumpable));
-	}
+	#endregion
 
-	void ropeAction(float direction)
+
+	#region Rope Action 
+	void ropeAction()
 	{
 		GameObject ropei = Instantiate (ropeDeb); 
 		Vector3 temp = this.transform.position; 
 
 		Vector3 temp2 = this.transform.localScale; 
-		temp2.x = direction; 
+		temp2.x = direction(); 
 		ropei.transform.localScale = temp2; 
-		temp.x = temp.x + direction * 0.8f;
+		temp.x = temp.x + direction() * 0.8f;
 		temp.y = temp.y - 0.373f;
 		ropei.transform.position = temp; 
 		listRope.Add (ropei); 
@@ -281,10 +284,9 @@ public class Player : MonoBehaviour {
 			temp2 = this.transform.localScale; 
 
 			ropei.transform.parent = listRope [0].transform; 
-				
-			temp2.x = direction; 
+
 			ropei.transform.localScale = temp2; 
-			temp.x = temp.x + direction * 0.8f;
+			temp.x = temp.x + direction() * 0.8f;
 			temp.y = temp.y - 0.373f + ftemp;
 			ropei.transform.position = temp; 
 
@@ -301,14 +303,12 @@ public class Player : MonoBehaviour {
 
 	void ropeActionReverse()
 	{
-		Debug.Log ("lalalalalalal : "+ listRope.Count ); 
 		for(int i = 1; i < listRope.Count ; i++)
 			Destroy (listRope[i]); 
 		Destroy (listRope[0]); 
 		listRope.Clear ();
 	}	
-
-
+		
 	void touchLadder() 
 	{
 		Collider2D[] cols = Physics2D.OverlapCapsuleAll(capsuleCollider.transform.position, capsuleCollider.size, capsuleCollider.direction, 0);
@@ -332,6 +332,23 @@ public class Player : MonoBehaviour {
 		}
 
 	}
-		
+	#endregion 
+
+
+
+	#region Utile : direction, toucheGround...
+	// Direction du joueur ; 1 regarde à droite -1 à gauche 
+	float direction() 
+	{
+		return this.transform.localScale.x;
+	}
+
+	// si les pied touch le sol
+	bool isTouchingGround()
+	{
+		return (Physics2D.OverlapBox (new Vector2 (feet.transform.position.x, feet.transform.position.y), new Vector2 (0.728853f, 0.1633179f), 0, isJumpable));
+	}
+	#endregion
+
 }
 
