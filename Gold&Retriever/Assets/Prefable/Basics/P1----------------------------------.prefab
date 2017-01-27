@@ -88,6 +88,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4783195775843840}
+  - component: {fileID: 114406540973366736}
   m_Layer: 5
   m_Name: LifeHUDJ1
   m_TagString: Untagged
@@ -499,6 +500,20 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 
+--- !u!114 &114406540973366736
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1498036277063312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac69147ce19d82641a62ea978b478493, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  J1actif: 1
+  gameObjLife: {fileID: 1812933276482008, guid: b3cd965f369701e49baa9f2860ccc7b5,
+    type: 2}
 --- !u!114 &114557379022250218
 MonoBehaviour:
   m_ObjectHideFlags: 1
