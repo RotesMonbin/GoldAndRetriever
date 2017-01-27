@@ -9,15 +9,12 @@ public class ManagerJoueur : MonoBehaviour {
 	[SerializeField]
 	private GameObject Joueur1; 
 	private int lifeJ1; 
+	private int lifeJ1Max; 
 
 	[SerializeField]
 	private GameObject Joueur2; 
 	private int lifeJ2; 
-
-	[SerializeField]
-	private GameObject hudJ1Life; 
-	[SerializeField]
-	private GameObject hudJ2Life; 
+	private int lifeJ2Max; 
 
 	// cash
 	private int cashJ1; 
@@ -42,6 +39,8 @@ public class ManagerJoueur : MonoBehaviour {
 		
 		lifeJ1 = 3; 
 		lifeJ2 = 3;
+		lifeJ1Max = 3;
+		lifeJ2Max = 3;
 
 		bombeJ1 = 2;
 		bombeJ2 = 2;
@@ -95,6 +94,16 @@ public class ManagerJoueur : MonoBehaviour {
 		{
 			lifeJ2 += lifeInscrease; 
 		}
+	}
+
+	public int getLifeMax(bool J1actif)
+	{
+		return J1actif ? lifeJ1Max : lifeJ2Max;
+	}
+
+	public int getLife(bool J1actif)
+	{
+		return J1actif ? lifeJ1 : lifeJ2;
 	}
 	#endregion
 
