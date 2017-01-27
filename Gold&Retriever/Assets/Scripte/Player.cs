@@ -177,10 +177,7 @@ public class Player : MonoBehaviour {
 					dontMove = false;
 				}
 			}
-
-
 		}
-
 	}
 	#endregion 
 
@@ -230,47 +227,47 @@ public class Player : MonoBehaviour {
         t.position = new Vector3(this.transform.position.x + 0.2f * this.transform.localScale.x,
             this.transform.position.y + 0.2f, this.transform.position.z);
         t.localScale = this.transform.localScale;
-
     }
 
     void doAction()
     {
-        Collider2D col = null;
-        Collider2D[] cols = Physics2D.OverlapCapsuleAll(capsuleCollider.transform.position, capsuleCollider.size, capsuleCollider.direction, 0);
 
-        if (cols.Length>1)
+        if (holdSomething)
         {
-            foreach (Collider2D c in cols)
+            moveHeldObject();
+            if (heldObject.tag == "Player")
             {
-                if (c.gameObject != this.gameObject)
-                {
-                    col = c;
-                }
+                heldObject.GetComponent<Player>().animator.SetBool("Held", false);
+                heldObject.GetComponent<Player>().dontMove = false;
             }
-            if (holdSomething)
+            heldObject.GetComponent<Rigidbody2D>().velocity = new Vector2(20 * this.transform.localScale.x, 10);
+            holdSomething = false;
+        }
+        else
+        {
+            Collider2D col = null;
+            Collider2D[] cols = Physics2D.OverlapCapsuleAll(capsuleCollider.transform.position, capsuleCollider.size, capsuleCollider.direction, 0);
+            if (cols.Length > 1)
             {
-                moveHeldObject();
-                if (col.gameObject.tag == "Player")
+                foreach (Collider2D c in cols)
                 {
-                    col.gameObject.GetComponent<Player>().animator.SetBool("Held", false);
-                    col.gameObject.GetComponent<Player>().dontMove = false;
+                    if (c.gameObject != this.gameObject)
+                    {
+                        col = c;
+                    }
                 }
-                heldObject.GetComponent<Rigidbody2D>().velocity = new Vector2(20 * this.transform.localScale.x, 10);
-                holdSomething = false;
-            }
-            else
-            {
-                if (col.gameObject.tag == "Player")
+                if (col.gameObject.tag == "Player" || col.gameObject.tag == "Pickup")
                 {
-
+                    if (col.gameObject.tag == "Player")
+                    {
+                        col.gameObject.GetComponent<Player>().animator.SetBool("Held", true);
+                        col.gameObject.GetComponent<Player>().dontMove = true;
+                    }
                     heldObject = col.gameObject;
-                    col.gameObject.GetComponent<Player>().animator.SetBool("Held", true);
-                    col.gameObject.GetComponent<Player>().dontMove = true;
                     holdSomething = true;
                 }
             }
         }
-       
     }
 	#endregion
 
