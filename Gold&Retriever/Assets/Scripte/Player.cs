@@ -63,8 +63,8 @@ public class Player : MonoBehaviour {
 	void Update ()
 	{
 
-		animator.SetBool ("Walk", 	rb.velocity.x != 0.0f); // walk
-		animator.SetBool ("Jump", 	rb.velocity.y != 0.0f); // walk
+		animator.SetBool ("Walk", 	rb.velocity.x != 0.0f ); // walk
+		animator.SetBool ("Jump", 	rb.velocity.y != 0.0f ); // walk
 
 		Vector3 temp = this.transform.localScale;
 		if (!dontMove) {
@@ -221,6 +221,7 @@ public class Player : MonoBehaviour {
         t.position = new Vector3(this.transform.position.x + 0.2f * this.transform.localScale.x,
             this.transform.position.y + 0.2f, this.transform.position.z);
         t.localScale = this.transform.localScale;
+
     }
 
     void doAction()
@@ -239,17 +240,23 @@ public class Player : MonoBehaviour {
             }
             if (holdSomething)
             {
-                //col.gameObject.GetComponent<Player>(); activate
+                moveHeldObject();
+                if (col.gameObject.tag == "Player")
+                {
+                    col.gameObject.GetComponent<Player>().animator.SetBool("Held", false);
+                    col.gameObject.GetComponent<Player>().dontMove = false;
+                }
                 heldObject.GetComponent<Rigidbody2D>().velocity = new Vector2(20 * this.transform.localScale.x, 10);
                 holdSomething = false;
-                //heldObject = null;
             }
             else
             {
                 if (col.gameObject.tag == "Player")
                 {
+
                     heldObject = col.gameObject;
-                    //col.gameObject.GetComponent<Player>(); inactivate
+                    col.gameObject.GetComponent<Player>().animator.SetBool("Held", true);
+                    col.gameObject.GetComponent<Player>().dontMove = true;
                     holdSomething = true;
                 }
             }
