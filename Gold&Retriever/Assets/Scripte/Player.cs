@@ -203,13 +203,25 @@ public class Player : MonoBehaviour {
 		}	
 
 		if (coll.gameObject.tag == "Coins") {
-			managerJoueur.GetComponent<ManagerJoueur> ().cashUp (1, J1actif); 
-			Destroy (coll.gameObject); 
+			if (J1actif) {
+				managerJoueur.GetComponent<ManagerJoueur> ().cashUp (1, true); 
+				Destroy (coll.gameObject); 
+			}
+			if (!J1actif) {
+				managerJoueur.GetComponent<ManagerJoueur> ().cashUp (1, false); 
+				Destroy (coll.gameObject); 
+			}
 		}	
 
 		if (coll.gameObject.tag == "bombeCaisse") {
-			managerJoueur.GetComponent<ManagerJoueur> ().bombeUp(1, J1actif); 
-			Destroy (coll.gameObject); 
+			if (J1actif) {
+				managerJoueur.GetComponent<ManagerJoueur> ().bombeUp (1, true); 
+				Destroy (coll.gameObject); 
+			}
+			if (!J1actif) {
+				managerJoueur.GetComponent<ManagerJoueur> ().bombeUp (1, false); 
+				Destroy (coll.gameObject); 
+			}
 		}	
 	}
 

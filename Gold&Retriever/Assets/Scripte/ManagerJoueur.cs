@@ -9,12 +9,12 @@ public class ManagerJoueur : MonoBehaviour {
 	[SerializeField]
 	private GameObject Joueur1; 
 	private int lifeJ1; 
-	private int lifeJ1Max; 
+	private int lifeJ1Max= 3; 
 
 	[SerializeField]
 	private GameObject Joueur2; 
 	private int lifeJ2; 
-	private int lifeJ2Max; 
+	private int lifeJ2Max= 3; 
 
 	// cash
 	private int cashJ1; 

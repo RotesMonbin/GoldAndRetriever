@@ -15,12 +15,10 @@ public class Life : MonoBehaviour {
 
 		int nblife = managerJoueur.getLifeMax(J1actif) ; 
 		GameObject LifeGameObj; 
-		while (nblife ==  0) {
-
+		while (nblife !=  0) {
 			LifeGameObj = Instantiate (gameObjLife); 
 			Vector3 temp = this.transform.position; 
-			temp.x += nblife - managerJoueur.getLifeMax(J1actif); 
-			temp.y += 0.5f;
+			temp.x += nblife - managerJoueur.getLifeMax(J1actif) + 2.25f; 
 			LifeGameObj.transform.parent = this.transform;
 			LifeGameObj.transform.position = temp; 
 			nblife--;
