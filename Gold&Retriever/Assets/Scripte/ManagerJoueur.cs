@@ -34,9 +34,15 @@ public class ManagerJoueur : MonoBehaviour {
 	[SerializeField]
 	private Text hudJ2Bombe; 
 
+	private Life lifeScript_J1;  
+	private Life lifeScript_J2;
+
 	// Use this for initialization
 	void Start () {
-		
+
+		lifeScript_J1 = GameObject.Find ("LifeHUDJ1").GetComponent<Life> ();
+		lifeScript_J2 = GameObject.Find ("LifeHUDJ2").GetComponent<Life> ();
+
 		lifeJ1 = 3; 
 		lifeJ2 = 3;
 		lifeJ1Max = 3;
@@ -76,11 +82,16 @@ public class ManagerJoueur : MonoBehaviour {
 	#region life
 	public void lifeDown(int lifeReduice ,  bool J1actif) 
 	{
+
 		if (J1actif) 
 		{
+			//if (lifeJ1 - lifeReduice)
+				 
+			lifeScript_J1.LifeDownAff (); 
 			lifeJ1 -= lifeReduice; 
 		} else 
 		{
+			lifeScript_J2.LifeDownAff(); 
 			lifeJ2 -= lifeReduice; 
 		}
 	}
