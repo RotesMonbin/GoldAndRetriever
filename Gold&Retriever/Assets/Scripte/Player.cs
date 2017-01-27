@@ -46,7 +46,7 @@ public class Player : MonoBehaviour {
 	[SerializeField]
 	private float climbSpeed; 
 
-	//private Manager manager ; 
+	private ManagerJoueur managerJoueur ; 
 
 
 	// Prefab : 
@@ -55,8 +55,9 @@ public class Player : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-		//manager = GameObject.Find ("Manager").GetComponent<Manager> ();
+		managerJoueur = GameObject.Find ("ManagerJoueur").GetComponent<ManagerJoueur> ();
 		listRope = new List<GameObject>() ; 
+
 	}
 	
 	// Update is called once per frame
@@ -95,13 +96,17 @@ public class Player : MonoBehaviour {
 
 			//BOMBE
 			if (Input.GetKeyDown (toucheBomb)) {
-				GameObject b = GameObject.Instantiate (bomb);
-				b.transform.position = this.transform.position;
-				if (Input.GetKey (toucheAccroupi)) {
-					b.GetComponent<Rigidbody2D> ().velocity = new Vector2 (0, 0);
 
-				} else {
-					b.GetComponent<Rigidbody2D> ().velocity = new Vector2 (bombThrow * this.transform.localScale.x, bombThrow);
+				if (managerJoueur.nbBombeOk (J1actif)) {
+					GameObject b = GameObject.Instantiate (bomb);
+					b.transform.position = this.transform.position;
+					if (Input.GetKey (toucheAccroupi)) {
+						b.GetComponent<Rigidbody2D> ().velocity = new Vector2 (0, 0);
+
+					} else {
+						b.GetComponent<Rigidbody2D> ().velocity = new Vector2 (bombThrow * this.transform.localScale.x, bombThrow);
+					}
+					managerJoueur.bombeDown (1, J1actif); 
 				}
 			}
 			// PIED SAUT 
@@ -190,12 +195,6 @@ public class Player : MonoBehaviour {
 		}
 		if (coll.gameObject.tag == "Ennemies" &&  coll.contacts [0].normal.y < 0.5)
 			dead (); 
-
-		if (coll.gameObject.tag == "Champi") {
-			rb.velocity += new Vector2 (0, jumpPower*3);
-			animator.SetBool ("Saut", true);
-		}
-
 	}
 		
 	// Death zone 
@@ -204,6 +203,16 @@ public class Player : MonoBehaviour {
 		if (coll.gameObject.tag == "deathZone") {
 			//manager.ChangementMort (); 
 			dead (); 
+		}	
+
+		if (coll.gameObject.tag == "Coins") {
+			managerJoueur.GetComponent<ManagerJoueur> ().cashUp (1, J1actif); 
+			Destroy (coll.gameObject); 
+		}	
+
+		if (coll.gameObject.tag == "bombeCaisse") {
+			managerJoueur.GetComponent<ManagerJoueur> ().bombeUp(1, J1actif); 
+			Destroy (coll.gameObject); 
 		}	
 	}
 

@@ -7,6 +7,8 @@ TagManager:
   - Breakable
   - unBreakable
   - rope
+  - Coins
+  - bombeCaisse
   layers:
   - Default
   - TransparentFX
