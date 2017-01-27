@@ -14,6 +14,11 @@ public class ManagerJoueur : MonoBehaviour {
 	private GameObject Joueur2; 
 	private int lifeJ2; 
 
+	[SerializeField]
+	private GameObject hudJ1Life; 
+	[SerializeField]
+	private GameObject hudJ2Life; 
+
 	// cash
 	private int cashJ1; 
 	private int cashJ2; 
@@ -23,11 +28,26 @@ public class ManagerJoueur : MonoBehaviour {
 	[SerializeField]
 	private Text hudJ2Cash; 
 
+	// Bombe :
+	private int bombeJ1; 
+	private int bombeJ2; 
+
+	[SerializeField]
+	private Text hudJ1Bombe; 
+	[SerializeField]
+	private Text hudJ2Bombe; 
+
 	// Use this for initialization
 	void Start () {
 		
 		lifeJ1 = 3; 
-		lifeJ2 = 3; 
+		lifeJ2 = 3;
+
+		bombeJ1 = 2;
+		bombeJ2 = 2;
+		hudJ1Bombe.text = "" + bombeJ1; 
+		hudJ2Bombe.text = "" + bombeJ2; 
+
 		cashJ1 = 0; 
 		cashJ2 = 0;
 		hudJ1Cash.text = "" + cashJ1; 
@@ -59,11 +79,63 @@ public class ManagerJoueur : MonoBehaviour {
 	{
 		if (J1actif) 
 		{
-			lifeJ1 += lifeReduice; 
+			lifeJ1 -= lifeReduice; 
 		} else 
 		{
-			lifeJ2 += lifeReduice; 
+			lifeJ2 -= lifeReduice; 
+		}
+	}
+
+	public void lifeUp(int lifeInscrease ,  bool J1actif) 
+	{
+		if (J1actif) 
+		{
+			lifeJ1 += lifeInscrease; 
+		} else 
+		{
+			lifeJ2 += lifeInscrease; 
 		}
 	}
 	#endregion
+
+	#region Bombe
+	public void bombeUp(int bombe, bool J1actif)
+	{
+		if (J1actif)
+			bombeJ1 += bombe; 
+		else 
+			bombeJ2 += bombe; 	
+
+		hudJ1Bombe.text = "" + bombeJ1;
+		hudJ2Bombe.text = "" + bombeJ2;
+	}
+
+	public void bombeDown(int bombe, bool J1actif)
+	{
+		if (J1actif)
+			bombeJ1 -= bombe; 
+		else 
+			bombeJ2 -= bombe; 	
+
+		hudJ1Bombe.text = "" + bombeJ1;
+		hudJ2Bombe.text = "" + bombeJ2;
+	}
+
+	public bool nbBombeOk(bool J1actif)
+	{
+
+		if (J1actif) {
+			if (bombeJ1 > 0)
+				return true;
+			else
+				return false; 
+		} else {
+			if (bombeJ2 > 0)
+				return true;
+			else
+				return false; 
+		}
+	
+	}
+	#endregion 
 }

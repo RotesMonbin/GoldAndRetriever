@@ -7,7 +7,12 @@ TagManager:
   - Breakable
   - unBreakable
   - rope
+<<<<<<< HEAD
   - Pickup
+=======
+  - Coins
+  - bombeCaisse
+>>>>>>> origin/master
   layers:
   - Default
   - TransparentFX
