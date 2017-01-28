@@ -122,8 +122,10 @@ public class Player : MonoBehaviour {
 			if (rb.velocity.y == 0.0f)
 				animator.SetFloat ("vitesse", Mathf.Abs (rb.velocity.x));  
 
-			if (Input.GetKey (KeyCode.DownArrow))
+			if (Input.GetKeyDown (KeyCode.DownArrow)) {
 				animator.SetBool ("crush", true);
+				managerJoueur.lifeDown (1,J1actif); 
+			}
 			else
 				animator.SetBool ("crush", false);
 
@@ -203,25 +205,13 @@ public class Player : MonoBehaviour {
 		}	
 
 		if (coll.gameObject.tag == "Coins") {
-			if (J1actif) {
-				managerJoueur.GetComponent<ManagerJoueur> ().cashUp (1, true); 
-				Destroy (coll.gameObject); 
-			}
-			if (!J1actif) {
-				managerJoueur.GetComponent<ManagerJoueur> ().cashUp (1, false); 
-				Destroy (coll.gameObject); 
-			}
+			managerJoueur.GetComponent<ManagerJoueur> ().cashUp (1, J1actif); 
+			Destroy (coll.gameObject); 
 		}	
 
 		if (coll.gameObject.tag == "bombeCaisse") {
-			if (J1actif) {
-				managerJoueur.GetComponent<ManagerJoueur> ().bombeUp (1, true); 
-				Destroy (coll.gameObject); 
-			}
-			if (!J1actif) {
-				managerJoueur.GetComponent<ManagerJoueur> ().bombeUp (1, false); 
-				Destroy (coll.gameObject); 
-			}
+			managerJoueur.GetComponent<ManagerJoueur> ().bombeUp (1, J1actif); 
+			Destroy (coll.gameObject); 
 		}	
 	}
 
