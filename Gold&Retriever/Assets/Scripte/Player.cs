@@ -252,6 +252,7 @@ public class Player : MonoBehaviour {
                 heldObject.GetComponent<Player>().animator.SetBool("Held", false);
                 heldObject.GetComponent<Player>().dontMove = false;
             }
+            heldObject.GetComponent<Rigidbody2D>().isKinematic = false;
             heldObject.GetComponent<Rigidbody2D>().velocity = new Vector2(20 * this.transform.localScale.x, 10);
             holdSomething = false;
         }
@@ -276,6 +277,7 @@ public class Player : MonoBehaviour {
                         col.gameObject.GetComponent<Player>().dontMove = true;
                     }
                     heldObject = col.gameObject;
+                    heldObject.GetComponent<Rigidbody2D>().isKinematic = true;
                     holdSomething = true;
                 }
             }
