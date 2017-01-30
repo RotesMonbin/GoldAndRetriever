@@ -37,7 +37,7 @@ public class Player : MonoBehaviour {
     public KeyCode toucheAccroupi;
     public KeyCode toucheAction;
 
-	private bool dontMove = false ; 
+	private bool dontMove = false ;
 
 	private List<GameObject> listRope; 
 
@@ -67,81 +67,9 @@ public class Player : MonoBehaviour {
 
 		animator.SetBool ("Walk", 	rb.velocity.x != 0.0f ); // walk
 		animator.SetBool ("Jump", 	rb.velocity.y != 0.0f ); // walk
-
-		Vector3 temp = this.transform.localScale;
-		if (!dontMove) {
-			if (Input.GetKey (toucheGauche) && rb.velocity.x > -5.0f) {
-				temp.x = -1;
-				this.transform.localScale = temp;
-                if (!isFacingWall())
-                {
-                    rb.velocity += new Vector2(-speed, 0);
-                }
-
-            } else if (Input.GetKey (toucheDroite) && rb.velocity.x < 5.0f) {
-				temp.x = 1;
-				this.transform.localScale = temp;
-                if (!isFacingWall())
-                {
-                    rb.velocity += new Vector2(+speed, 0);
-                }
-			} else {
-				if (rb.velocity.x > 0) {
-					if (rb.velocity.x - speed <= 0) {
-						rb.velocity -= new Vector2 (rb.velocity.x, 0);
-					} else {
-						rb.velocity += new Vector2 (-speed, 0);
-					}
-				} else {
-					if (rb.velocity.x + speed >= 0) {
-						rb.velocity += new Vector2 (rb.velocity.x, 0);
-					} else {
-						rb.velocity += new Vector2 (speed, 0);
-					}
-				}
-			}
-
-			//BOMBE
-			if (Input.GetKeyDown (toucheBomb)) {
-
-				if (managerJoueur.nbBombeOk (J1actif)) {
-					GameObject b = GameObject.Instantiate (bomb);
-					b.transform.position = this.transform.position;
-					if (Input.GetKey (toucheAccroupi)) {
-						b.GetComponent<Rigidbody2D> ().velocity = new Vector2 (0, 0);
-
-					} else {
-						b.GetComponent<Rigidbody2D> ().velocity = new Vector2 (bombThrow * this.transform.localScale.x, bombThrow);
-					}
-					managerJoueur.bombeDown (1, J1actif); 
-				}
-			}
-			// PIED SAUT 
-			if (Input.GetKey (toucheSaut)
-			    && (Physics2D.OverlapBox (new Vector2 (feet.transform.position.x, feet.transform.position.y), new Vector2 (0.728853f, 0.1633179f), 0, isJumpable)))
-				rb.velocity = new Vector2 (rb.velocity.x, jumpPower);
-
-			if (isTouchingGround())
-				animator.SetBool ("Jump", false);
-			else
-				animator.SetBool ("Jump", true);
-		
-			if (rb.velocity.y == 0.0f)
-				animator.SetFloat ("vitesse", Mathf.Abs (rb.velocity.x));  
-
-			if (Input.GetKeyDown (KeyCode.DownArrow)) {
-				animator.SetBool ("crush", true);
-				managerJoueur.lifeDown (1,J1actif); 
-			}
-			else
-				animator.SetBool ("crush", false);
-
-		
-			touchLadder (); 
-
-		}
-
-
+        DirectionControl();
+        SautControl();
+        BombControl();
 		// touche action 
 		actionOn ();  
 
@@ -159,9 +87,131 @@ public class Player : MonoBehaviour {
 			animator.SetFloat ("vitesse", Mathf.Abs (rb.velocity.x));  
 
 	}
-		
-	#region Touche action
-	void actionOn() 
+
+    #region ToucheBomb
+    void BombControl()
+    {
+        //BOMBE
+        if (!dontMove)
+        {
+            if (Input.GetKeyDown(toucheBomb))
+            {
+
+                if (managerJoueur.nbBombeOk(J1actif))
+                {
+                    GameObject b = GameObject.Instantiate(bomb);
+                    b.transform.position = this.transform.position;
+                    if (Input.GetKey(toucheAccroupi))
+                    {
+                        b.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+
+                    }
+                    else
+                    {
+                        b.GetComponent<Rigidbody2D>().velocity = new Vector2(bombThrow * this.transform.localScale.x, bombThrow);
+                    }
+                    managerJoueur.bombeDown(1, J1actif);
+                }
+            }
+        }
+    }
+    #endregion
+
+    #region ToucheSaut
+    void SautControl()
+    {
+        // PIED SAUT 
+        if (!dontMove)
+        {
+            if (Input.GetKey(toucheSaut)
+            && (Physics2D.OverlapBox(new Vector2(feet.transform.position.x, feet.transform.position.y), new Vector2(0.728853f, 0.1633179f), 0, isJumpable)))
+                rb.velocity = new Vector2(rb.velocity.x, jumpPower);
+
+            if (isTouchingGround())
+                animator.SetBool("Jump", false);
+            else
+                animator.SetBool("Jump", true);
+
+            if (rb.velocity.y == 0.0f)
+                animator.SetFloat("vitesse", Mathf.Abs(rb.velocity.x));
+
+            if (Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                animator.SetBool("crush", true);
+                managerJoueur.lifeDown(1, J1actif);
+            }
+            else
+                animator.SetBool("crush", false);
+
+            touchLadder();
+        }
+    }
+    #endregion
+
+    #region TouchesDirection
+
+    void DirectionControl()
+    {
+        Vector3 temp = this.transform.localScale;
+        if (!dontMove)
+        {
+            if (Input.GetKey(toucheGauche) && rb.velocity.x > -5.0f)
+            {
+                temp.x = -1;
+                this.transform.localScale = temp;
+                if (!isFacingWall())
+                {
+                    rb.velocity += new Vector2(-speed, 0);
+                }
+
+            }
+            else if (Input.GetKey(toucheDroite) && rb.velocity.x < 5.0f)
+            {
+                temp.x = 1;
+                this.transform.localScale = temp;
+                if (!isFacingWall())
+                {
+                    rb.velocity += new Vector2(+speed, 0);
+                }
+            }
+            else
+            {
+                if (isTouchingGround())
+                {
+                    if (rb.velocity.x > 0)
+                    {
+                        if (rb.velocity.x - speed <= 0)
+                        {
+                            rb.velocity -= new Vector2(rb.velocity.x, 0);
+                        }
+                        else
+                        {
+                            rb.velocity += new Vector2(-speed, 0);
+                        }
+                    }
+                    else
+                    {
+                        if (rb.velocity.x + speed >= 0)
+                        {
+                            rb.velocity += new Vector2(rb.velocity.x, 0);
+                        }
+                        else
+                        {
+                            rb.velocity += new Vector2(speed, 0);
+                        }
+                    }
+                }
+                else
+                {
+                    rb.velocity -= new Vector2(rb.velocity.x / 20, 0);
+                }
+            }
+        }
+    }
+    #endregion
+
+    #region Touche action
+    void actionOn() 
 	{
 		//Action
 		if (Input.GetKeyDown(toucheAction))
