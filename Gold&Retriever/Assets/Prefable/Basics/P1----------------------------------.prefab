@@ -89,6 +89,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4783195775843840}
   - component: {fileID: 114406540973366736}
+  - component: {fileID: 114882333610737880}
   m_Layer: 5
   m_Name: LifeHUDJ1
   m_TagString: Untagged
@@ -107,6 +108,22 @@ GameObject:
   - component: {fileID: 61681893912022122}
   m_Layer: 30
   m_Name: FeetBOX
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1569574669550530
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4288439148409358}
+  - component: {fileID: 58283409863937790}
+  m_Layer: 30
+  m_Name: FaceBOX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -240,6 +257,19 @@ Transform:
   m_Father: {fileID: 4683349974207132}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4288439148409358
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1569574669550530}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.36, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4683349974207132}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4311576160578962
 Transform:
   m_ObjectHideFlags: 1
@@ -282,6 +312,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4251580153995818}
+  - {fileID: 4288439148409358}
   m_Father: {fileID: 4311576160578962}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -365,6 +396,20 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!58 &58283409863937790
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1569574669550530}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.2
 --- !u!61 &61681893912022122
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -512,8 +557,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   J1actif: 1
-  gameObjLife: {fileID: 1812933276482008, guid: b3cd965f369701e49baa9f2860ccc7b5,
-    type: 2}
+  gameObjLife_full: {fileID: 0}
+  gameObjLife_empty: {fileID: 0}
 --- !u!114 &114557379022250218
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -562,6 +607,7 @@ MonoBehaviour:
   jumpPower: 5.5
   rb: {fileID: 50670438719941444}
   feet: {fileID: 1559339745836772}
+  face: {fileID: 1569574669550530}
   capsuleCollider: {fileID: 70555931846036212}
   isJumpable:
     serializedVersion: 2
@@ -602,6 +648,20 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+--- !u!114 &114882333610737880
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1498036277063312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac69147ce19d82641a62ea978b478493, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  J1actif: 1
+  gameObjLife_full: {fileID: 0}
+  gameObjLife_empty: {fileID: 0}
 --- !u!114 &114958062978664314
 MonoBehaviour:
   m_ObjectHideFlags: 1

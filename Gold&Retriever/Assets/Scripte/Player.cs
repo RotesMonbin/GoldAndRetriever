@@ -10,6 +10,7 @@ public class Player : MonoBehaviour {
 
 	public Rigidbody2D rb; 
 	public GameObject feet ;
+    public GameObject face ;
     public CapsuleCollider2D capsuleCollider;
 
 
@@ -70,14 +71,20 @@ public class Player : MonoBehaviour {
 		Vector3 temp = this.transform.localScale;
 		if (!dontMove) {
 			if (Input.GetKey (toucheGauche) && rb.velocity.x > -5.0f) {
-				rb.velocity += new Vector2 (-speed, 0); 
 				temp.x = -1;
-				this.transform.localScale = temp; 
+				this.transform.localScale = temp;
+                if (!isFacingWall())
+                {
+                    rb.velocity += new Vector2(-speed, 0);
+                }
 
-			} else if (Input.GetKey (toucheDroite) && rb.velocity.x < 5.0f) {
-				rb.velocity += new Vector2 (+speed, 0); 
+            } else if (Input.GetKey (toucheDroite) && rb.velocity.x < 5.0f) {
 				temp.x = 1;
-				this.transform.localScale = temp; 
+				this.transform.localScale = temp;
+                if (!isFacingWall())
+                {
+                    rb.velocity += new Vector2(+speed, 0);
+                }
 			} else {
 				if (rb.velocity.x > 0) {
 					if (rb.velocity.x - speed <= 0) {
@@ -365,7 +372,12 @@ public class Player : MonoBehaviour {
 	{
 		return (Physics2D.OverlapBox (new Vector2 (feet.transform.position.x, feet.transform.position.y), new Vector2 (0.728853f, 0.1633179f), 0, isJumpable));
 	}
-	#endregion
+
+    bool isFacingWall()
+    {
+        return (Physics2D.OverlapCircle(new Vector2(face.transform.position.x, face.transform.position.y), 0.2f, isJumpable));
+    }
+    #endregion
 
 }
 

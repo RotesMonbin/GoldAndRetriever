@@ -177,6 +177,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1675268077853878
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4017840258871690}
+  - component: {fileID: 58260230531500524}
+  m_Layer: 30
+  m_Name: FaceBOX
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1675494699892484
 GameObject:
   m_ObjectHideFlags: 1
@@ -229,6 +245,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!4 &4017840258871690
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1675268077853878}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.36, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4949110578402202}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4119791859323236
 Transform:
   m_ObjectHideFlags: 1
@@ -323,6 +352,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4457609043408454}
+  - {fileID: 4017840258871690}
   m_Father: {fileID: 4173479359181414}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -380,6 +410,20 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!58 &58260230531500524
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1675268077853878}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.2
 --- !u!61 &61484677793039266
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -604,6 +648,7 @@ MonoBehaviour:
   jumpPower: 5.5
   rb: {fileID: 50792270509024428}
   feet: {fileID: 1481170544471804}
+  face: {fileID: 1675268077853878}
   capsuleCollider: {fileID: 70758799268058154}
   isJumpable:
     serializedVersion: 2
@@ -662,8 +707,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   J1actif: 0
-  gameObjLife: {fileID: 1348766118538200, guid: 840f50581165e80459db585c889ca1c6,
-    type: 2}
+  gameObjLife_full: {fileID: 0}
+  gameObjLife_empty: {fileID: 0}
 --- !u!124 &124672591619587540
 Behaviour:
   m_ObjectHideFlags: 1
