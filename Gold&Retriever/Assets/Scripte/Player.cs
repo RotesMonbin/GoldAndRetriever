@@ -69,6 +69,7 @@ public class Player : MonoBehaviour {
 		animator.SetBool ("Jump", 	rb.velocity.y != 0.0f ); // walk
         DirectionControl();
         SautControl();
+		touchLadder();
         BombControl();
 		// touche action 
 		actionOn ();  
@@ -85,6 +86,8 @@ public class Player : MonoBehaviour {
 	
 		if (rb.velocity.y == 0.0f)
 			animator.SetFloat ("vitesse", Mathf.Abs (rb.velocity.x));  
+
+
 
 	}
 
@@ -141,9 +144,7 @@ public class Player : MonoBehaviour {
                 managerJoueur.lifeDown(1, J1actif);
             }
             else
-                animator.SetBool("crush", false);
-
-            touchLadder();
+                animator.SetBool("crush", false); 
         }
     }
     #endregion
@@ -395,7 +396,7 @@ public class Player : MonoBehaviour {
 				onLadder = true; 
 		
 		animator.SetBool ("Climb", onLadder);		
-		if (onLadder && J1actif) {
+		if (onLadder) {
 			if (Input.GetKey (toucheHaut))
 				rb.velocity = new Vector2 (0, speed * climbSpeed); 
 			else if (Input.GetKey (toucheAccroupi))

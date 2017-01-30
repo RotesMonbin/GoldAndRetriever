@@ -293,7 +293,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1833821646654846}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 22.45, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4119791859323236}
@@ -309,7 +309,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1523377290886086}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.4, y: 4, z: 0}
+  m_LocalPosition: {x: -3.41, y: 6.2153273, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4173479359181414}
@@ -690,8 +690,8 @@ MonoBehaviour:
   J1actif: 0
   toucheDroite: 100
   toucheGauche: 113
-  toucheHaut: 0
-  toucheSaut: 122
+  toucheHaut: 122
+  toucheSaut: 104
   toucheBomb: 102
   toucheAccroupi: 274
   toucheAction: 103

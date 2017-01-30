@@ -10,6 +10,7 @@ TagManager:
   - Pickup
   - Coins
   - bombeCaisse
+  - transitionDebut
   layers:
   - Default
   - TransparentFX
