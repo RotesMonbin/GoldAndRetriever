@@ -14,13 +14,17 @@ public class Player : MonoBehaviour {
     public CapsuleCollider2D capsuleCollider;
 
 
-	public LayerMask isJumpable ; 
-	public float jumpDuration = 0.2f ;
+	public LayerMask isJumpable ;
+    public LayerMask enemieLayer;
+
+    public float jumpDuration = 0.2f ;
 	public Animator animator ;
     public GameObject bomb;
     public float bombThrow;
+    public float invincibleTime;
 
-	private float jumpTime = 0f ; 
+
+    private float jumpTime = 0f ; 
 	private bool isJumping = false;
 
     private bool holdSomething=false;
@@ -38,8 +42,11 @@ public class Player : MonoBehaviour {
     public KeyCode toucheAction;
 
 	private bool dontMove = false ;
+    private float invincible;
+    
 
-	private List<GameObject> listRope; 
+
+    private List<GameObject> listRope; 
 
 
 	public bool onLadder { get ; set; } 
@@ -72,7 +79,8 @@ public class Player : MonoBehaviour {
 		touchLadder();
         BombControl();
 		// touche action 
-		actionOn ();  
+		actionOn ();
+        enemieColision();
 
         // DEPLACE OBJET TENU
         if (holdSomething)
@@ -250,8 +258,6 @@ public class Player : MonoBehaviour {
 			rb.velocity += new Vector2 (0, jumpPower*5);
 			animator.SetBool ("Saut", true);
 		}
-		if (coll.gameObject.tag == "Ennemies" &&  coll.contacts [0].normal.y < 0.5)
-			dead (); 
 
 		if (coll.gameObject.tag == "Coins") {
 			managerJoueur.GetComponent<ManagerJoueur> ().cashUp (1, J1actif); 
@@ -261,8 +267,12 @@ public class Player : MonoBehaviour {
 		if (coll.gameObject.tag == "bombeCaisse") {
 			managerJoueur.GetComponent<ManagerJoueur> ().bombeUp (1, J1actif); 
 			Destroy (coll.gameObject); 
-		}	
-	}
+		}
+        if (coll.gameObject.tag == "Enemie")
+        {
+            dead();
+        }
+    }
 		
 	// Death zone 
 	void OnTriggerEnter2D(Collider2D coll)
@@ -270,14 +280,54 @@ public class Player : MonoBehaviour {
 		if (coll.gameObject.tag == "deathZone") {
 			//manager.ChangementMort (); 
 			dead (); 
-		}	
+		}
+        if (coll.gameObject.tag == "Enemie" )
+        {
+            dead();
+        }
 
-	
-	}
 
-	#endregion
 
-	public void dead()
+    }
+
+    #endregion
+
+    void enemieColision()
+    {
+        if (invincible != 0)
+        {
+            invincible = invincible - Time.deltaTime<0 ?0: invincible - Time.deltaTime;
+        }
+        Collider2D[] cols = Physics2D.OverlapCapsuleAll(capsuleCollider.transform.position, capsuleCollider.size, capsuleCollider.direction, 0,enemieLayer);
+        foreach (Collider2D c in cols)
+        {
+            if (c.GetComponent<Worms>())
+            {
+                if (c.transform.position.y > feet.transform.position.y+0.5)
+                {
+                    if (invincible == 0) { 
+                    takeDamage(c.transform.position.x > feet.transform.position.x ? -1 : 1);
+                    invincible = invincibleTime;
+                    }
+                }
+                else
+                {
+                    if (invincible == 0)
+                    {
+                        this.rb.velocity += new Vector2(0, 4);
+                        c.GetComponent<Worms>().dead();
+                    }
+                }
+            }
+        }
+    }
+
+    void takeDamage(int direction)
+    {
+        this.rb.velocity+=new Vector2 (direction * 4, 4);
+        managerJoueur.lifeDown(1, J1actif);
+    }
+    public void dead()
 	{
 		SceneManager.LoadScene (SceneManager.GetActiveScene ().name); 
 	}
@@ -316,10 +366,12 @@ public class Player : MonoBehaviour {
                 {
                     if (c.gameObject != this.gameObject)
                     {
-                        col = c;
+                        if (c.gameObject.tag == "Player" || c.gameObject.tag == "Pickup") { 
+                            col = c;
+                        }
                     }
                 }
-                if (col.gameObject.tag == "Player" || col.gameObject.tag == "Pickup")
+                if (col)
                 {
                     if (col.gameObject.tag == "Player")
                     {
@@ -334,7 +386,6 @@ public class Player : MonoBehaviour {
         }
     }
 	#endregion
-
 
 	#region Rope Action 
 	void ropeAction()
@@ -410,8 +461,6 @@ public class Player : MonoBehaviour {
 
 	}
 	#endregion 
-
-
 
 	#region Utile : direction, toucheGround...
 	// Direction du joueur ; 1 regarde à droite -1 à gauche 

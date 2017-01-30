@@ -57,7 +57,7 @@ GameObject:
   - component: {fileID: 114273252740074686}
   m_Layer: 10
   m_Name: Worm
-  m_TagString: Untagged
+  m_TagString: Enemie
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -156,7 +156,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1636091867828152}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.25, y: 11.14, z: 0}
+  m_LocalPosition: {x: 11.28103, y: 9.002048, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4562824193110720}
@@ -271,6 +271,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df62393ebf276ab499d5a4afdb413621, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  toDestroy: {fileID: 1636091867828152}
 --- !u!114 &114884874297580132
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -289,6 +290,7 @@ MonoBehaviour:
     m_Bits: 1048576
   head: {fileID: 1585478268552362}
   eye: {fileID: 1618512366398514}
+  anime: {fileID: 95333704411085602}
 --- !u!212 &212465768551816358
 SpriteRenderer:
   m_ObjectHideFlags: 1

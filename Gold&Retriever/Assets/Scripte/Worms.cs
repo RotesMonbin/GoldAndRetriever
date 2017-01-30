@@ -10,6 +10,7 @@ public class Worms : MonoBehaviour {
     public LayerMask decor;
     public GameObject head;
     public GameObject eye;
+    public Animator anime;
 
     private bool falling = false;
 
@@ -56,5 +57,13 @@ public class Worms : MonoBehaviour {
         this.transform.localScale = new Vector3(-this.transform.localScale.x, this.transform.localScale.y,
             this.transform.localScale.z);
         direction = -direction;
+    }
+    public void dead()
+    {
+        Destroy(this.GetComponent<Rigidbody2D>());
+        if (anime)
+        {
+            anime.SetBool("dead", true);
+        }
     }
 }
