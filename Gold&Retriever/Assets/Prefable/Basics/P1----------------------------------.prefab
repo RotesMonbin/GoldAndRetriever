@@ -73,6 +73,7 @@ GameObject:
   - component: {fileID: 224692013528309400}
   - component: {fileID: 222750262641962594}
   - component: {fileID: 114557379022250218}
+  - component: {fileID: 114934600391751834}
   m_Layer: 5
   m_Name: BombeJ1
   m_TagString: Untagged
@@ -89,7 +90,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4783195775843840}
   - component: {fileID: 114406540973366736}
-  - component: {fileID: 114882333610737880}
   m_Layer: 5
   m_Name: LifeHUDJ1
   m_TagString: Untagged
@@ -224,6 +224,7 @@ GameObject:
   - component: {fileID: 224206816614226666}
   - component: {fileID: 222198215405950488}
   - component: {fileID: 114237662390390858}
+  - component: {fileID: 114473864184313702}
   m_Layer: 5
   m_Name: CashJ1
   m_TagString: Untagged
@@ -293,7 +294,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1608397027453456}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12, y: 4, z: 0}
+  m_LocalPosition: {x: 0, y: 2.28, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4311576160578962}
@@ -323,7 +324,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1498036277063312}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -41.001316, y: 30.234776, z: -2026.0463}
+  m_LocalPosition: {x: -378.3, y: 86.5, z: -2026.0463}
   m_LocalScale: {x: 22.511625, y: 22.511625, z: 22.511625}
   m_Children: []
   m_Father: {fileID: 224029540524477278}
@@ -544,7 +545,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 
+  m_Text: 12
 --- !u!114 &114406540973366736
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -557,8 +558,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   J1actif: 1
-  gameObjLife_full: {fileID: 0}
-  gameObjLife_empty: {fileID: 0}
+  gameObjLife_full: {fileID: 1812933276482008, guid: b3cd965f369701e49baa9f2860ccc7b5,
+    type: 2}
+  gameObjLife_empty: {fileID: 1071924377268328, guid: 5f4e79c5625dcb44aa4fab2ec398a7ce,
+    type: 2}
+--- !u!114 &114473864184313702
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1907116081415346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!114 &114557379022250218
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -648,20 +665,20 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
---- !u!114 &114882333610737880
+--- !u!114 &114934600391751834
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1498036277063312}
+  m_GameObject: {fileID: 1450784569505334}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac69147ce19d82641a62ea978b478493, type: 3}
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  J1actif: 1
-  gameObjLife_full: {fileID: 0}
-  gameObjLife_empty: {fileID: 0}
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 0
 --- !u!114 &114958062978664314
 MonoBehaviour:
   m_ObjectHideFlags: 1

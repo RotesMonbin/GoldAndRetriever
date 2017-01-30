@@ -37,46 +37,54 @@ public class Life : MonoBehaviour {
 	}
 		
 
-	public void LifeDownAff()
+	public void LifeAff()
 	{
 
 		int nblife = managerJoueur.getLife(J1actif) ; 
 		int nblifeMax = managerJoueur.getLifeMax(J1actif) ; 
 
-		if (nblife == 0)
-			return; 
+		if (nblife <= 0)
+			return;
+		else {
+			for (int i = 0; i < listHearth.Count; i++)
+				Destroy (listHearth [i]); 
 		
-		for (int i = 0; i < listHearth.Count; i++)
-			Destroy (listHearth [i]); 
-		
-		listHearth = new List<GameObject>() ; 
-		managerJoueur = GameObject.Find ("ManagerJoueur").GetComponent<ManagerJoueur> ();
+			listHearth = new List<GameObject> (); 
+			managerJoueur = GameObject.Find ("ManagerJoueur").GetComponent<ManagerJoueur> ();
 
-	
 
-		GameObject LifeGameObj; 
-		Vector3 temp; 
-		int pos; 
-		while (nblife !=  0) {
-			LifeGameObj = Instantiate (gameObjLife_full); 
-			temp = this.transform.position; 
-			temp.x += nblife - managerJoueur.getLifeMax(J1actif) + 2.25f; 
-			LifeGameObj.transform.parent = this.transform;
-			LifeGameObj.transform.position = temp; 
+			GameObject LifeGameObj; 
+			Vector3 temp; 
 
-			listHearth.Add (LifeGameObj); 
-			nblife--;
-		} 
-		pos = nblifeMax - nblife; 
-		while (pos !=  0) {
-			LifeGameObj = Instantiate (gameObjLife_empty); 
-			temp = this.transform.position; 
-			temp.x += pos - managerJoueur.getLifeMax(J1actif) + 2.25f; 
-			LifeGameObj.transform.parent = this.transform;
-			LifeGameObj.transform.position = temp; 
+			int pos = 1; 
 
-			listHearth.Add (LifeGameObj); 
-			pos--;
+			while (pos != nblife+1) {
+				LifeGameObj = Instantiate (gameObjLife_full); 
+				temp = this.transform.position; 
+
+				temp.x += pos - managerJoueur.getLifeMax (J1actif) + 2.25f; 
+
+				LifeGameObj.transform.parent = this.transform;
+				LifeGameObj.transform.position = temp; 
+
+				listHearth.Add (LifeGameObj); 
+				pos++;
+			}
+
+
+			while (pos != nblifeMax+1) {
+				LifeGameObj = Instantiate (gameObjLife_empty); 
+				temp = this.transform.position; 
+
+				temp.x += pos - managerJoueur.getLifeMax (J1actif) + 2.25f; 
+
+				LifeGameObj.transform.parent = this.transform;
+				LifeGameObj.transform.position = temp; 
+
+				listHearth.Add (LifeGameObj); 
+				pos++;
+			} 
+		 
 		}
 	}
 }

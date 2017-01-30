@@ -86,13 +86,14 @@ public class ManagerJoueur : MonoBehaviour {
 		if (J1actif) 
 		{
 			//if (lifeJ1 - lifeReduice)
-				 
-			lifeScript_J1.LifeDownAff (); 
 			lifeJ1 -= lifeReduice; 
+			lifeScript_J1.LifeAff (); 
+		
 		} else 
 		{
-			lifeScript_J2.LifeDownAff(); 
 			lifeJ2 -= lifeReduice; 
+			lifeScript_J2.LifeAff(); 
+
 		}
 	}
 

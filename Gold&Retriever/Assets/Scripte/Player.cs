@@ -251,15 +251,6 @@ public class Player : MonoBehaviour {
 		}
 		if (coll.gameObject.tag == "Ennemies" &&  coll.contacts [0].normal.y < 0.5)
 			dead (); 
-	}
-		
-	// Death zone 
-	void OnTriggerEnter2D(Collider2D coll)
-	{
-		if (coll.gameObject.tag == "deathZone") {
-			//manager.ChangementMort (); 
-			dead (); 
-		}	
 
 		if (coll.gameObject.tag == "Coins") {
 			managerJoueur.GetComponent<ManagerJoueur> ().cashUp (1, J1actif); 
@@ -270,6 +261,17 @@ public class Player : MonoBehaviour {
 			managerJoueur.GetComponent<ManagerJoueur> ().bombeUp (1, J1actif); 
 			Destroy (coll.gameObject); 
 		}	
+	}
+		
+	// Death zone 
+	void OnTriggerEnter2D(Collider2D coll)
+	{
+		if (coll.gameObject.tag == "deathZone") {
+			//manager.ChangementMort (); 
+			dead (); 
+		}	
+
+	
 	}
 
 	#endregion
