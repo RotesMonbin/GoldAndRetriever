@@ -294,7 +294,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1608397027453456}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.93, y: 6.61, z: 0}
+  m_LocalPosition: {x: 5.57, y: 6.61, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4311576160578962}
@@ -629,10 +629,14 @@ MonoBehaviour:
   isJumpable:
     serializedVersion: 2
     m_Bits: 1048576
+  enemieLayer:
+    serializedVersion: 2
+    m_Bits: 1024
   jumpDuration: 0.2
   animator: {fileID: 95052670525783728}
   bomb: {fileID: 1769960141452492, guid: c660ea44e85fa4f48899cd54630f2802, type: 2}
   bombThrow: 15
+  invincibleTime: 2
   J1actif: 1
   toucheDroite: 275
   toucheGauche: 276

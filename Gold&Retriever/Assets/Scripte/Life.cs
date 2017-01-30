@@ -43,7 +43,7 @@ public class Life : MonoBehaviour {
 		int nblife = managerJoueur.getLife(J1actif) ; 
 		int nblifeMax = managerJoueur.getLifeMax(J1actif) ; 
 
-		if (nblife <= 0)
+		if (nblife <= -1)
 			return;
 		else {
 			for (int i = 0; i < listHearth.Count; i++)
