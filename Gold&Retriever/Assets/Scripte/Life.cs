@@ -39,14 +39,20 @@ public class Life : MonoBehaviour {
 
 	public void LifeDownAff()
 	{
+
+		int nblife = managerJoueur.getLife(J1actif) ; 
+		int nblifeMax = managerJoueur.getLifeMax(J1actif) ; 
+
+		if (nblife == 0)
+			return; 
+		
 		for (int i = 0; i < listHearth.Count; i++)
 			Destroy (listHearth [i]); 
 		
 		listHearth = new List<GameObject>() ; 
 		managerJoueur = GameObject.Find ("ManagerJoueur").GetComponent<ManagerJoueur> ();
 
-		int nblife = managerJoueur.getLife(J1actif) ; 
-		int nblifeMax = managerJoueur.getLifeMax(J1actif) ; 
+	
 
 		GameObject LifeGameObj; 
 		Vector3 temp; 

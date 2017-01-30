@@ -224,7 +224,7 @@ public class Player : MonoBehaviour {
 
 	#endregion
 
-	void dead()
+	public void dead()
 	{
 		SceneManager.LoadScene (SceneManager.GetActiveScene ().name); 
 	}
