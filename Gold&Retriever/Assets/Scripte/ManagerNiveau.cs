@@ -10,7 +10,6 @@ public class ManagerNiveau : MonoBehaviour {
 
 	// Tableau de prefable coin de map : 
 	public GameObject[] TabCoin;  
-
 	// Player 1 
 	public GameObject Player1;  
 	public GameObject Player2; 

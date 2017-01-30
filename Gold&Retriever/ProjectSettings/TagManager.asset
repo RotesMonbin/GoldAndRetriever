@@ -11,6 +11,7 @@ TagManager:
   - Coins
   - bombeCaisse
   - transitionDebut
+  - GemmeBleu
   layers:
   - Default
   - TransparentFX
