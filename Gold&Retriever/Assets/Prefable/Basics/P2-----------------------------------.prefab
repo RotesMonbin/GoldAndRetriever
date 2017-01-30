@@ -693,9 +693,9 @@ MonoBehaviour:
   toucheHaut: 122
   toucheSaut: 104
   toucheBomb: 102
-  toucheAccroupi: 274
+  toucheAccroupi: 115
   toucheAction: 103
-  climbSpeed: 0
+  climbSpeed: 5
   rope: {fileID: 1718647762000076, guid: 64b11e0ce7de94a4b94746f3c5ecbe63, type: 2}
   ropeDeb: {fileID: 1672038747845474, guid: 1a3271d546a28a54fb3ef8a90b02ba1a, type: 2}
 --- !u!114 &114775318446230070

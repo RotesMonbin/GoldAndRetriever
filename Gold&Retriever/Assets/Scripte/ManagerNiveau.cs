@@ -17,8 +17,8 @@ public class ManagerNiveau : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		Instantiate (Player1).transform.position = new Vector3(0,6,0); 
-		Instantiate (Player2).transform.position = new Vector3(0,6,0); 
+		//Instantiate (Player1).transform.position = new Vector3(0,6,0); 
+		//Instantiate (Player2).transform.position = new Vector3(0,6,0); 
 
 		Instantiate (TabMilieu [0]).transform.position = new Vector3(0,1,0); 
 		Instantiate (TabMilieu [1]).transform.position = new Vector3(40,1,0); 

@@ -312,11 +312,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 114598933684071250, guid: 9a154be1d595d0d438e46a52b66e9305,
-        type: 2}
-      propertyPath: climbSpeed
-      value: 5
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9a154be1d595d0d438e46a52b66e9305, type: 2}
   m_IsPrefabParent: 0
@@ -442,7 +437,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -1243882133
+  randomSeed: 589988538
   InitialModule:
     serializedVersion: 3
     enabled: 1
