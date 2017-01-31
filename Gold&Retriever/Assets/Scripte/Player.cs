@@ -302,7 +302,13 @@ public class Player : MonoBehaviour {
 			managerJoueur.GetComponent<ManagerJoueur> ().bombeUp (1, J1actif); 
 			Destroy (coll.gameObject); 
 		}
-      
+
+        if (coll.gameObject.tag == "coeur de vie" && managerJoueur.getLifeMax(J1actif) != managerJoueur.getLife(J1actif))
+        {
+            managerJoueur.GetComponent<ManagerJoueur>().lifeUp(1, J1actif);
+            Destroy(coll.gameObject);
+        }
+
     }
 		
 	// Death zone 
@@ -541,11 +547,13 @@ public class Player : MonoBehaviour {
 
 	void ropeActionReverse()
 	{
-		for(int i = 1; i < listRope.Count ; i++)
-			Destroy (listRope[i]); 
-		Destroy (listRope[0]); 
-		listRope.Clear ();
-	}	
+        if(listRope.Count > 0) { 
+		    for(int i = 1; i < listRope.Count ; i++)
+			    Destroy (listRope[i]) ; 
+		    Destroy (listRope[0]) ; 
+		    listRope.Clear () ;
+        }
+    }	
 		
 	void touchLadder() 
 	{

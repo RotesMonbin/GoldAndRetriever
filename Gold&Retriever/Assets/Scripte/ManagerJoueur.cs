@@ -124,11 +124,14 @@ public class ManagerJoueur : MonoBehaviour {
 	{
 		if (J1actif) 
 		{
-			lifeJ1 += lifeInscrease; 
-		} else 
+          
+			lifeJ1 += lifeInscrease;
+            lifeScript_J1.LifeAff();
+        } else 
 		{
-			lifeJ2 += lifeInscrease; 
-		}
+			lifeJ2 += lifeInscrease;
+            lifeScript_J1.LifeAff();
+        }
 	}
 
 	public int getLifeMax(bool J1actif)
