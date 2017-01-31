@@ -130,8 +130,6 @@ public class Player : MonoBehaviour {
         {
             sprite.color = new Color(1, 1, 1, 1);
         }
-
-
 	}
 
     #region ToucheBomb
@@ -260,14 +258,23 @@ public class Player : MonoBehaviour {
 		//Action
 		if (Input.GetKeyDown(toucheAction))
 		{
-			if (!J1actif) { // fille 
-				if (isTouchingGround ()) {
-					ropeAction (); 
-					rb.velocity = new Vector2 (0, 0); // a voir si enlever ( fréinage direct) 
-					dontMove = true;
-				}
+            if (!J1actif)
+            { // fille 
+                if (Input.GetKey(toucheAccroupi))
+                {
+                    if (isTouchingGround())
+                    {
+                        ropeAction();
+                        rb.velocity = new Vector2(0, 0); // a voir si enlever ( fréinage direct) 
+                        dontMove = true;
+                    }
+                }
+                else
+                {
+                    pickUpItem();
+                }
 			} else {
-				doAction();
+				pickUpItem();
 
 			}
 
@@ -381,7 +388,7 @@ public class Player : MonoBehaviour {
         t.localScale = this.transform.localScale;
     }
 
-    void doAction()
+    void pickUpItem()
     {
 
         if (holdSomething)
@@ -406,7 +413,7 @@ public class Player : MonoBehaviour {
                 {
                     if (c.gameObject != this.gameObject)
                     {
-                        if (c.gameObject.tag == "Player" || c.gameObject.tag == "Pickup") { 
+                        if ((c.gameObject.tag == "Player" && J1actif)|| c.gameObject.tag == "Pickup") { 
                             col = c;
                         }
                     }
