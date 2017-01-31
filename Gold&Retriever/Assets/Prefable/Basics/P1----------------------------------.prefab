@@ -156,6 +156,7 @@ GameObject:
   - component: {fileID: 92752904730794672}
   - component: {fileID: 124899590538806034}
   - component: {fileID: 81164008152121152}
+  - component: {fileID: 114143229059955062}
   m_Layer: 30
   m_Name: CameraP1
   m_TagString: MainCamera
@@ -294,7 +295,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1608397027453456}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 13.418798, y: 4.4018574, z: 0}
+  m_LocalPosition: {x: 33.47, y: 6.61, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4311576160578962}
@@ -513,6 +514,24 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114143229059955062
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1659678128856886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b41402c392c5c547a25248524acfd91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocity: {x: 0, y: 0}
+  smoothTimeX: 0.05
+  smoothTimeY: 0.05
+  player: {fileID: 1299293146023152}
+  shakeTimer: 2
+  shakeAmount: 0
+  gem: 0
 --- !u!114 &114237662390390858
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -649,7 +668,7 @@ MonoBehaviour:
   toucheAccroupi: 274
   toucheAction: 108
   climbSpeed: 5
-  cameraShakeJ1: {fileID: 0}
+  cameraShakeJ1: {fileID: 20513970190531742}
   cameraShakeJ2: {fileID: 0}
   rope: {fileID: 1718647762000076, guid: 64b11e0ce7de94a4b94746f3c5ecbe63, type: 2}
   ropeDeb: {fileID: 1672038747845474, guid: 1a3271d546a28a54fb3ef8a90b02ba1a, type: 2}

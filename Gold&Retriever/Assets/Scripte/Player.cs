@@ -309,9 +309,10 @@ public class Player : MonoBehaviour {
 		if (coll.gameObject.tag == "GemmeBleu" )
 		{
 			cameraShakeJ1.GetComponent<CameraShake> ().gem = true;
-			cameraShakeJ2.GetComponent<CameraShake> ().gem = true; 
+			cameraShakeJ2.GetComponent<CameraShake> ().gem = true;
+            managerJoueur.gemUp(); 
 
-			Destroy (coll.gameObject); 
+            Destroy (coll.gameObject); 
 		}
 
 
