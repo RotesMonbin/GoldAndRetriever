@@ -51,7 +51,7 @@ public class ManagerJoueur : MonoBehaviour {
 
         gemGlobal = GameObject.Find("GEMME").GetComponent<GemmeBleuHUD>();
 
-        lave = GameObject.Find("laveManager").GetComponent<Lave>();
+        lave = GameObject.Find("LaveALL").GetComponent<Lave>();
 
 
         lifeJ1 = 3; 

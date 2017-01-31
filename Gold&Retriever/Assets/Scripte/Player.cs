@@ -74,6 +74,7 @@ public class Player : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
 	{
+
         if (J1actif)
         {
             if(managerJoueur.getLife(true) <= 0)
@@ -272,12 +273,7 @@ public class Player : MonoBehaviour {
 	// ENEMIES
 	void OnCollisionEnter2D(Collision2D coll)
 	{
-		if (coll.gameObject.tag == "Ennemies" &&  coll.contacts [0].normal.y > 0.5) {
-			Destroy (coll.gameObject); 
-			rb.velocity += new Vector2 (0, jumpPower*5);
-			animator.SetBool ("Saut", true);
-		}
-
+	
 		if (coll.gameObject.tag == "Coins") {
 			managerJoueur.GetComponent<ManagerJoueur> ().cashUp (1, J1actif); 
 			Destroy (coll.gameObject); 
@@ -287,24 +283,12 @@ public class Player : MonoBehaviour {
 			managerJoueur.GetComponent<ManagerJoueur> ().bombeUp (1, J1actif); 
 			Destroy (coll.gameObject); 
 		}
-        if (coll.gameObject.tag == "Enemie")
-        {
-            dead();
-        }
+      
     }
 		
 	// Death zone 
 	void OnTriggerEnter2D(Collider2D coll)
 	{
-		if (coll.gameObject.tag == "deathZone") {
-			//manager.ChangementMort (); 
-			dead (); 
-		}
-        if (coll.gameObject.tag == "Enemie" )
-        {
-            dead();
-        }
-
 		if (coll.gameObject.tag == "GemmeBleu" )
 		{
 			cameraShakeJ1.GetComponent<CameraShake> ().gem = true;
@@ -314,10 +298,15 @@ public class Player : MonoBehaviour {
             
             Destroy (coll.gameObject); 
 		}
-
-
     }
 
+    void OnTriggerEnter(Collider coll)
+    {
+        if (coll.gameObject.tag == "Lave")
+        {
+            managerJoueur.lifeDown(managerJoueur.getLife(J1actif), J1actif);
+        }
+    }
     #endregion
 
     void enemieColision()

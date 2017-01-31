@@ -14,6 +14,7 @@ TagManager:
   - GemmeBleu
   - Enemie
   - Spike
+  - Lave
   layers:
   - Default
   - TransparentFX
@@ -28,7 +29,7 @@ TagManager:
   - Enemies
   - Objects
   - Spike
-  - 
+  - Lave
   - 
   - 
   - 
