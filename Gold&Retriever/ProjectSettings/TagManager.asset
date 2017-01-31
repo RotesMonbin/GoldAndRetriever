@@ -14,6 +14,7 @@ TagManager:
   - GemmeBleu
   - Enemie
   - Spike
+  - Lave
   layers:
   - Default
   - TransparentFX
@@ -28,7 +29,7 @@ TagManager:
   - Enemies
   - Objects
   - Spike
-  - 
+  - Lave
   - 
   - 
   - 
@@ -50,4 +51,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: lave
+    uniqueID: 1475025619
     locked: 0

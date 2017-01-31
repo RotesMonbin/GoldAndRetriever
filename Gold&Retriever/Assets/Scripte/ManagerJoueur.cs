@@ -37,16 +37,29 @@ public class ManagerJoueur : MonoBehaviour {
 	private Life lifeScript_J1;  
 	private Life lifeScript_J2;
 
-	// Use this for initialization
-	void Start () {
+    // Gem :
+    private bool gem;
+    private GemmeBleuHUD gemGlobal;
+
+    private Lave lave;
+
+    // Use this for initialization
+    void Start () {
 
 		lifeScript_J1 = GameObject.Find ("LifeHUDJ1").GetComponent<Life> ();
 		lifeScript_J2 = GameObject.Find ("LifeHUDJ2").GetComponent<Life> ();
 
-		lifeJ1 = 3; 
+        gemGlobal = GameObject.Find("GEMME").GetComponent<GemmeBleuHUD>();
+
+        lave = GameObject.Find("LaveALL").GetComponent<Lave>();
+
+
+        lifeJ1 = 3; 
 		lifeJ2 = 3;
 		lifeJ1Max = 3;
 		lifeJ2Max = 3;
+
+        gem = false; 
 
 		bombeJ1 = 2;
 		bombeJ2 = 2;
@@ -77,10 +90,20 @@ public class ManagerJoueur : MonoBehaviour {
 		hudJ2Cash.text = "" + cashJ2;
 	}
 
-	#endregion 
+    #endregion
 
-	#region life
-	public void lifeDown(int lifeReduice ,  bool J1actif) 
+    #region gem 
+    public void gemUp()
+    {
+        gem = true;
+        gemGlobal.gemaff();
+        lave.laveLancement(); 
+    }
+
+    #endregion
+
+    #region life
+    public void lifeDown(int lifeReduice ,  bool J1actif) 
 	{
 
 		if (J1actif) 
