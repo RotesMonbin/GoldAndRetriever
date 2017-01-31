@@ -17,6 +17,7 @@ public class Player : MonoBehaviour {
 	public LayerMask isJumpable ;
     public LayerMask enemieLayer;
     public LayerMask spikeLayer;
+    public LayerMask objectLayer;
 
     public float jumpDuration = 0.2f ;
 	public Animator animator ;
@@ -51,8 +52,8 @@ public class Player : MonoBehaviour {
     private int lastBlinkNumber;
     
 
-    private List<GameObject> listRope; 
-
+    private List<GameObject> listRope;
+    private List<GameObject> objectsLaunched;
 
 	public bool onLadder { get ; set; } 
 
@@ -74,8 +75,10 @@ public class Player : MonoBehaviour {
     void Start () {
 		managerJoueur = GameObject.Find ("ManagerJoueur").GetComponent<ManagerJoueur> ();
 
-        listRope = new List<GameObject>() ; 
-	}
+        listRope = new List<GameObject>() ;
+        objectsLaunched = new List<GameObject>();
+
+    }
 	
 	// Update is called once per frame
 	void Update ()
@@ -104,6 +107,8 @@ public class Player : MonoBehaviour {
 		touchLadder();
         BombControl();
         SpikeColision();
+        DamageOnThrow();
+        CleanObjectLaunched();
         // touche action 
         actionOn ();
         enemieColision();
@@ -144,11 +149,11 @@ public class Player : MonoBehaviour {
                 if (managerJoueur.nbBombeOk(J1actif))
                 {
                     GameObject b = GameObject.Instantiate(bomb);
+                    objectsLaunched.Add(b);
                     b.transform.position = this.transform.position;
                     if (Input.GetKey(toucheAccroupi))
                     {
                         b.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
-
                     }
                     else
                     {
@@ -355,20 +360,84 @@ public class Player : MonoBehaviour {
         if (Physics2D.OverlapBox(new Vector2(feet.transform.position.x, feet.transform.position.y)
             , new Vector2(0.728853f, 0.1633179f), 0, spikeLayer) && rb.velocity.y<-0.5)
         {
-            managerJoueur.lifeDown(managerJoueur.getLife(J1actif), J1actif);
+            killPlayer();
         }
 
     }
+
+    public void killPlayer()
+    {
+        managerJoueur.lifeDown(managerJoueur.getLife(J1actif), J1actif);
+    }
+
     void takeDamage(int direction)
     {
         this.rb.velocity+=new Vector2 (direction * 4, 4);
         managerJoueur.lifeDown(1, J1actif);
         lastBlinkNumber = (int)(5 * invincible);
     }
+
     public void dead()
 	{
 		SceneManager.LoadScene (SceneManager.GetActiveScene ().name); 
 	}
+
+    public void DamageOnThrow()
+    {
+        bool next = false;
+        if (invincible == 0)
+        {
+            Collider2D[] cols = Physics2D.OverlapCapsuleAll(capsuleCollider.transform.position, capsuleCollider.size, capsuleCollider.direction, 0, objectLayer);
+            foreach (Collider2D c in cols)
+            {
+                next = false;
+                foreach (GameObject obj in objectsLaunched)
+                {
+                    if (c.gameObject == obj)
+                    {
+                        next = true;
+                    }
+                }
+                if (!next)
+                {
+                    Rigidbody2D rb_tmp = c.GetComponent<Rigidbody2D>();
+                    if (rb_tmp)
+                    {
+                        if (Mathf.Abs(rb_tmp.velocity.x) + Mathf.Abs(rb_tmp.velocity.y) > 1)
+                        {
+                            invincible = invincibleTime;
+                            takeDamage(c.transform.position.x > this.transform.position.x ? -1 : 1);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    public void CleanObjectLaunched()
+    {
+        bool toDelete = true;
+        List<GameObject> objectsToDelete = new List<GameObject>();
+        Collider2D[] cols = Physics2D.OverlapCapsuleAll(capsuleCollider.transform.position, capsuleCollider.size, capsuleCollider.direction, 0, objectLayer);
+        foreach (GameObject obj in objectsLaunched)
+        {
+            foreach (Collider2D c in cols)
+            {
+                if(obj == c.gameObject)
+                {
+                    toDelete = false;
+                }
+            }
+            if (toDelete)
+            {
+                objectsToDelete.Add(obj);
+            }
+        }
+        foreach(GameObject obj in objectsToDelete)
+        {
+            objectsLaunched.Remove(obj);
+        }
+    }
     #endregion
 
     #region Porte obj
@@ -391,6 +460,7 @@ public class Player : MonoBehaviour {
                 heldObject.GetComponent<Player>().animator.SetBool("Held", false);
                 heldObject.GetComponent<Player>().dontMove = false;
             }
+            objectsLaunched.Add(heldObject);
             heldObject.GetComponent<Rigidbody2D>().isKinematic = false;
             heldObject.GetComponent<Rigidbody2D>().velocity = new Vector2(20 * this.transform.localScale.x, 10);
             holdSomething = false;
@@ -418,6 +488,7 @@ public class Player : MonoBehaviour {
                         col.gameObject.GetComponent<Player>().dontMove = true;
                     }
                     heldObject = col.gameObject;
+                    heldObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
                     heldObject.GetComponent<Rigidbody2D>().isKinematic = true;
                     holdSomething = true;
                 }
@@ -526,7 +597,6 @@ public class Player : MonoBehaviour {
             lastBlinkNumber = (int)(5 * invincible);
             sprite.color = new Color(1, 1, 1, sprite.color.a==1?0:1);
         }
-        
     }
     #endregion
 

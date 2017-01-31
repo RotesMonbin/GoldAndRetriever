@@ -327,8 +327,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1523377290886086}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -11.340612, y: -1.4457884, z: 6.203125}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.45, y: 3.42, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4173479359181414}
@@ -750,6 +750,9 @@ MonoBehaviour:
   spikeLayer:
     serializedVersion: 2
     m_Bits: 4096
+  objectLayer:
+    serializedVersion: 2
+    m_Bits: 2048
   jumpDuration: 0.2
   animator: {fileID: 95755103511524838}
   bomb: {fileID: 1769960141452492, guid: c660ea44e85fa4f48899cd54630f2802, type: 2}

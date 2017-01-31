@@ -37,11 +37,21 @@ public class Bomb : MonoBehaviour {
     void Blow()
     {
         Collider2D[] blocks = Physics2D.OverlapCircleAll(new Vector2(blowRadius.transform.position.x, blowRadius.transform.position.y)
-            , 2, decor);
+            , 2);
         Destroy(this.gameObject.GetComponent<Rigidbody2D>());
         foreach(Collider2D c in blocks)
         {
             if (c.tag == "Breakable")
+            {
+                Destroy(c.gameObject);
+            }
+            if(c.tag == "Player")
+            {
+                c.GetComponent<Rigidbody2D>().velocity = new Vector2((c.transform.position.x - this.transform.position.x)*20, (c.transform.position.y - this.transform.position.y)*20);
+                c.GetComponent<Player>().killPlayer();
+
+            }
+            if(c.tag == "Enemie")
             {
                 Destroy(c.gameObject);
             }
