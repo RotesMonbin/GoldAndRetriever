@@ -128,7 +128,7 @@ public class Player : MonoBehaviour {
         }
         else
         {
-            this.GetComponentInChildren<SpriteRenderer>().color = new Color(1, 1, 1, 1);
+            sprite.color = new Color(1, 1, 1, 1);
         }
 
 
@@ -525,7 +525,7 @@ public class Player : MonoBehaviour {
         if (lastBlinkNumber>(int)(5 * invincible))
         {
             lastBlinkNumber = (int)(5 * invincible);
-            this.GetComponentInChildren<SpriteRenderer>().color = new Color(1, 1, 1, this.GetComponentInChildren<SpriteRenderer>().color.a==1?0:1);
+            sprite.color = new Color(1, 1, 1, sprite.color.a==1?0:1);
         }
         
     }
