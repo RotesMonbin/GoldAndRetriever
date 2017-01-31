@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Lave : MonoBehaviour {
 
-	public GameObject laveGO;
-
-	private List<GameObject> tabLave; 
+    private bool activation = false ;
 	// Use this for initialization
 	void Start () {
 		
@@ -14,17 +13,18 @@ public class Lave : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		laveLancement ();
+		 
+        if(activation)
+        {
+            Vector3 temp = this.transform.position;
+            temp.y = 0.01f + temp.y;
+            this.transform.position = temp;
+        }
 	}
 
 
 	public void laveLancement()
 	{
-		GameObject lave = Instantiate (laveGO); 
-		Vector3 temp = this.transform.position; 
-		temp.x = temp.x + 2;
-		lave.transform.position = temp; 
-
-		tabLave.Add (lave); 
+        activation = true; 
 	}
 }

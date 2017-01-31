@@ -44,8 +44,6 @@ public class Player : MonoBehaviour {
 
 	private bool dontMove = false ;
     private float invincible;
-    
-
 
     private List<GameObject> listRope; 
 
@@ -64,12 +62,13 @@ public class Player : MonoBehaviour {
 
 	// Prefab : 
 	public GameObject rope ; 
-	public GameObject ropeDeb ; 
-
+	public GameObject ropeDeb ;
+ 
     // Use this for initialization
     void Start () {
 		managerJoueur = GameObject.Find ("ManagerJoueur").GetComponent<ManagerJoueur> ();
-		listRope = new List<GameObject>() ; 
+
+        listRope = new List<GameObject>() ; 
 	}
 	
 	// Update is called once per frame
@@ -310,8 +309,9 @@ public class Player : MonoBehaviour {
 		{
 			cameraShakeJ1.GetComponent<CameraShake> ().gem = true;
 			cameraShakeJ2.GetComponent<CameraShake> ().gem = true;
-            managerJoueur.gemUp(); 
+            managerJoueur.gemUp();
 
+            
             Destroy (coll.gameObject); 
 		}
 

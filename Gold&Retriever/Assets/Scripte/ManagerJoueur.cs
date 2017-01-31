@@ -41,6 +41,8 @@ public class ManagerJoueur : MonoBehaviour {
     private bool gem;
     private GemmeBleuHUD gemGlobal;
 
+    private Lave lave;
+
     // Use this for initialization
     void Start () {
 
@@ -48,7 +50,9 @@ public class ManagerJoueur : MonoBehaviour {
 		lifeScript_J2 = GameObject.Find ("LifeHUDJ2").GetComponent<Life> ();
 
         gemGlobal = GameObject.Find("GEMME").GetComponent<GemmeBleuHUD>();
-       
+
+        lave = GameObject.Find("laveManager").GetComponent<Lave>();
+
 
         lifeJ1 = 3; 
 		lifeJ2 = 3;
@@ -92,7 +96,8 @@ public class ManagerJoueur : MonoBehaviour {
     public void gemUp()
     {
         gem = true;
-        gemGlobal.gemaff(); 
+        gemGlobal.gemaff();
+        lave.laveLancement(); 
     }
 
     #endregion
