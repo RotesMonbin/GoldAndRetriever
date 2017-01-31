@@ -46,14 +46,10 @@ public class Player : MonoBehaviour {
     public KeyCode toucheAction;
 
 	private bool dontMove = false ;
-<<<<<<< HEAD
+
     private float invincible=0;
     private int lastBlinkNumber;
     
-
-=======
-    private float invincible;
->>>>>>> origin/master
 
     private List<GameObject> listRope; 
 
