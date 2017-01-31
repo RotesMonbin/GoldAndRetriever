@@ -178,14 +178,6 @@ public class Player : MonoBehaviour {
 
             if (rb.velocity.y == 0.0f)
                 animator.SetFloat("vitesse", Mathf.Abs(rb.velocity.x));
-
-            if (Input.GetKeyDown(KeyCode.DownArrow))
-            {
-                animator.SetBool("crush", true);
-                managerJoueur.lifeDown(1, J1actif);
-            }
-            else
-                animator.SetBool("crush", false); 
         }
     }
     #endregion
