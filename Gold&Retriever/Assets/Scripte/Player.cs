@@ -56,6 +56,10 @@ public class Player : MonoBehaviour {
 
 	private ManagerJoueur managerJoueur ; 
 
+	[SerializeField]
+	private Camera cameraShakeJ1 ;
+	[SerializeField]
+	private Camera cameraShakeJ2 ; 
 
 	// Prefab : 
 	public GameObject rope ; 
@@ -286,6 +290,13 @@ public class Player : MonoBehaviour {
             dead();
         }
 
+		if (coll.gameObject.tag == "GemmeBleu" )
+		{
+			cameraShakeJ1.GetComponent<CameraShake> ().gem = true;
+			cameraShakeJ2.GetComponent<CameraShake> ().gem = true; 
+
+			Destroy (coll.gameObject); 
+		}
 
 
     }
