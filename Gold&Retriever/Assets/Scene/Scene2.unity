@@ -130,16 +130,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 70555931846036212, guid: 28ff40cf113758a4380736ae28560c0a,
-        type: 2}
-      propertyPath: m_Direction
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114800415898129446, guid: 28ff40cf113758a4380736ae28560c0a,
-        type: 2}
-      propertyPath: spikeLayer.m_Bits
-      value: 4096
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 28ff40cf113758a4380736ae28560c0a, type: 2}
   m_IsPrefabParent: 0
@@ -342,7 +332,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4348827569691718, guid: 9a154be1d595d0d438e46a52b66e9305, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -8.3
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4348827569691718, guid: 9a154be1d595d0d438e46a52b66e9305, type: 2}
       propertyPath: m_LocalPosition.y
@@ -371,6 +361,11 @@ Prefab:
     - target: {fileID: 4348827569691718, guid: 9a154be1d595d0d438e46a52b66e9305, type: 2}
       propertyPath: m_RootOrder
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 212916190163697182, guid: 9a154be1d595d0d438e46a52b66e9305,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9a154be1d595d0d438e46a52b66e9305, type: 2}

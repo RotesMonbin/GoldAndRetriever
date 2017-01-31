@@ -24,12 +24,15 @@ public class Player : MonoBehaviour {
     public float bombThrow;
     public float invincibleTime;
 
+    public SpriteRenderer sprite;
 
     private float jumpTime = 0f ; 
 	private bool isJumping = false;
 
     private bool holdSomething=false;
     private GameObject heldObject;
+
+
 
     // Touche clavier :
 	public bool J1actif; 
@@ -43,7 +46,8 @@ public class Player : MonoBehaviour {
     public KeyCode toucheAction;
 
 	private bool dontMove = false ;
-    private float invincible;
+    private float invincible=0;
+    private int lastBlinkNumber;
     
 
 
@@ -113,8 +117,17 @@ public class Player : MonoBehaviour {
 			animator.SetBool ("Jump", true);
 	
 		if (rb.velocity.y == 0.0f)
-			animator.SetFloat ("vitesse", Mathf.Abs (rb.velocity.x));  
+			animator.SetFloat ("vitesse", Mathf.Abs (rb.velocity.x));
 
+        //invincibilityBlink
+        if (invincible > 0)
+        {
+            blinkAnimation();
+        }
+        else
+        {
+            this.GetComponentInChildren<SpriteRenderer>().color = new Color(1, 1, 1, 1);
+        }
 
 
 	}
@@ -319,6 +332,7 @@ public class Player : MonoBehaviour {
 
     #endregion
 
+    #region Damage
     void enemieColision()
     {
         if (invincible != 0)
@@ -332,9 +346,9 @@ public class Player : MonoBehaviour {
             {
                 if (c.transform.position.y > feet.transform.position.y+0.5)
                 {
-                    if (invincible == 0) { 
-                    takeDamage(c.transform.position.x > feet.transform.position.x ? -1 : 1);
-                    invincible = invincibleTime;
+                    if (invincible == 0) {
+                        invincible = invincibleTime;
+                        takeDamage(c.transform.position.x > feet.transform.position.x ? -1 : 1);
                     }
                 }
                 else
@@ -361,13 +375,15 @@ public class Player : MonoBehaviour {
     {
         this.rb.velocity+=new Vector2 (direction * 4, 4);
         managerJoueur.lifeDown(1, J1actif);
+        lastBlinkNumber = (int)(5 * invincible);
     }
     public void dead()
 	{
 		SceneManager.LoadScene (SceneManager.GetActiveScene ().name); 
 	}
+    #endregion
 
-	#region Porte obj
+    #region Porte obj
     void moveHeldObject()
     {
         Transform t = heldObject.transform;
@@ -513,6 +529,16 @@ public class Player : MonoBehaviour {
     bool isFacingWall()
     {
         return (Physics2D.OverlapCircle(new Vector2(face.transform.position.x, face.transform.position.y), 0.2f, isJumpable));
+    }
+
+    void blinkAnimation()
+    {
+        if (lastBlinkNumber>(int)(5 * invincible))
+        {
+            lastBlinkNumber = (int)(5 * invincible);
+            this.GetComponentInChildren<SpriteRenderer>().color = new Color(1, 1, 1, this.GetComponentInChildren<SpriteRenderer>().color.a==1?0:1);
+        }
+        
     }
     #endregion
 
