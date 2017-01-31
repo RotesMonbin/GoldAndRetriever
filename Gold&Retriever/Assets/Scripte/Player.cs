@@ -313,15 +313,12 @@ public class Player : MonoBehaviour {
             
             Destroy (coll.gameObject); 
 		}
-    }
-
-    void OnTriggerEnter(Collider coll)
-    {
         if (coll.gameObject.tag == "Lave")
         {
-            managerJoueur.lifeDown(managerJoueur.getLife(J1actif), J1actif);
+            takeDamage(4);
         }
     }
+
     #endregion
 
     #region Damage
