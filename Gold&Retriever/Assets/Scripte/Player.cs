@@ -16,6 +16,7 @@ public class Player : MonoBehaviour {
 
 	public LayerMask isJumpable ;
     public LayerMask enemieLayer;
+    public LayerMask spikeLayer;
 
     public float jumpDuration = 0.2f ;
 	public Animator animator ;
@@ -69,21 +70,36 @@ public class Player : MonoBehaviour {
     void Start () {
 		managerJoueur = GameObject.Find ("ManagerJoueur").GetComponent<ManagerJoueur> ();
 		listRope = new List<GameObject>() ; 
-
 	}
 	
 	// Update is called once per frame
 	void Update ()
 	{
-
+        if (J1actif)
+        {
+            if(managerJoueur.getLife(true) <= 0)
+            {
+                animator.SetBool("Dead", true);
+                this.dontMove = true;
+            }
+        }
+        else
+        {
+            if (managerJoueur.getLife(false) <= 0)
+            {
+                animator.SetBool("Dead", true);
+                this.dontMove = true;
+            }
+        }
 		animator.SetBool ("Walk", 	rb.velocity.x != 0.0f ); // walk
 		animator.SetBool ("Jump", 	rb.velocity.y != 0.0f ); // walk
         DirectionControl();
         SautControl();
 		touchLadder();
         BombControl();
-		// touche action 
-		actionOn ();
+        SpikeColision();
+        // touche action 
+        actionOn ();
         enemieColision();
 
         // DEPLACE OBJET TENU
@@ -332,7 +348,15 @@ public class Player : MonoBehaviour {
             }
         }
     }
+    void SpikeColision()
+    {
+        if (Physics2D.OverlapBox(new Vector2(feet.transform.position.x, feet.transform.position.y)
+            , new Vector2(0.728853f, 0.1633179f), 0, spikeLayer) && rb.velocity.y<-0.5)
+        {
+            managerJoueur.lifeDown(managerJoueur.getLife(J1actif), J1actif);
+        }
 
+    }
     void takeDamage(int direction)
     {
         this.rb.velocity+=new Vector2 (direction * 4, 4);
