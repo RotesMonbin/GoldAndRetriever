@@ -574,7 +574,7 @@ public class Player : MonoBehaviour {
 		
 		animator.SetBool ("Climb", onLadder);		
 		if (onLadder) {
-			if (Input.GetKey (toucheHaut))
+			if (Input.GetKey (toucheHaut) || manetteUp())
 				rb.velocity = new Vector2 (0, speed * climbSpeed); 
 			else if (Input.GetKey (toucheAccroupi))
 				rb.velocity = new Vector2 (0, -speed * climbSpeed); 
@@ -626,7 +626,6 @@ public class Player : MonoBehaviour {
     }
     bool manetteLeft()
     {
-        Debug.Log(Input.GetAxis(manetteAxeY));
         return Input.GetAxis(manetteAxeX) < -0.5;
     }
     bool manetteRight()
