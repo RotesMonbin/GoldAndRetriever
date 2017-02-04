@@ -536,7 +536,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1299958111737420}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 28.169388, y: -1.0511155, z: 6.203125}
+  m_LocalPosition: {x: 0, y: 0, z: 6.203125}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4242236428365076}
@@ -595,7 +595,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1793509230380508}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 29.72, y: 13.15, z: -6.203125}
+  m_LocalPosition: {x: 1, y: 7.5, z: -6.203125}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4070240857430448}
@@ -623,7 +623,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1249140618517324}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 9.66, y: -1.4457884, z: 6.203125}
+  m_LocalPosition: {x: 0, y: 0, z: 6.203125}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4911958824886360}
@@ -1230,11 +1230,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b41402c392c5c547a25248524acfd91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocity: {x: 0, y: 0}
+  velocity: {x: 0.05, y: 0}
   smoothTimeX: 0.05
   smoothTimeY: 0.05
   player: {fileID: 1285287883764832}
-  shakeTimer: 0.9831508
+  shakeTimer: 3
   shakeAmount: 0
   gem: 0
 --- !u!114 &114600910580655286
