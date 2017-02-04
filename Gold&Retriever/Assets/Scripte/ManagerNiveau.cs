@@ -31,81 +31,83 @@ public class ManagerNiveau : MonoBehaviour {
     // Use this for initialization
     void Start () {
 
-        int rLigne = Random.Range(2, 7);
+        int rLigne = 2; Random.Range(2, 7);
         int rColonne = 2; Random.Range(2, 5);
 
         int sens = 1; // -1 = inverser 
 
-        int HauteurColonne = HAUTEURMAX;
-        int tailleLigne = LARGEURMAX;
+        int pointeurLigne = 40;
+        int pointeurColonne = 0;
 
-        for (int i = 0; i < rColonne;  i++)
+        for(int iColonne = 0; iColonne < rColonne; iColonne++ )
         {
-            HauteurColonne = i * HauteurColonne;
-            // ligne 0 
-
-            tailleLigne = 0;
-            for (int j = 0; j < rLigne; j++)
+            if(sens == -1 )
             {
-                if (i == 0 && j == 0)
-                    InstanciateGameObjRandom(TabDebGrotte, new Vector3(0, 0, 0), sens);
-                else
+                pointeurLigne = pointeurLigne - 20;
+                // LIGNE +-------------------------------
+                for (int iLigne = rLigne - 1 ; iLigne >= 0; iLigne--)
                 {
-                    tailleLigne = j * LARGEURMAX;
-
-                    Vector3 vLignetemp = new Vector3(tailleLigne, HauteurColonne, 0);
-
-                    int randLigne = Random.Range(0, TabMilieu.Count);
-                    InstanciateGameObjRandom(TabMilieu[randLigne], vLignetemp, sens);
+                    pointeurLigne = pointeurLigne * iLigne + (iLigne == 0 ? 79 : 0);
+                    int randomMilieu = Random.Range(0, TabMilieu.Count);
+                    InstanciateGameObjRandom(TabMilieu[randomMilieu], new Vector3(pointeurLigne, pointeurColonne, 0), sens, true);
+                    
                 }
-              
             }
+            else
+            {
+                // LIGNE +-------------------------------
+                for (int iLigne = 0; iLigne < rLigne; iLigne++)
+                {
+                    if (iColonne == 0 && iLigne == 0)
+                        InstanciateGameObjRandom(TabDebGrotte, new Vector3(0, 0, 0), sens, false);
+                    else
+                    {
+                        pointeurLigne = pointeurLigne * iLigne;
+                        int randomMilieu = Random.Range(0, TabMilieu.Count);
+                        InstanciateGameObjRandom(TabMilieu[randomMilieu], new Vector3(pointeurLigne, pointeurColonne, 0), sens, false);
+                    }
+                }
+            }
+           
 
-            tailleLigne += LARGEURMAX + 20;
-            Debug.Log(" LIGNE : " + tailleLigne);
-            sens = sens == -1 ? 1 : -1;
-            int randColonne = Random.Range(0, TabCoin.Count );
-            Vector3 vCointemp = new Vector3(tailleLigne, HauteurColonne, 0);
+            sens = sens == 1 ? -1 : 1;
 
-            InstanciateGameObjRandom(TabCoin[randColonne], vCointemp, sens);
-
-            HauteurColonne += HAUTEURMAX;
+            pointeurLigne = pointeurLigne + 79;
+            // COLONNEEE+------------------------------ DRoite
+            if (rColonne > 1 && iColonne < rColonne - 1 )
+            {
+                pointeurLigne += 20;
+                int randomCoin = Random.Range(0, TabCoin.Count);
+                InstanciateGameObjRandom(TabCoin[randomCoin], new Vector3(pointeurLigne, pointeurColonne, 0), sens, true);
+                pointeurColonne = pointeurColonne + HAUTEURMAX - 1;
+            }
+            
         }
+                
+         if(sens == 1)
+            InstanciateGameObjRandom(TabFin, new Vector3(pointeurLigne -198, pointeurColonne, 0), sens, false);
+        else 
+            InstanciateGameObjRandom(TabFin, new Vector3(pointeurLigne , pointeurColonne, 0), sens,false);
 
-
-        /*
-        Instantiate (TabDebGrotte).transform.position = new Vector3(0,1,0);
-        Instantiate (TabMilieu [0]).transform.position = new Vector3(40,1,0); 
-
-		Instantiate (TabMilieu [1]).transform.position = new Vector3(40,-20,0); 
-
-		GameObject i3 = Instantiate (TabCoin [0]); 
-
-		Vector3 temp = i3.transform.localScale; 
-		temp.x = -1; 
-		i3.transform.localScale = temp; 
-	
-		i3.transform.position = new Vector3(100,1,0); 
-
-	
-		//Instantiate (TabMilieu [1]).transform.position = new Vector3(40,-20,0); 
-	
-		Instantiate (TabCoin [0]).transform.position = new Vector3(20,-20,0); */
-
-	}
+    }
 	
 	// Update is called once per frame
 	void Update () {
 	}
 
-    void InstanciateGameObjRandom(GameObject Go , Vector3 position, int direction)
+    void InstanciateGameObjRandom(GameObject Go , Vector3 position, int direction, bool coin)
     {
         GameObject gameobjTemp = Instantiate(Go);
 
         Vector3 temp = gameobjTemp.transform.localScale;
         temp.x = direction;
 
- 
+
+        if (direction == -1 && !coin)
+            position.x += 40;
+        if (direction == -1 && coin)
+            position.x -= 40;
+
         gameobjTemp.transform.localScale = temp;
         gameobjTemp.transform.position = position;
     }
