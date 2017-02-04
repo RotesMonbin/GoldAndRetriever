@@ -2284,7 +2284,7 @@ GameObject:
   - component: {fileID: 114483462792758716}
   - component: {fileID: 61920776173928578}
   - component: {fileID: 50219963425777164}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: coinGold (5)
   m_TagString: Coins
   m_Icon: {fileID: 0}
@@ -2983,7 +2983,7 @@ GameObject:
   - component: {fileID: 114382752101708980}
   - component: {fileID: 61625965353144980}
   - component: {fileID: 50939530912478304}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: coinGold
   m_TagString: Coins
   m_Icon: {fileID: 0}
@@ -5311,7 +5311,7 @@ GameObject:
   - component: {fileID: 114259709227566742}
   - component: {fileID: 61365245981698660}
   - component: {fileID: 50758201222749008}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: coinGold (4)
   m_TagString: Coins
   m_Icon: {fileID: 0}
@@ -7533,7 +7533,7 @@ GameObject:
   - component: {fileID: 114411615168146850}
   - component: {fileID: 61888691532076616}
   - component: {fileID: 50990986281355396}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: coinGold (3)
   m_TagString: Coins
   m_Icon: {fileID: 0}
@@ -8571,7 +8571,7 @@ GameObject:
   - component: {fileID: 114173641340006584}
   - component: {fileID: 61741573104855168}
   - component: {fileID: 50937569901071382}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: coinGold (2)
   m_TagString: Coins
   m_Icon: {fileID: 0}
@@ -9318,7 +9318,7 @@ GameObject:
   - component: {fileID: 212698334932010878}
   - component: {fileID: 61969397850276454}
   - component: {fileID: 50477118331855098}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: CaisseBombe (1)
   m_TagString: bombeCaisse
   m_Icon: {fileID: 0}
@@ -12111,7 +12111,7 @@ GameObject:
   - component: {fileID: 114772304234276610}
   - component: {fileID: 61701648432951008}
   - component: {fileID: 50595681861495676}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: coinGold (1)
   m_TagString: Coins
   m_Icon: {fileID: 0}
@@ -16188,7 +16188,7 @@ GameObject:
   - component: {fileID: 212907950742794390}
   - component: {fileID: 61820653446528024}
   - component: {fileID: 50117073247060740}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: CaisseBombe (2)
   m_TagString: bombeCaisse
   m_Icon: {fileID: 0}
@@ -34060,7 +34060,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1935275011622852}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 36, y: 0, z: 0}
+  m_LocalPosition: {x: 38.354607, y: 17.76426, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4126002252138590}

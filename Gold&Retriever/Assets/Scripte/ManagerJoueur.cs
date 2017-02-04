@@ -50,8 +50,7 @@ public class ManagerJoueur : MonoBehaviour {
 		lifeScript_J2 = GameObject.Find ("LifeHUDJ2").GetComponent<Life> ();
 
         gemGlobal = GameObject.Find("GEMME").GetComponent<GemmeBleuHUD>();
-
-        lave = GameObject.Find("LaveALL").GetComponent<Lave>();
+        lave = GameObject.Find("LaveDeplacement").GetComponent<Lave>();
 
 
         lifeJ1 = 3; 
