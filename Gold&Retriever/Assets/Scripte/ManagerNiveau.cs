@@ -31,63 +31,53 @@ public class ManagerNiveau : MonoBehaviour {
     // Use this for initialization
     void Start () {
 
-        int rLigne = 2; Random.Range(2, 7);
-        int rColonne = 2; Random.Range(2, 5);
+        int rLigne =  Random.Range(2, 5);
+        int rColonne = Random.Range(3, 5);
 
         int sens = 1; // -1 = inverser 
 
-        int pointeurLigne = 40;
-        int pointeurColonne = 0;
+        int indiceLigne = 40;
+        int indiceColonne = 1;
 
-        for(int iColonne = 0; iColonne < rColonne; iColonne++ )
+        InstanciateGameObjRandom(TabDebGrotte , new Vector3(0,1,0) , 1 , false);
+
+
+        for (int i = 1;  i <=  rColonne; i++)
         {
-            if(sens == -1 )
+            if (sens == 1)
             {
-                pointeurLigne = pointeurLigne - 20;
-                // LIGNE +-------------------------------
-                for (int iLigne = rLigne - 1 ; iLigne >= 0; iLigne--)
+                // ligne 
+                for (int j = 1; j <= rLigne; j++)
                 {
-                    pointeurLigne = pointeurLigne * iLigne + (iLigne == 0 ? 79 : 0);
-                    int randomMilieu = Random.Range(0, TabMilieu.Count);
-                    InstanciateGameObjRandom(TabMilieu[randomMilieu], new Vector3(pointeurLigne, pointeurColonne, 0), sens, true);
-                    
+                    int r = Random.Range(0, TabMilieu.Count); 
+                    InstanciateGameObjRandom(TabMilieu[r], new Vector3(indiceLigne, indiceColonne, 0), sens, false);
+                    indiceLigne = indiceLigne + 40;
                 }
+
+                int rCoin = Random.Range(0, TabCoin.Count);
+                InstanciateGameObjRandom(TabCoin[rCoin], new Vector3(indiceLigne, indiceColonne, 0), -sens, true);
+
             }
             else
             {
-                // LIGNE +-------------------------------
-                for (int iLigne = 0; iLigne < rLigne; iLigne++)
+                indiceLigne = indiceLigne - 41;
+                // ligne Autre sens
+                for (int j = 1; j <= rLigne; j++)
                 {
-                    if (iColonne == 0 && iLigne == 0)
-                        InstanciateGameObjRandom(TabDebGrotte, new Vector3(0, 0, 0), sens, false);
-                    else
-                    {
-                        pointeurLigne = pointeurLigne * iLigne;
-                        int randomMilieu = Random.Range(0, TabMilieu.Count);
-                        InstanciateGameObjRandom(TabMilieu[randomMilieu], new Vector3(pointeurLigne, pointeurColonne, 0), sens, false);
-                    }
+                    int r = Random.Range(0, TabMilieu.Count);
+                    InstanciateGameObjRandom(TabMilieu[r], new Vector3(indiceLigne, indiceColonne, 0), sens, false);
+                    indiceLigne = indiceLigne - 40;
                 }
-            }
-           
 
-            sens = sens == 1 ? -1 : 1;
-
-            pointeurLigne = pointeurLigne + 79;
-            // COLONNEEE+------------------------------ DRoite
-            if (rColonne > 1 && iColonne < rColonne - 1 )
-            {
-                pointeurLigne += 20;
-                int randomCoin = Random.Range(0, TabCoin.Count);
-                InstanciateGameObjRandom(TabCoin[randomCoin], new Vector3(pointeurLigne, pointeurColonne, 0), sens, true);
-                pointeurColonne = pointeurColonne + HAUTEURMAX - 1;
-            }
-            
-        }
+                int rCoin = Random.Range(0, TabCoin.Count);
+                InstanciateGameObjRandom(TabCoin[rCoin], new Vector3(indiceLigne+20, indiceColonne, 0), -sens, true);
                 
-         if(sens == 1)
-            InstanciateGameObjRandom(TabFin, new Vector3(pointeurLigne -198, pointeurColonne, 0), sens, false);
-        else 
-            InstanciateGameObjRandom(TabFin, new Vector3(pointeurLigne , pointeurColonne, 0), sens,false);
+            }
+            sens = sens == 1 ? -1 : 1;
+            indiceColonne = indiceColonne - 21;
+        }
+
+       
 
     }
 	
@@ -105,8 +95,9 @@ public class ManagerNiveau : MonoBehaviour {
 
         if (direction == -1 && !coin)
             position.x += 40;
+
         if (direction == -1 && coin)
-            position.x -= 40;
+            position.x += 20;
 
         gameobjTemp.transform.localScale = temp;
         gameobjTemp.transform.position = position;
