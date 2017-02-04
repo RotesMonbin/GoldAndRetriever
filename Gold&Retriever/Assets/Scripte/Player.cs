@@ -46,7 +46,15 @@ public class Player : MonoBehaviour {
     public KeyCode toucheAccroupi;
     public KeyCode toucheAction;
 
-	private bool dontMove = false ;
+    public string manetteSaut;
+    public string manetteBombe;
+    public string manetteAction;
+    public string manetteAxeX;
+    public string manetteAxeY;
+
+
+
+    private bool dontMove = false ;
 
     private float invincible=0;
     private int lastBlinkNumber;
@@ -143,7 +151,7 @@ public class Player : MonoBehaviour {
         //BOMBE
         if (!dontMove)
         {
-            if (Input.GetKeyDown(toucheBomb))
+            if (Input.GetKeyDown(toucheBomb) || Input.GetButtonDown(manetteBombe))
             {
 
                 if (managerJoueur.nbBombeOk(J1actif))
@@ -151,7 +159,7 @@ public class Player : MonoBehaviour {
                     GameObject b = GameObject.Instantiate(bomb);
                     objectsLaunched.Add(b);
                     b.transform.position = this.transform.position;
-                    if (Input.GetKey(toucheAccroupi))
+                    if (Input.GetKey(toucheAccroupi) || manetteDown())
                     {
                         b.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
                     }
@@ -172,7 +180,7 @@ public class Player : MonoBehaviour {
         // PIED SAUT 
         if (!dontMove)
         {
-            if (Input.GetKey(toucheSaut)
+            if ((Input.GetKey(toucheSaut) || Input.GetButton(manetteSaut))
             && (Physics2D.OverlapBox(new Vector2(feet.transform.position.x, feet.transform.position.y), new Vector2(0.728853f, 0.1633179f), 0, isJumpable)))
                 rb.velocity = new Vector2(rb.velocity.x, jumpPower);
 
@@ -194,7 +202,7 @@ public class Player : MonoBehaviour {
         Vector3 temp = this.transform.localScale;
         if (!dontMove)
         {
-            if (Input.GetKey(toucheGauche) && rb.velocity.x > -5.0f)
+            if ( (Input.GetKey(toucheGauche) || manetteLeft() && rb.velocity.x > -5.0f) )
             {
                 temp.x = -1;
                 this.transform.localScale = temp;
@@ -204,7 +212,7 @@ public class Player : MonoBehaviour {
                 }
 
             }
-            else if (Input.GetKey(toucheDroite) && rb.velocity.x < 5.0f)
+            else if (Input.GetKey(toucheDroite) || manetteRight() && rb.velocity.x < 5.0f)
             {
                 temp.x = 1;
                 this.transform.localScale = temp;
@@ -253,11 +261,11 @@ public class Player : MonoBehaviour {
     void actionOn() 
 	{
 		//Action
-		if (Input.GetKeyDown(toucheAction))
+		if (Input.GetKeyDown(toucheAction) ||Input.GetButtonDown(manetteAction))
 		{
             if (!J1actif)
             { // fille 
-                if (Input.GetKey(toucheAccroupi))
+                if (Input.GetKey(toucheAccroupi) || manetteDown())
                 {
                     if (isTouchingGround())
                     {
@@ -277,7 +285,7 @@ public class Player : MonoBehaviour {
 
 		}
 
-		if (Input.GetKeyUp (toucheAction)) {
+		if (Input.GetKeyUp (toucheAction) || Input.GetButtonUp(manetteAction)) {
 			if (!J1actif) {
 				if (isTouchingGround ()) {
 					ropeActionReverse (); 
@@ -605,6 +613,25 @@ public class Player : MonoBehaviour {
             lastBlinkNumber = (int)(5 * invincible);
             sprite.color = new Color(1, 1, 1, sprite.color.a==1?0:1);
         }
+    }
+
+    bool manetteDown()
+    {
+
+        return Input.GetAxis(manetteAxeY ) > 0.5;
+    }
+    bool manetteUp()
+    {
+        return Input.GetAxis(manetteAxeY ) < - 0.5;
+    }
+    bool manetteLeft()
+    {
+        Debug.Log(Input.GetAxis(manetteAxeY));
+        return Input.GetAxis(manetteAxeX) < -0.5;
+    }
+    bool manetteRight()
+    {
+        return Input.GetAxis(manetteAxeX) > 0.5;
     }
     #endregion
 

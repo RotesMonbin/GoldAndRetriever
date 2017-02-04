@@ -595,7 +595,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1793509230380508}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 29.72, y: 13.15, z: -6.203125}
+  m_LocalPosition: {x: -11.4, y: 11.7, z: -6.203125}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4070240857430448}
@@ -1067,10 +1067,15 @@ MonoBehaviour:
   toucheDroite: 275
   toucheGauche: 276
   toucheHaut: 273
-  toucheSaut: 305
+  toucheSaut: 306
   toucheBomb: 109
   toucheAccroupi: 274
   toucheAction: 108
+  manetteSaut: AButtonJ1
+  manetteBombe: BButtonJ1
+  manetteAction: XButtonJ1
+  manetteAxeX: AxisXJ1
+  manetteAxeY: AxisYJ1
   climbSpeed: 5
   cameraShakeJ1: {fileID: 20134866854585802}
   cameraShakeJ2: {fileID: 20684923350699632}
@@ -1340,6 +1345,11 @@ MonoBehaviour:
   toucheBomb: 102
   toucheAccroupi: 115
   toucheAction: 103
+  manetteSaut: AButtonJ2
+  manetteBombe: BButtonJ2
+  manetteAction: XButtonJ2
+  manetteAxeX: AxisXJ2
+  manetteAxeY: AxisYJ2
   climbSpeed: 5
   cameraShakeJ1: {fileID: 20134866854585802}
   cameraShakeJ2: {fileID: 20684923350699632}
