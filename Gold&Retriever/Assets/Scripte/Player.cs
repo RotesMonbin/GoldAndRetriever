@@ -474,6 +474,11 @@ public class Player : MonoBehaviour {
                 heldObject.GetComponent<Player>().animator.SetBool("Held", false);
                 heldObject.GetComponent<Player>().dontMove = false;
             }
+            if (heldObject.gameObject.tag == "Box")
+            {
+                heldObject.GetComponent<boxRandom>().held = false;
+                heldObject.GetComponent<boxRandom>().thrown = true;
+            }
             objectsLaunched.Add(heldObject);
             heldObject.GetComponent<Rigidbody2D>().isKinematic = false;
             heldObject.GetComponent<Rigidbody2D>().velocity = new Vector2(20 * this.transform.localScale.x, 10);
@@ -489,13 +494,17 @@ public class Player : MonoBehaviour {
                 {
                     if (c.gameObject != this.gameObject)
                     {
-                        if ((c.gameObject.tag == "Player" && J1actif)|| c.gameObject.tag == "Pickup") { 
+                        if ((c.gameObject.tag == "Player" && J1actif)|| c.gameObject.tag == "Pickup" || c.gameObject.tag == "Box") { 
                             col = c;
                         }
                     }
                 }
                 if (col)
                 {
+                    if(col.gameObject.tag == "Box")
+                    {
+                        col.GetComponent<boxRandom>().held = true ;
+                    }
                     if (col.gameObject.tag == "Player")
                     {
                         col.gameObject.GetComponent<Player>().animator.SetBool("Held", true);
