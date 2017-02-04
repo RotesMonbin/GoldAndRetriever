@@ -202,7 +202,7 @@ public class Player : MonoBehaviour {
         Vector3 temp = this.transform.localScale;
         if (!dontMove)
         {
-            if ( (Input.GetKey(toucheGauche) || manetteLeft() && rb.velocity.x > -5.0f) )
+            if ( (Input.GetKey(toucheGauche) || manetteLeft()) && rb.velocity.x > -5.0f )
             {
                 temp.x = -1;
                 this.transform.localScale = temp;
@@ -212,7 +212,7 @@ public class Player : MonoBehaviour {
                 }
 
             }
-            else if (Input.GetKey(toucheDroite) || manetteRight() && rb.velocity.x < 5.0f)
+            else if ( (Input.GetKey(toucheDroite) || manetteRight()) && rb.velocity.x < 5.0f)
             {
                 temp.x = 1;
                 this.transform.localScale = temp;
