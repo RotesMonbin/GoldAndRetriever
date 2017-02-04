@@ -5,7 +5,7 @@ using UnityEngine;
 public class Worms : MonoBehaviour {
 
     public Rigidbody2D rb;
-    private int direction=-1;
+    private int direction;
     public float speed = 3;
     public LayerMask decor;
     public GameObject head;
@@ -16,8 +16,8 @@ public class Worms : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-		
-	}
+        direction =-(int)this.transform.localScale.x;
+    }
 	
 	// Update is called once per frame
 	void LateUpdate () {

@@ -595,7 +595,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1793509230380508}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1, y: 7.5, z: -6.203125}
+  m_LocalPosition: {x: 24.896587, y: 16.65, z: -6.203125}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4070240857430448}
@@ -1063,6 +1063,7 @@ MonoBehaviour:
   bombThrow: 15
   invincibleTime: 2
   sprite: {fileID: 212985150049731666}
+  speedFallDamage: 15
   J1actif: 1
   toucheDroite: 275
   toucheGauche: 276
@@ -1337,6 +1338,7 @@ MonoBehaviour:
   bombThrow: 15
   invincibleTime: 2
   sprite: {fileID: 212470563484288976}
+  speedFallDamage: 15
   J1actif: 0
   toucheDroite: 100
   toucheGauche: 113

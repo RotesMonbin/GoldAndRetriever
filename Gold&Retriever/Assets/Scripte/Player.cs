@@ -27,13 +27,12 @@ public class Player : MonoBehaviour {
 
     public SpriteRenderer sprite;
 
+    public float speedFallDamage;
     private float jumpTime = 0f ; 
 	private bool isJumping = false;
 
     private bool holdSomething=false;
     private GameObject heldObject;
-
-
 
     // Touche clavier :
 	public bool J1actif; 
@@ -52,13 +51,11 @@ public class Player : MonoBehaviour {
     public string manetteAxeX;
     public string manetteAxeY;
 
-
-
     private bool dontMove = false ;
 
     private float invincible=0;
     private int lastBlinkNumber;
-    
+    private bool damageNextTimeOnGround;
 
     private List<GameObject> listRope;
     private List<GameObject> objectsLaunched;
@@ -110,16 +107,6 @@ public class Player : MonoBehaviour {
         }
 		animator.SetBool ("Walk", 	rb.velocity.x != 0.0f ); // walk
 		animator.SetBool ("Jump", 	rb.velocity.y != 0.0f ); // walk
-        DirectionControl();
-        SautControl();
-		touchLadder();
-        BombControl();
-        SpikeColision();
-        DamageOnThrow();
-        CleanObjectLaunched();
-        // touche action 
-        actionOn ();
-        enemieColision();
 
         // DEPLACE OBJET TENU
         if (holdSomething)
@@ -135,7 +122,7 @@ public class Player : MonoBehaviour {
 			animator.SetFloat ("vitesse", Mathf.Abs (rb.velocity.x));
 
         //invincibilityBlink
-        if (invincible > 0)
+        if (invincible > 0 && managerJoueur.getLife(J1actif)>0)
         {
             blinkAnimation();
         }
@@ -144,6 +131,20 @@ public class Player : MonoBehaviour {
             sprite.color = new Color(1, 1, 1, 1);
         }
 	}
+
+    private void FixedUpdate()
+    {
+        DirectionControl();
+        SautControl();
+        touchLadder();
+        BombControl();
+        SpikeColision();
+        DamageOnThrow();
+        CleanObjectLaunched();
+        actionOn();
+        enemieColision();
+        DamageOnFall();
+    }
 
     #region ToucheBomb
     void BombControl()
@@ -360,10 +361,29 @@ public class Player : MonoBehaviour {
                 }
                 else
                 {
-                    if (invincible == 0)
+                    if (invincible < 1.5)
                     {
                         this.rb.velocity += new Vector2(0, 4);
                         c.GetComponent<Worms>().dead();
+                    }
+                }
+            }
+            if (c.GetComponent<Frog>())
+            {
+                if (c.transform.position.y > feet.transform.position.y + 0.5)
+                {
+                    if (invincible == 0)
+                    {
+                        invincible = invincibleTime;
+                        takeDamage(c.transform.position.x > feet.transform.position.x ? -1 : 1);
+                    }
+                }
+                else
+                {
+                    if (invincible < 1.5)
+                    {
+                        this.rb.velocity += new Vector2(0, 4);
+                        c.GetComponent<Frog>().dead();
                     }
                 }
             }
@@ -450,6 +470,20 @@ public class Player : MonoBehaviour {
         foreach(GameObject obj in objectsToDelete)
         {
             objectsLaunched.Remove(obj);
+        }
+    }
+
+    private void DamageOnFall()
+    {
+        if (rb.velocity.y < -speedFallDamage)
+        {
+            damageNextTimeOnGround = true;
+        }
+        if(isTouchingGround() && damageNextTimeOnGround)
+        {
+            invincible = invincibleTime;
+            takeDamage((int)-this.transform.localScale.x);
+            damageNextTimeOnGround = false;
         }
     }
     #endregion
