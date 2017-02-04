@@ -19,9 +19,12 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4752983130525442}
-  m_Layer: 20
+  - component: {fileID: 50225725499187924}
+  - component: {fileID: 61435926207853524}
+  - component: {fileID: 114688465281226932}
+  m_Layer: 11
   m_Name: CaisseCassable
-  m_TagString: Untagged
+  m_TagString: Box
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -35,10 +38,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4899901828349984}
   - component: {fileID: 212062719675192894}
-  - component: {fileID: 61790476976227790}
-  - component: {fileID: 114463830484045462}
-  - component: {fileID: 50403311829216150}
-  m_Layer: 20
+  m_Layer: 11
   m_Name: boxCrate_double
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -52,7 +52,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1356451783729372}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 71, y: 4, z: 0}
+  m_LocalPosition: {x: 33.86, y: 4.05, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4899901828349984}
@@ -72,13 +72,13 @@ Transform:
   m_Father: {fileID: 4752983130525442}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!50 &50403311829216150
+--- !u!50 &50225725499187924
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1928997265650884}
+  m_GameObject: {fileID: 1356451783729372}
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
@@ -92,12 +92,12 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!61 &61790476976227790
+--- !u!61 &61435926207853524
 BoxCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1928997265650884}
+  m_GameObject: {fileID: 1356451783729372}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -106,29 +106,38 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
---- !u!114 &114463830484045462
+--- !u!114 &114688465281226932
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1928997265650884}
+  m_GameObject: {fileID: 1356451783729372}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1a07c0cbb8f4c5e45ad2f1c034a85b66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jeter: 0
+  held: 0
+  thrown: 0
   listObj:
-  - {fileID: 1143822041834466, guid: ee0cbc5e08e1d5944a91b6004cf77eda, type: 2}
+  - {fileID: 1242344847330910, guid: 519428fae23bfef459d20acdb4511c9f, type: 2}
+  - {fileID: 1242344847330910, guid: 519428fae23bfef459d20acdb4511c9f, type: 2}
+  - {fileID: 1962761769278424, guid: 9be25d8dcba40ec41ab8edd4a5ced7d5, type: 2}
+  - {fileID: 1962761769278424, guid: 9be25d8dcba40ec41ab8edd4a5ced7d5, type: 2}
   - {fileID: 1769960141452492, guid: c660ea44e85fa4f48899cd54630f2802, type: 2}
-  - {fileID: 1962761769278424, guid: 9be25d8dcba40ec41ab8edd4a5ced7d5, type: 2}
-  - {fileID: 1242344847330910, guid: 519428fae23bfef459d20acdb4511c9f, type: 2}
-  - {fileID: 1242344847330910, guid: 519428fae23bfef459d20acdb4511c9f, type: 2}
-  - {fileID: 1962761769278424, guid: 9be25d8dcba40ec41ab8edd4a5ced7d5, type: 2}
+  - {fileID: 1769960141452492, guid: c660ea44e85fa4f48899cd54630f2802, type: 2}
   - {fileID: 1143822041834466, guid: ee0cbc5e08e1d5944a91b6004cf77eda, type: 2}
-  - {fileID: 1614210152340962, guid: 4aa7966523aa66842ab2fbf0bb749dc2, type: 2}
-  - {fileID: 1242344847330910, guid: 519428fae23bfef459d20acdb4511c9f, type: 2}
+  - {fileID: 1143822041834466, guid: ee0cbc5e08e1d5944a91b6004cf77eda, type: 2}
+  - {fileID: 1636091867828152, guid: 15907e0ade3ea2d419fd0d4cf04617ce, type: 2}
+  - {fileID: 1636091867828152, guid: 15907e0ade3ea2d419fd0d4cf04617ce, type: 2}
   particule: {fileID: 1437332764143158, guid: 14df95a8028e51743947e982d13f413e, type: 2}
+  boxColl: {fileID: 61435926207853524}
+  objects:
+    serializedVersion: 2
+    m_Bits: 2048
+  decors:
+    serializedVersion: 2
+    m_Bits: 1048576
 --- !u!212 &212062719675192894
 SpriteRenderer:
   m_ObjectHideFlags: 1
