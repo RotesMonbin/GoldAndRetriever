@@ -595,7 +595,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1793509230380508}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 24.896587, y: 16.65, z: -6.203125}
+  m_LocalPosition: {x: 52.5, y: 31.54, z: -6.203125}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4070240857430448}
@@ -623,7 +623,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1249140618517324}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 6.203125}
+  m_LocalPosition: {x: -17.15, y: -1.93, z: 6.203125}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4911958824886360}
@@ -1039,12 +1039,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b579677fd1dd3447882e9144dcae998, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.5
-  jumpPower: 5.5
+  acceleration: 4
+  walkingMaxSpeed: 10
+  runningMaxSpeed: 20
+  jumpPower: 20
+  throwPower: 30
   rb: {fileID: 50382337990656472}
   feet: {fileID: 1096790383775650}
   face: {fileID: 1342051575532034}
   capsuleCollider: {fileID: 70479074126840800}
+  gravityScale: 5
   isJumpable:
     serializedVersion: 2
     m_Bits: 1048576
@@ -1063,12 +1067,12 @@ MonoBehaviour:
   bombThrow: 15
   invincibleTime: 2
   sprite: {fileID: 212985150049731666}
-  speedFallDamage: 15
+  speedFallDamage: 40
   J1actif: 1
   toucheDroite: 275
   toucheGauche: 276
   toucheHaut: 273
-  toucheSaut: 306
+  toucheSaut: 305
   toucheBomb: 109
   toucheAccroupi: 274
   toucheAction: 108
@@ -1077,6 +1081,7 @@ MonoBehaviour:
   manetteAction: XButtonJ1
   manetteAxeX: AxisXJ1
   manetteAxeY: AxisYJ1
+  triggAxis: TriggAxisJ1
   climbSpeed: 5
   cameraShakeJ1: {fileID: 20134866854585802}
   cameraShakeJ2: {fileID: 20684923350699632}
@@ -1314,12 +1319,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b579677fd1dd3447882e9144dcae998, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.6
-  jumpPower: 5.5
+  acceleration: 4
+  walkingMaxSpeed: 10
+  runningMaxSpeed: 20
+  jumpPower: 20
+  throwPower: 30
   rb: {fileID: 50081042707591054}
   feet: {fileID: 1114823452592740}
   face: {fileID: 1493506590576948}
   capsuleCollider: {fileID: 70600783142106398}
+  gravityScale: 5
   isJumpable:
     serializedVersion: 2
     m_Bits: 1048576
@@ -1338,7 +1347,7 @@ MonoBehaviour:
   bombThrow: 15
   invincibleTime: 2
   sprite: {fileID: 212470563484288976}
-  speedFallDamage: 15
+  speedFallDamage: 40
   J1actif: 0
   toucheDroite: 100
   toucheGauche: 113
@@ -1352,6 +1361,7 @@ MonoBehaviour:
   manetteAction: XButtonJ2
   manetteAxeX: AxisXJ2
   manetteAxeY: AxisYJ2
+  triggAxis: TriggAxisJ2
   climbSpeed: 5
   cameraShakeJ1: {fileID: 20134866854585802}
   cameraShakeJ2: {fileID: 20684923350699632}

@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 114842764908137748}
   - component: {fileID: 70015114167804234}
   m_Layer: 10
-  m_Name: Frog
+  m_Name: GreenFrog
   m_TagString: Enemie
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

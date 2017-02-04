@@ -5,13 +5,17 @@ using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour {
 
-	public float speed = 10f;
-	public float jumpPower = 10f;
+	public float acceleration ;
+    public float walkingMaxSpeed;
+    public float runningMaxSpeed;
+    public float jumpPower ;
+    public float throwPower;
 
 	public Rigidbody2D rb; 
 	public GameObject feet ;
     public GameObject face ;
     public CapsuleCollider2D capsuleCollider;
+    public float gravityScale;
 
 
 	public LayerMask isJumpable ;
@@ -50,6 +54,7 @@ public class Player : MonoBehaviour {
     public string manetteAction;
     public string manetteAxeX;
     public string manetteAxeY;
+    public string triggAxis;
 
     private bool dontMove = false ;
 
@@ -203,23 +208,30 @@ public class Player : MonoBehaviour {
         Vector3 temp = this.transform.localScale;
         if (!dontMove)
         {
-            if ( (Input.GetKey(toucheGauche) || manetteLeft()) && rb.velocity.x > -5.0f )
+            if ( (Input.GetKey(toucheGauche) || manetteLeft()))
             {
                 temp.x = -1;
                 this.transform.localScale = temp;
                 if (!isFacingWall())
                 {
-                    rb.velocity += new Vector2(-speed, 0);
+                    if ((manetteRT() && rb.velocity.x > -runningMaxSpeed) || rb.velocity.x > -walkingMaxSpeed)
+                    {
+                        rb.velocity += new Vector2(-acceleration, 0);
+                    }
                 }
 
             }
-            else if ( (Input.GetKey(toucheDroite) || manetteRight()) && rb.velocity.x < 5.0f)
+            else if ( (Input.GetKey(toucheDroite) || manetteRight()) )
             {
                 temp.x = 1;
                 this.transform.localScale = temp;
                 if (!isFacingWall())
                 {
-                    rb.velocity += new Vector2(+speed, 0);
+                    if ((manetteRT() && rb.velocity.x < runningMaxSpeed )|| rb.velocity.x < walkingMaxSpeed)
+                    {
+                        rb.velocity += new Vector2(+acceleration, 0);
+                    }
+
                 }
             }
             else
@@ -228,24 +240,24 @@ public class Player : MonoBehaviour {
                 {
                     if (rb.velocity.x > 0)
                     {
-                        if (rb.velocity.x - speed <= 0)
+                        if (rb.velocity.x - acceleration <= 0)
                         {
                             rb.velocity -= new Vector2(rb.velocity.x, 0);
                         }
                         else
                         {
-                            rb.velocity += new Vector2(-speed, 0);
+                            rb.velocity += new Vector2(-acceleration, 0);
                         }
                     }
                     else
                     {
-                        if (rb.velocity.x + speed >= 0)
+                        if (rb.velocity.x + acceleration >= 0)
                         {
                             rb.velocity += new Vector2(rb.velocity.x, 0);
                         }
                         else
                         {
-                            rb.velocity += new Vector2(speed, 0);
+                            rb.velocity += new Vector2(acceleration, 0);
                         }
                     }
                 }
@@ -515,7 +527,7 @@ public class Player : MonoBehaviour {
             }
             objectsLaunched.Add(heldObject);
             heldObject.GetComponent<Rigidbody2D>().isKinematic = false;
-            heldObject.GetComponent<Rigidbody2D>().velocity = new Vector2(20 * this.transform.localScale.x, 10);
+            heldObject.GetComponent<Rigidbody2D>().velocity = new Vector2(throwPower * this.transform.localScale.x, throwPower/2);
             holdSomething = false;
         }
         else
@@ -618,13 +630,13 @@ public class Player : MonoBehaviour {
 		animator.SetBool ("Climb", onLadder);		
 		if (onLadder) {
 			if (Input.GetKey (toucheHaut) || manetteUp())
-				rb.velocity = new Vector2 (0, speed * climbSpeed); 
+				rb.velocity = new Vector2 (0, acceleration * climbSpeed); 
 			else if (Input.GetKey (toucheAccroupi))
-				rb.velocity = new Vector2 (0, -speed * climbSpeed); 
+				rb.velocity = new Vector2 (0, -acceleration * climbSpeed); 
 		
 			rb.gravityScale = 0;
 		} else {
-			rb.gravityScale = 1.2f;
+			rb.gravityScale = gravityScale;
 			animator.SetBool ("Climb", false);
 		}
 
@@ -674,6 +686,11 @@ public class Player : MonoBehaviour {
     bool manetteRight()
     {
         return Input.GetAxis(manetteAxeX) > 0.5;
+    }
+    bool manetteRT()
+    {
+        Debug.Log(Input.GetAxis(triggAxis));
+        return Input.GetAxis(triggAxis) < -0.5;
     }
     #endregion
 

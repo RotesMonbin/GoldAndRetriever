@@ -17,6 +17,7 @@ TagManager:
   - Lave
   - coeur de vie
   - button
+  - Box
   layers:
   - Default
   - TransparentFX
