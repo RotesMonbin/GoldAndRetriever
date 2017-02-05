@@ -116,7 +116,7 @@ public class ManagerNiveau : MonoBehaviour {
 
         if (direction == -1 && milCoinFin == 2)
             position.x += 40;   
-        if(direction == 1 && milCoinFin == 2)
+        if (direction == 1 && milCoinFin == 2)
             position.x -= 40;
 
 

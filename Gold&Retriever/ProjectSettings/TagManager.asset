@@ -18,6 +18,7 @@ TagManager:
   - coeur de vie
   - button
   - Box
+  - Transition Menu Jeu
   layers:
   - Default
   - TransparentFX

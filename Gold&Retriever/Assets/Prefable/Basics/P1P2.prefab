@@ -1040,10 +1040,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   acceleration: 4
-  walkingMaxSpeed: 10
-  runningMaxSpeed: 20
-  jumpPower: 20
-  throwPower: 30
+  walkingMaxSpeed: 5
+  runningMaxSpeed: 10
+  jumpPower: 15
+  throwPower: 20
   rb: {fileID: 50382337990656472}
   feet: {fileID: 1096790383775650}
   face: {fileID: 1342051575532034}
@@ -1320,10 +1320,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   acceleration: 4
-  walkingMaxSpeed: 10
-  runningMaxSpeed: 20
-  jumpPower: 20
-  throwPower: 30
+  walkingMaxSpeed: 5
+  runningMaxSpeed: 10
+  jumpPower: 15
+  throwPower: 20
   rb: {fileID: 50081042707591054}
   feet: {fileID: 1114823452592740}
   face: {fileID: 1493506590576948}

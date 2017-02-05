@@ -2,16 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
 
 public class ManagerJoueur : MonoBehaviour {
 
 	// Vie : 
-	[SerializeField]
 	private GameObject Joueur1; 
+
 	private int lifeJ1; 
 	private int lifeJ1Max= 3; 
 
-	[SerializeField]
 	private GameObject Joueur2; 
 	private int lifeJ2; 
 	private int lifeJ2Max= 3; 
@@ -20,18 +21,15 @@ public class ManagerJoueur : MonoBehaviour {
 	private int cashJ1; 
 	private int cashJ2; 
 
-	[SerializeField]
 	private Text hudJ1Cash; 
-	[SerializeField]
 	private Text hudJ2Cash; 
 
 	// Bombe :
 	private int bombeJ1; 
 	private int bombeJ2; 
 
-	[SerializeField]
+
 	private Text hudJ1Bombe; 
-	[SerializeField]
 	private Text hudJ2Bombe; 
 
 	private Life lifeScript_J1;  
@@ -41,12 +39,37 @@ public class ManagerJoueur : MonoBehaviour {
     private bool gem;
     private GemmeBleuHUD gemGlobal;
 
+    // lave
     private Lave lave;
+
+    // Scene 
+    public int scene = 0;
+    static ManagerJoueur me;
+
+    void Awake()
+    {
+        if (me != null)
+            DestroyImmediate(this.gameObject);
+        else {
+            me = this;
+            DontDestroyOnLoad(this.gameObject);
+        }
+
+    }
 
     // Use this for initialization
     void Start () {
 
-		lifeScript_J1 = GameObject.Find ("LifeHUDJ1").GetComponent<Life> ();
+        Joueur1 = GameObject.Find("P1----------------------------------");
+        Joueur2 = GameObject.Find("P2-----------------------------------");
+
+        hudJ1Bombe = GameObject.Find("BombeJ1").GetComponent<Text>();
+        hudJ2Bombe = GameObject.Find("BombeJ2").GetComponent<Text>();
+
+        hudJ1Cash = GameObject.Find("CashJ1").GetComponent<Text>();
+        hudJ2Cash = GameObject.Find("CashJ2").GetComponent<Text>();
+
+        lifeScript_J1 = GameObject.Find ("LifeHUDJ1").GetComponent<Life> ();
 		lifeScript_J2 = GameObject.Find ("LifeHUDJ2").GetComponent<Life> ();
 
         gemGlobal = GameObject.Find("GEMME").GetComponent<GemmeBleuHUD>();
@@ -58,15 +81,16 @@ public class ManagerJoueur : MonoBehaviour {
 		lifeJ1Max = 3;
 		lifeJ2Max = 3;
 
-        gem = false; 
+        gem = false;
 
-		bombeJ1 = 2;
-		bombeJ2 = 2;
-		hudJ1Bombe.text = "" + bombeJ1; 
+        bombeJ1 = 2;
+        bombeJ2 = 2;
+        hudJ1Bombe.text = "" + bombeJ1; 
 		hudJ2Bombe.text = "" + bombeJ2; 
 
-		cashJ1 = 0; 
-		cashJ2 = 0;
+        cashJ1 = 0;
+        cashJ2 = 0;
+        
 		hudJ1Cash.text = "" + cashJ1; 
 		hudJ2Cash.text = "" + cashJ2; 
  	}
@@ -183,5 +207,23 @@ public class ManagerJoueur : MonoBehaviour {
 		}
 	
 	}
-	#endregion 
+    #endregion
+
+
+    #region Gestion Scene 
+
+    // scene 0 ==> menu, scene = 1 gameplay niveau 1
+    public void changementScene(int sceneID)
+    {
+        scene = sceneID; 
+        if (sceneID == 1)
+        {
+            SceneManager.LoadScene("SceneJeuAleatoire1");
+        }
+        else if(sceneID == 0)
+        {
+            SceneManager.LoadScene("SceneMenu");
+        }
+    }
+    #endregion
 }
