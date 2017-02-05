@@ -79,7 +79,8 @@ public class ManagerNiveau : MonoBehaviour {
         
         InstanciateGameObjRandom(TabFin, new Vector3(indiceLigne , indiceColonne, 0), -sens, 2);
 
-        
+
+        indiceColonne = indiceColonne - 1; 
         int posXLave = -20;
         laveGame.transform.position = new Vector3(posXLave, indiceColonne); 
         for (int i= 0; i < rColonne + 4; i++)
