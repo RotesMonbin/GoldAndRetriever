@@ -595,7 +595,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1793509230380508}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 15, y: 15, z: -6.203125}
+  m_LocalPosition: {x: 64.694664, y: 14.18, z: -6.203125}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4070240857430448}
@@ -1082,7 +1082,7 @@ MonoBehaviour:
   manetteAxeX: AxisXJ1
   manetteAxeY: AxisYJ1
   triggAxis: TriggAxisJ1
-  climbSpeed: 5
+  climbSpeed: 1
   cameraShakeJ1: {fileID: 20134866854585802}
   cameraShakeJ2: {fileID: 20684923350699632}
   rope: {fileID: 1718647762000076, guid: 64b11e0ce7de94a4b94746f3c5ecbe63, type: 2}
@@ -1362,7 +1362,7 @@ MonoBehaviour:
   manetteAxeX: AxisXJ2
   manetteAxeY: AxisYJ2
   triggAxis: TriggAxisJ2
-  climbSpeed: 5
+  climbSpeed: 1
   cameraShakeJ1: {fileID: 20134866854585802}
   cameraShakeJ2: {fileID: 20684923350699632}
   rope: {fileID: 1718647762000076, guid: 64b11e0ce7de94a4b94746f3c5ecbe63, type: 2}
