@@ -31,8 +31,11 @@ public class ManagerNiveau : MonoBehaviour {
     // Use this for initialization
     void Start () {
 
-        int rLigne = Random.Range(2, 4);
-        int rColonne = Random.Range(1, 3);
+        int maxLigne = 4;
+        int maxColonne = 4;
+
+        int rLigne = Random.Range(2, maxLigne);
+        int rColonne = Random.Range(2, maxColonne);
 
         int sens = 1; // -1 = inverser 
 
@@ -41,9 +44,11 @@ public class ManagerNiveau : MonoBehaviour {
 
         InstanciateGameObjRandom(TabDebGrotte , new Vector3(0,1,0) , 1 , 0);
 
+        
 
         for (int i = 1;  i <=  rColonne; i++)
         {
+            rLigne = Random.Range(2, maxLigne);
             if (sens == 1)
             {
                 // ligne 
@@ -81,6 +86,14 @@ public class ManagerNiveau : MonoBehaviour {
         InstanciateGameObjRandom(TabFin, new Vector3(indiceLigne , indiceColonne, 0), -sens, 2);
 
 
+        int posXLave = -20;
+        laveGame.transform.position = new Vector3(posXLave, indiceColonne); 
+        for (int i= 0; i < rColonne + 3; i++)
+        {
+            LaveSpawn(new Vector3(posXLave, indiceColonne ), 0);
+            posXLave += 40;
+        }
+
     }
 	
 	// Update is called once per frame
@@ -109,5 +122,13 @@ public class ManagerNiveau : MonoBehaviour {
 
         gameobjTemp.transform.localScale = temp;
         gameobjTemp.transform.position = position;
+    }
+
+    void LaveSpawn(Vector3 position, int timeLave)
+    {
+        GameObject gameobjTemp = Instantiate(prefabLave);
+        gameobjTemp.transform.parent = laveGame.transform; 
+        gameobjTemp.transform.position = position;
+
     }
 }
