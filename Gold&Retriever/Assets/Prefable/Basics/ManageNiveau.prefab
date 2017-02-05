@@ -57,6 +57,11 @@ MonoBehaviour:
   - {fileID: 1258314775092648, guid: b4bd08b9e8ac12b4abc6195fe477c9f0, type: 2}
   - {fileID: 1360394514274114, guid: cf85ba8b4e77eaa4ea9cb93c5522ec40, type: 2}
   - {fileID: 1375529014363638, guid: c81d7e7f8f6659b458e60fcf421d30c8, type: 2}
+  - {fileID: 1021904996168430, guid: 206e1de533b08284ba68ef15383f2861, type: 2}
+  - {fileID: 1021904996168430, guid: 70a722b1dc99bcf4083ebc00a873b4ef, type: 2}
+  - {fileID: 1395926751908604, guid: c24a4c7efa3c68742801fdf393acde62, type: 2}
+  - {fileID: 1656614994350936, guid: 5275106aca301574d9027abf72cd397f, type: 2}
+  - {fileID: 1301457519872376, guid: 9c24f1c2cec50d440ba6a4aa8744ff93, type: 2}
   TabCoin:
   - {fileID: 1509377266792388, guid: 7e9dd89cb153d424ebe9acff71683577, type: 2}
   - {fileID: 1055856106932652, guid: ec993e363b6057a48b4aa68b48127cad, type: 2}
@@ -64,5 +69,5 @@ MonoBehaviour:
   TabDebGrotte: {fileID: 1779075268265182, guid: cb6d3ec079c54fc47aad5ff4ed2ff517,
     type: 2}
   TabFin: {fileID: 1383416814376534, guid: 44149e721cd334f429261aa5962d885d, type: 2}
-  laveGame: {fileID: 1192989756418646, guid: 854b5b7c298eee94f970741d39fcb48c, type: 2}
+  laveGame: {fileID: 0}
   prefabLave: {fileID: 1197690403624236, guid: d5734f2081002a844bd7977e04fed4ee, type: 2}
