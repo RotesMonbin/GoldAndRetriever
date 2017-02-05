@@ -43,7 +43,7 @@ public class ManagerJoueur : MonoBehaviour {
     private Lave lave;
 
     // Scene 
-    public int scene = 0;
+    private int scene = 0;
     static ManagerJoueur me;
 
     void Awake()
@@ -59,7 +59,6 @@ public class ManagerJoueur : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-
         Joueur1 = GameObject.Find("P1----------------------------------");
         Joueur2 = GameObject.Find("P2-----------------------------------");
 
@@ -97,8 +96,8 @@ public class ManagerJoueur : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
-	}
+        
+    }
 		
 
 	#region cash 
@@ -224,6 +223,37 @@ public class ManagerJoueur : MonoBehaviour {
         {
             SceneManager.LoadScene("SceneMenu");
         }
+    }
+
+    public void chargementDonnee()
+    {
+        if(Joueur1 == null)
+        {
+            Joueur1 = GameObject.Find("P1----------------------------------");
+            Joueur2 = GameObject.Find("P2-----------------------------------");
+
+            hudJ1Bombe = GameObject.Find("BombeJ1").GetComponent<Text>();
+            hudJ2Bombe = GameObject.Find("BombeJ2").GetComponent<Text>();
+
+            hudJ1Cash = GameObject.Find("CashJ1").GetComponent<Text>();
+            hudJ2Cash = GameObject.Find("CashJ2").GetComponent<Text>();
+
+            lifeScript_J1 = GameObject.Find("LifeHUDJ1").GetComponent<Life>();
+            lifeScript_J2 = GameObject.Find("LifeHUDJ2").GetComponent<Life>();
+
+            gemGlobal = GameObject.Find("GEMME").GetComponent<GemmeBleuHUD>();
+            lave = GameObject.Find("LaveDeplacement").GetComponent<Lave>();
+
+            hudJ1Bombe.text = "" + bombeJ1;
+            hudJ2Bombe.text = "" + bombeJ2;
+
+            hudJ1Cash.text = "" + cashJ1;
+            hudJ2Cash.text = "" + cashJ2;
+
+            gem = false;
+
+        }
+        
     }
     #endregion
 }

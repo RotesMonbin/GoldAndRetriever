@@ -85,6 +85,7 @@ public class Player : MonoBehaviour {
     void Start () {
 		managerJoueur = GameObject.Find ("ManagerJoueur").GetComponent<ManagerJoueur> ();
 
+        managerJoueur.chargementDonnee(); 
         listRope = new List<GameObject>() ;
         objectsLaunched = new List<GameObject>();
 
@@ -696,7 +697,7 @@ public class Player : MonoBehaviour {
     }
     bool manetteRT()
     {
-        Debug.Log(Input.GetAxis(triggAxis));
+       // Debug.Log(Input.GetAxis(triggAxis));
         return Input.GetAxis(triggAxis) < -0.5;
     }
     #endregion
