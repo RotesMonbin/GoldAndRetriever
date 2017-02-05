@@ -372,7 +372,6 @@ public class Player : MonoBehaviour {
         {
             if (c.GetComponent<Worms>())
             {
-                Debug.Log("worm : " + c.transform.position.y+ " feet : "+ (feet.transform.position.y+0.6) + "bool : " + (c.transform.position.y > feet.transform.position.y + 0.6));
                 if (c.transform.position.y > feet.transform.position.y+0.6)
                 {
                     if (invincible == 0) {
@@ -512,10 +511,18 @@ public class Player : MonoBehaviour {
     #region Porte obj
     void moveHeldObject()
     {
-        Transform t = heldObject.transform;
-        t.position = new Vector3(this.transform.position.x + 0.2f * this.transform.localScale.x,
-            this.transform.position.y + 0.2f, this.transform.position.z);
-        t.localScale = this.transform.localScale;
+        if (!heldObject)
+        {
+            holdSomething = false;
+        }
+        else
+        {
+            Transform t = heldObject.transform;
+            t.position = new Vector3(this.transform.position.x + 0.2f * this.transform.localScale.x,
+                this.transform.position.y + 0.2f, this.transform.position.z);
+            t.localScale = this.transform.localScale;
+        }
+
     }
 
     void pickUpItem()
@@ -681,7 +688,6 @@ public class Player : MonoBehaviour {
 
     bool manetteDown()
     {
-        Debug.Log(Input.GetAxis(manetteAxeY));
         return Input.GetAxis(manetteAxeY ) > 0.5;
     }
     bool manetteUp()
