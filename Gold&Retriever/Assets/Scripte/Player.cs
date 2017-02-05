@@ -85,7 +85,7 @@ public class Player : MonoBehaviour {
     void Start () {
 		managerJoueur = GameObject.Find ("ManagerJoueur").GetComponent<ManagerJoueur> ();
 
-        managerJoueur.chargementDonnee(); 
+        managerJoueur.chargementDonnee();
         listRope = new List<GameObject>() ;
         objectsLaunched = new List<GameObject>();
 
@@ -94,7 +94,7 @@ public class Player : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
 	{
-
+      
         if (J1actif)
         {
             if(managerJoueur.getLife(true) <= 0)

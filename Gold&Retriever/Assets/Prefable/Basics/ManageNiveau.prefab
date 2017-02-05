@@ -64,7 +64,5 @@ MonoBehaviour:
   TabDebGrotte: {fileID: 1779075268265182, guid: cb6d3ec079c54fc47aad5ff4ed2ff517,
     type: 2}
   TabFin: {fileID: 1383416814376534, guid: 44149e721cd334f429261aa5962d885d, type: 2}
-  Player1: {fileID: 1608397027453456, guid: 28ff40cf113758a4380736ae28560c0a, type: 2}
-  Player2: {fileID: 1523377290886086, guid: 9a154be1d595d0d438e46a52b66e9305, type: 2}
-  laveGame: {fileID: 0}
+  laveGame: {fileID: 1192989756418646, guid: 854b5b7c298eee94f970741d39fcb48c, type: 2}
   prefabLave: {fileID: 1197690403624236, guid: d5734f2081002a844bd7977e04fed4ee, type: 2}

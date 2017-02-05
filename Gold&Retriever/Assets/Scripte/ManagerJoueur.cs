@@ -59,6 +59,7 @@ public class ManagerJoueur : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+
         Joueur1 = GameObject.Find("P1----------------------------------");
         Joueur2 = GameObject.Find("P2-----------------------------------");
 
@@ -68,13 +69,18 @@ public class ManagerJoueur : MonoBehaviour {
         hudJ1Cash = GameObject.Find("CashJ1").GetComponent<Text>();
         hudJ2Cash = GameObject.Find("CashJ2").GetComponent<Text>();
 
-        lifeScript_J1 = GameObject.Find ("LifeHUDJ1").GetComponent<Life> ();
-		lifeScript_J2 = GameObject.Find ("LifeHUDJ2").GetComponent<Life> ();
+        lifeScript_J1 = GameObject.Find("LifeHUDJ1").GetComponent<Life>();
+        lifeScript_J2 = GameObject.Find("LifeHUDJ2").GetComponent<Life>();
 
         gemGlobal = GameObject.Find("GEMME").GetComponent<GemmeBleuHUD>();
         lave = GameObject.Find("LaveDeplacement").GetComponent<Lave>();
 
+        hudJ1Bombe.text = "" + bombeJ1;
+        hudJ2Bombe.text = "" + bombeJ2;
 
+        hudJ1Cash.text = "" + cashJ1;
+        hudJ2Cash.text = "" + cashJ2;
+        gem = false;
         lifeJ1 = 3; 
 		lifeJ2 = 3;
 		lifeJ1Max = 3;
@@ -227,6 +233,7 @@ public class ManagerJoueur : MonoBehaviour {
 
     public void chargementDonnee()
     {
+
         if(Joueur1 == null)
         {
             Joueur1 = GameObject.Find("P1----------------------------------");
@@ -250,10 +257,8 @@ public class ManagerJoueur : MonoBehaviour {
             hudJ1Cash.text = "" + cashJ1;
             hudJ2Cash.text = "" + cashJ2;
 
-            gem = false;
-
         }
-        
+      
     }
     #endregion
 }
