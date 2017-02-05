@@ -208,8 +208,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2dc91bdd59fd33445bd85bfda5e6a5ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToBlow: 5
-  timeToBlink: 3.5
+  timeToBlow: 3
+  timeToBlink: 1.5
   anime: {fileID: 95646199972399032}
   blowRadius: {fileID: 1181926164828964}
   decor:
