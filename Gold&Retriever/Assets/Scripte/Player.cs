@@ -348,9 +348,16 @@ public class Player : MonoBehaviour {
         {
             takeDamage(4);
         }
+
+        if (coll.gameObject.tag == "Transition Menu Jeu")
+        {
+            managerJoueur.changementScene(1); 
+        }
     }
 
     #endregion
+
+   
 
     #region Damage
     void enemieColision()
