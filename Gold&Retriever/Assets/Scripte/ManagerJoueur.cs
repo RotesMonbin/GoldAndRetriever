@@ -86,8 +86,6 @@ public class ManagerJoueur : MonoBehaviour {
 		lifeJ1Max = 3;
 		lifeJ2Max = 3;
 
-        gem = false;
-
         bombeJ1 = 2;
         bombeJ2 = 2;
         hudJ1Bombe.text = "" + bombeJ1; 
@@ -126,6 +124,11 @@ public class ManagerJoueur : MonoBehaviour {
         gem = true;
         gemGlobal.gemaff();
         lave.laveLancement(); 
+    }
+
+    public bool possedeGem()
+    {
+        return gem; 
     }
 
     #endregion
@@ -228,6 +231,10 @@ public class ManagerJoueur : MonoBehaviour {
         else if(sceneID == 0)
         {
             SceneManager.LoadScene("SceneMenu");
+        }
+        else if (sceneID == 2)
+        {
+            SceneManager.LoadScene("SceneMenu fin");
         }
     }
 

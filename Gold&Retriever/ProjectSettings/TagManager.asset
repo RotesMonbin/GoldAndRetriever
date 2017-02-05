@@ -19,6 +19,7 @@ TagManager:
   - button
   - Box
   - Transition Menu Jeu
+  - Transition Jeu Menu
   layers:
   - Default
   - TransparentFX

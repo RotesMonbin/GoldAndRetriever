@@ -331,6 +331,12 @@ public class Player : MonoBehaviour {
             Destroy(coll.gameObject);
         }
 
+        if (coll.gameObject.tag == "Transition Jeu Menu" && managerJoueur.possedeGem())
+        {
+            managerJoueur.changementScene(2);
+            managerJoueur.gemUp();
+        }
+
     }
 		
 	// Death zone 
