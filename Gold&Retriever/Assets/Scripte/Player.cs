@@ -35,6 +35,7 @@ public class Player : MonoBehaviour {
     private float jumpTime = 0f ; 
 	private bool isJumping = false;
 
+    private bool gameOver = false;
     private bool holdSomething=false;
     private GameObject heldObject;
 
@@ -150,6 +151,7 @@ public class Player : MonoBehaviour {
         actionOn();
         enemieColision();
         DamageOnFall();
+        GameOver();
     }
 
     #region ToucheBomb
@@ -437,10 +439,19 @@ public class Player : MonoBehaviour {
         lastBlinkNumber = (int)(5 * invincible);
     }
 
-    public void dead()
-	{
-		SceneManager.LoadScene (SceneManager.GetActiveScene ().name); 
-	}
+    void GameOver()
+    {
+        if(managerJoueur.getLife(true)<=0 || managerJoueur.getLife(false) <= 0)
+        {
+            this.dontMove = true;
+            gameOver = true;
+        }
+        if(gameOver && (Input.GetButtonDown(manetteSaut) || Input.GetKeyDown(toucheSaut)))
+        {
+            Destroy(managerJoueur);
+            SceneManager.LoadScene("SceneMenu");
+        }
+    }
 
     public void DamageOnThrow()
     {

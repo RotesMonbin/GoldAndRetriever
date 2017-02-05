@@ -35,6 +35,9 @@ public class ManagerJoueur : MonoBehaviour {
 	private Life lifeScript_J1;  
 	private Life lifeScript_J2;
 
+    private GameObject hudJ1GameOver;
+    private GameObject hudJ2GameOver;
+
     // Gem :
     private bool gem;
     private GemmeBleuHUD gemGlobal;
@@ -69,8 +72,18 @@ public class ManagerJoueur : MonoBehaviour {
         hudJ1Cash = GameObject.Find("CashJ1").GetComponent<Text>();
         hudJ2Cash = GameObject.Find("CashJ2").GetComponent<Text>();
 
+        /*hudJ1GameOver = GameObject.Find("GameOverJ1");
+        hudJ2GameOver = GameObject.Find("GameOverJ2");*/
+
+        hudJ1GameOver = GameObject.Find("GameOverJ1");
+        hudJ2GameOver = GameObject.Find("GameOverJ2");
+
+        //hudJ1GameOver = GameObject.Find("HUDJ1---------------------------").get;
+
         lifeScript_J1 = GameObject.Find("LifeHUDJ1").GetComponent<Life>();
         lifeScript_J2 = GameObject.Find("LifeHUDJ2").GetComponent<Life>();
+        hudJ1GameOver.SetActive(false);
+        hudJ2GameOver.SetActive(false);
 
         gemGlobal = GameObject.Find("GEMME").GetComponent<GemmeBleuHUD>();
         lave = GameObject.Find("LaveDeplacement").GetComponent<Lave>();
@@ -100,7 +113,11 @@ public class ManagerJoueur : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        
+        if(lifeJ1<=0 || lifeJ2 <= 0)
+        {
+            hudJ1GameOver.SetActive(true);
+            hudJ2GameOver.SetActive(true);
+        }
     }
 		
 
