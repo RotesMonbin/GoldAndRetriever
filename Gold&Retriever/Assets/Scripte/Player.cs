@@ -364,6 +364,7 @@ public class Player : MonoBehaviour {
         {
             if (c.GetComponent<Worms>())
             {
+                Debug.Log("worm : " + c.transform.position.y+ " feet : "+ feet.transform.position.y);
                 if (c.transform.position.y > feet.transform.position.y+0.5)
                 {
                     if (invincible == 0) {
