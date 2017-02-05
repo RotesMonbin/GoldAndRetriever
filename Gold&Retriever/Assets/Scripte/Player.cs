@@ -125,9 +125,6 @@ public class Player : MonoBehaviour {
 		else 
 			animator.SetBool ("Jump", true);
 	
-		if (rb.velocity.y == 0.0f)
-			animator.SetFloat ("vitesse", Mathf.Abs (rb.velocity.x));
-
         //invincibilityBlink
         if (invincible > 0 && managerJoueur.getLife(J1actif)>0)
         {
@@ -198,8 +195,6 @@ public class Player : MonoBehaviour {
             else
                 animator.SetBool("Jump", true);
 
-            if (rb.velocity.y == 0.0f)
-                animator.SetFloat("vitesse", Mathf.Abs(rb.velocity.x));
         }
     }
     #endregion
