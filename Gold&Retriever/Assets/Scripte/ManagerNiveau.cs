@@ -65,13 +65,13 @@ public class ManagerNiveau : MonoBehaviour {
             }
             else
             {
-                indiceLigne = indiceLigne - 1;
+               // indiceLigne = indiceLigne;
                 // ligne Autre sens
                 for (int j = 1; j <= rLigne; j++)
                 {
                     indiceLigne = indiceLigne - 40;
                     int r = Random.Range(0, TabMilieu.Count);
-                    InstanciateGameObjRandom(TabMilieu[r], new Vector3(indiceLigne, indiceColonne, 0), sens, 0);
+                    InstanciateGameObjRandom(TabMilieu[r], new Vector3(indiceLigne, indiceColonne, 0), -sens, 0);
                     
                 }
 
@@ -108,8 +108,8 @@ public class ManagerNiveau : MonoBehaviour {
         temp.x = direction;
 
 
-        if (direction == -1 && milCoinFin == 0)
-            position.x += 40;
+       /* if (direction == -1 && milCoinFin == 0)
+            position.x += 40;*/
 
         if (direction == -1 && milCoinFin == 1)
             position.x += 20;
