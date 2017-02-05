@@ -232,6 +232,10 @@ public class ManagerJoueur : MonoBehaviour {
         {
             SceneManager.LoadScene("SceneMenu");
         }
+        else if (sceneID == 2)
+        {
+            SceneManager.LoadScene("SceneMenu fin");
+        }
     }
 
     public void chargementDonnee()

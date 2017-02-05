@@ -333,7 +333,7 @@ public class Player : MonoBehaviour {
 
         if (coll.gameObject.tag == "Transition Jeu Menu" && managerJoueur.possedeGem())
         {
-            managerJoueur.changementScene(0);
+            managerJoueur.changementScene(2);
             managerJoueur.gemUp();
         }
 
