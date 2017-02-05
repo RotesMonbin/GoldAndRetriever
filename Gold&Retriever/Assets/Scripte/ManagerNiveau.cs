@@ -21,10 +21,6 @@ public class ManagerNiveau : MonoBehaviour {
 
     public GameObject TabFin;
 
-    // Player 1 
-    public GameObject Player1;  
-	public GameObject Player2;
-
     public GameObject laveGame; // un seul à gerer le parent de tout les prefabLave
     public GameObject prefabLave;
 
@@ -43,9 +39,7 @@ public class ManagerNiveau : MonoBehaviour {
         int indiceColonne = 1;
 
         InstanciateGameObjRandom(TabDebGrotte , new Vector3(0,1,0) , 1 , 0);
-
         
-
         for (int i = 1;  i <=  rColonne; i++)
         {
             rLigne = Random.Range(2, maxLigne);
@@ -82,10 +76,10 @@ public class ManagerNiveau : MonoBehaviour {
             sens = sens == 1 ? -1 : 1;
             indiceColonne = indiceColonne - 21;
         }
-
+        
         InstanciateGameObjRandom(TabFin, new Vector3(indiceLigne , indiceColonne, 0), -sens, 2);
 
-
+        
         int posXLave = -20;
         laveGame.transform.position = new Vector3(posXLave, indiceColonne); 
         for (int i= 0; i < rColonne + 4; i++)
@@ -93,7 +87,7 @@ public class ManagerNiveau : MonoBehaviour {
             LaveSpawn(new Vector3(posXLave, indiceColonne ), 0);
             posXLave += 40;
         }
-
+        
     }
 	
 	// Update is called once per frame
