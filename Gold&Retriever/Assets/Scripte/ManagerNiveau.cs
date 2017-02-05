@@ -88,7 +88,7 @@ public class ManagerNiveau : MonoBehaviour {
 
         int posXLave = -20;
         laveGame.transform.position = new Vector3(posXLave, indiceColonne); 
-        for (int i= 0; i < rColonne + 3; i++)
+        for (int i= 0; i < rColonne + 4; i++)
         {
             LaveSpawn(new Vector3(posXLave, indiceColonne ), 0);
             posXLave += 40;
