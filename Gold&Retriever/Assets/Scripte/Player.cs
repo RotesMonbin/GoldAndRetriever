@@ -371,8 +371,8 @@ public class Player : MonoBehaviour {
         {
             if (c.GetComponent<Worms>())
             {
-                Debug.Log("worm : " + c.transform.position.y+ " feet : "+ feet.transform.position.y);
-                if (c.transform.position.y > feet.transform.position.y+0.5)
+                Debug.Log("worm : " + c.transform.position.y+ " feet : "+ (feet.transform.position.y+0.6) + "bool : " + (c.transform.position.y > feet.transform.position.y + 0.6));
+                if (c.transform.position.y > feet.transform.position.y+0.6)
                 {
                     if (invincible == 0) {
                         invincible = invincibleTime;
@@ -383,14 +383,14 @@ public class Player : MonoBehaviour {
                 {
                     if (invincible < 1.5)
                     {
-                        this.rb.velocity += new Vector2(0, 4);
+                        this.rb.velocity = new Vector2(this.rb.velocity.x, 8);
                         c.GetComponent<Worms>().dead();
                     }
                 }
             }
             if (c.GetComponent<Frog>())
             {
-                if (c.transform.position.y > feet.transform.position.y + 0.5)
+                if (c.transform.position.y > feet.transform.position.y + 0.6)
                 {
                     if (invincible == 0)
                     {
@@ -402,7 +402,7 @@ public class Player : MonoBehaviour {
                 {
                     if (invincible < 1.5)
                     {
-                        this.rb.velocity += new Vector2(0, 4);
+                        this.rb.velocity = new Vector2(this.rb.velocity.x, 8);
                         c.GetComponent<Frog>().dead();
                     }
                 }
@@ -697,7 +697,6 @@ public class Player : MonoBehaviour {
     }
     bool manetteRT()
     {
-        Debug.Log(Input.GetAxis(triggAxis));
         return Input.GetAxis(triggAxis) < -0.5;
     }
     #endregion

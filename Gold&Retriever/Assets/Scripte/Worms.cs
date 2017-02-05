@@ -60,6 +60,7 @@ public class Worms : MonoBehaviour {
     }
     public void dead()
     {
+        this.gameObject.layer = 0;
         Destroy(this.GetComponent<Rigidbody2D>());
         if (anime)
         {
