@@ -330,7 +330,7 @@ public class Player : MonoBehaviour {
 
         if (coll.gameObject.tag == "Transition Jeu Menu" && managerJoueur.possedeGem())
         {
-            managerJoueur.changementScene(2);
+            managerJoueur.changementScene(3);
             managerJoueur.gemUp();
         }
 
@@ -355,7 +355,7 @@ public class Player : MonoBehaviour {
 
         if (coll.gameObject.tag == "Transition Menu Jeu")
         {
-            managerJoueur.changementScene(1); 
+            managerJoueur.changementScene(2); 
         }
     }
 
@@ -443,8 +443,7 @@ public class Player : MonoBehaviour {
         }
         if(gameOver && (Input.GetButtonDown(manetteSaut) || Input.GetKeyDown(toucheSaut)))
         {
-            Destroy(managerJoueur);
-            SceneManager.LoadScene("SceneMenu");
+            managerJoueur.changementScene(1);
         }
     }
 

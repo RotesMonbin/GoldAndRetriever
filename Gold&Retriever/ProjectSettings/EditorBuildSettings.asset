@@ -8,6 +8,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scene/SceneMenu.unity
   - enabled: 1
+    path: Assets/Scene/SceneStart.unity
+  - enabled: 1
     path: Assets/Scene/SceneJeuAleatoire1.unity
   - enabled: 1
     path: Assets/Scene/SceneMenu fin.unity

@@ -5,41 +5,42 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 
-public class ManagerJoueur : MonoBehaviour {
+public class ManagerJoueur : MonoBehaviour
+{
 
-	// Vie : 
-	private GameObject Joueur1; 
+    // Vie : 
+    private GameObject Joueur1;
 
-	private int lifeJ1; 
-	private int lifeJ1Max= 3; 
+    private int lifeJ1 = 3;
+    private int lifeJ1Max = 3;
 
-	private GameObject Joueur2; 
-	private int lifeJ2; 
-	private int lifeJ2Max= 3; 
+    private GameObject Joueur2;
+    private int lifeJ2 = 3;
+    private int lifeJ2Max = 3;
 
-	// cash
-	private int cashJ1; 
-	private int cashJ2; 
+    // cash
+    private int cashJ1 = 0;
+    private int cashJ2 = 0;
 
-	private Text hudJ1Cash; 
-	private Text hudJ2Cash; 
+    private Text hudJ1Cash;
+    private Text hudJ2Cash;
 
-	// Bombe :
-	private int bombeJ1; 
-	private int bombeJ2; 
+    // Bombe :
+    private int bombeJ1 = 2;
+    private int bombeJ2 = 2;
 
 
-	private Text hudJ1Bombe; 
-	private Text hudJ2Bombe; 
+    private Text hudJ1Bombe;
+    private Text hudJ2Bombe;
 
-	private Life lifeScript_J1;  
-	private Life lifeScript_J2;
+    private Life lifeScript_J1;
+    private Life lifeScript_J2;
 
     private GameObject hudJ1GameOver;
     private GameObject hudJ2GameOver;
 
     // Gem :
-    private bool gem;
+    private bool gem = false;
     private GemmeBleuHUD gemGlobal;
 
     // lave
@@ -53,7 +54,8 @@ public class ManagerJoueur : MonoBehaviour {
     {
         if (me != null)
             DestroyImmediate(this.gameObject);
-        else {
+        else
+        {
             me = this;
             DontDestroyOnLoad(this.gameObject);
         }
@@ -61,77 +63,47 @@ public class ManagerJoueur : MonoBehaviour {
     }
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
+        changementScene(1);
+    }
 
-        Joueur1 = GameObject.Find("P1----------------------------------");
-        Joueur2 = GameObject.Find("P2-----------------------------------");
+    // Update is called once per frame
+    void Update()
+    {
+    }
 
-        hudJ1Bombe = GameObject.Find("BombeJ1").GetComponent<Text>();
-        hudJ2Bombe = GameObject.Find("BombeJ2").GetComponent<Text>();
+    void Restart()
+    {
+        lifeJ1 = 3;
+        lifeJ1Max = 3;
 
-        hudJ1Cash = GameObject.Find("CashJ1").GetComponent<Text>();
-        hudJ2Cash = GameObject.Find("CashJ2").GetComponent<Text>();
+        lifeJ2 = 3;
+        lifeJ2Max = 3;
 
-        /*hudJ1GameOver = GameObject.Find("GameOverJ1");
-        hudJ2GameOver = GameObject.Find("GameOverJ2");*/
+        // cash
+        cashJ1 = 0;
+        cashJ2 = 0;
 
-        hudJ1GameOver = GameObject.Find("GameOverJ1");
-        hudJ2GameOver = GameObject.Find("GameOverJ2");
+        // Bombe :
+        bombeJ1 = 2;
+        bombeJ2 = 2;
 
-        //hudJ1GameOver = GameObject.Find("HUDJ1---------------------------").get;
+        // Gem :
+        gem = false;
+    }
 
-        lifeScript_J1 = GameObject.Find("LifeHUDJ1").GetComponent<Life>();
-        lifeScript_J2 = GameObject.Find("LifeHUDJ2").GetComponent<Life>();
-        hudJ1GameOver.SetActive(false);
-        hudJ2GameOver.SetActive(false);
-
-        gemGlobal = GameObject.Find("GEMME").GetComponent<GemmeBleuHUD>();
-        lave = GameObject.Find("LaveDeplacement").GetComponent<Lave>();
-
-        hudJ1Bombe.text = "" + bombeJ1;
-        hudJ2Bombe.text = "" + bombeJ2;
+    #region cash 
+    public void cashUp(int cash, bool J1actif)
+    {
+        if (J1actif)
+            cashJ1 += cash;
+        else
+            cashJ2 += cash;
 
         hudJ1Cash.text = "" + cashJ1;
         hudJ2Cash.text = "" + cashJ2;
-        gem = false;
-        lifeJ1 = 3; 
-		lifeJ2 = 3;
-		lifeJ1Max = 3;
-		lifeJ2Max = 3;
-
-        bombeJ1 = 2;
-        bombeJ2 = 2;
-        hudJ1Bombe.text = "" + bombeJ1; 
-		hudJ2Bombe.text = "" + bombeJ2; 
-
-        cashJ1 = 0;
-        cashJ2 = 0;
-        
-		hudJ1Cash.text = "" + cashJ1; 
-		hudJ2Cash.text = "" + cashJ2; 
- 	}
-	
-	// Update is called once per frame
-	void Update () {
-        if(lifeJ1<=0 || lifeJ2 <= 0)
-        {
-            hudJ1GameOver.SetActive(true);
-            hudJ2GameOver.SetActive(true);
-        }
     }
-		
-
-	#region cash 
-	public void cashUp(int cash, bool J1actif)
-	{
-		if (J1actif)
-			cashJ1 += cash; 
-		else 
-			cashJ2 += cash; 	
-		
-		hudJ1Cash.text = "" + cashJ1;
-		hudJ2Cash.text = "" + cashJ2;
-	}
 
     #endregion
 
@@ -140,95 +112,106 @@ public class ManagerJoueur : MonoBehaviour {
     {
         gem = true;
         gemGlobal.gemaff();
-        lave.laveLancement(); 
+        lave.laveLancement();
     }
 
     public bool possedeGem()
     {
-        return gem; 
+        return gem;
     }
 
     #endregion
 
     #region life
-    public void lifeDown(int lifeReduice ,  bool J1actif) 
-	{
+    public void lifeDown(int lifeReduice, bool J1actif)
+    {
 
-		if (J1actif) 
-		{
-			lifeJ1 -= lifeReduice; 
-			lifeScript_J1.LifeAff (); 
-		} else 
-		{
-			lifeJ2 -= lifeReduice; 
-			lifeScript_J2.LifeAff(); 
-		}
-	}
-
-	public void lifeUp(int lifeInscrease ,  bool J1actif) 
-	{
-		if (J1actif) 
-		{
-          
-			lifeJ1 += lifeInscrease;
-            lifeScript_J1.LifeAff();
-        } else 
-		{
-			lifeJ2 += lifeInscrease;
+        if (J1actif)
+        {
+            lifeJ1 -= lifeReduice;
             lifeScript_J1.LifeAff();
         }
-	}
+        else
+        {
+            lifeJ2 -= lifeReduice;
+            lifeScript_J2.LifeAff();
+        }
 
-	public int getLifeMax(bool J1actif)
-	{
-		return J1actif ? lifeJ1Max : lifeJ2Max;
-	}
+        if (lifeJ1 <= 0 || lifeJ2 <= 0)
+        {
+            hudJ1GameOver.SetActive(true);
+            hudJ2GameOver.SetActive(true);
+        }
+    }
 
-	public int getLife(bool J1actif)
-	{
-		return J1actif ? lifeJ1 : lifeJ2;
-	}
-	#endregion
+    public void lifeUp(int lifeInscrease, bool J1actif)
+    {
+        if (J1actif)
+        {
 
-	#region Bombe
-	public void bombeUp(int bombe, bool J1actif)
-	{
-		if (J1actif)
-			bombeJ1 += bombe; 
-		else 
-			bombeJ2 += bombe; 	
+            lifeJ1 += lifeInscrease;
+            lifeScript_J1.LifeAff();
+        }
+        else
+        {
+            lifeJ2 += lifeInscrease;
+            lifeScript_J1.LifeAff();
+        }
+    }
 
-		hudJ1Bombe.text = "" + bombeJ1;
-		hudJ2Bombe.text = "" + bombeJ2;
-	}
+    public int getLifeMax(bool J1actif)
+    {
+        return J1actif ? lifeJ1Max : lifeJ2Max;
+    }
 
-	public void bombeDown(int bombe, bool J1actif)
-	{
-		if (J1actif)
-			bombeJ1 -= bombe; 
-		else 
-			bombeJ2 -= bombe; 	
+    public int getLife(bool J1actif)
+    {
+        return J1actif ? lifeJ1 : lifeJ2;
+    }
+    #endregion
 
-		hudJ1Bombe.text = "" + bombeJ1;
-		hudJ2Bombe.text = "" + bombeJ2;
-	}
+    #region Bombe
+    public void bombeUp(int bombe, bool J1actif)
+    {
+        if (J1actif)
+            bombeJ1 += bombe;
+        else
+            bombeJ2 += bombe;
 
-	public bool nbBombeOk(bool J1actif)
-	{
+        hudJ1Bombe.text = "" + bombeJ1;
+        hudJ2Bombe.text = "" + bombeJ2;
+    }
 
-		if (J1actif) {
-			if (bombeJ1 > 0)
-				return true;
-			else
-				return false; 
-		} else {
-			if (bombeJ2 > 0)
-				return true;
-			else
-				return false; 
-		}
-	
-	}
+    public void bombeDown(int bombe, bool J1actif)
+    {
+        if (J1actif)
+            bombeJ1 -= bombe;
+        else
+            bombeJ2 -= bombe;
+
+        hudJ1Bombe.text = "" + bombeJ1;
+        hudJ2Bombe.text = "" + bombeJ2;
+    }
+
+    public bool nbBombeOk(bool J1actif)
+    {
+
+        if (J1actif)
+        {
+            if (bombeJ1 > 0)
+                return true;
+            else
+                return false;
+        }
+        else
+        {
+            if (bombeJ2 > 0)
+                return true;
+            else
+                return false;
+        }
+
+    }
     #endregion
 
 
@@ -237,16 +220,21 @@ public class ManagerJoueur : MonoBehaviour {
     // scene 0 ==> menu, scene = 1 gameplay niveau 1
     public void changementScene(int sceneID)
     {
-        scene = sceneID; 
-        if (sceneID == 1)
+        scene = sceneID;
+        if (sceneID == 0)
         {
-            SceneManager.LoadScene("SceneJeuAleatoire1");
+            SceneManager.LoadScene("SceneStart");
         }
-        else if(sceneID == 0)
+        else if (sceneID == 1)
         {
+            Restart();
             SceneManager.LoadScene("SceneMenu");
         }
         else if (sceneID == 2)
+        {
+            SceneManager.LoadScene("SceneJeuAleatoire1");
+        }
+        else if (sceneID == 3)
         {
             SceneManager.LoadScene("SceneMenu fin");
         }
@@ -255,7 +243,7 @@ public class ManagerJoueur : MonoBehaviour {
     public void chargementDonnee()
     {
 
-        if(Joueur1 == null)
+        if (Joueur1 == null)
         {
             Joueur1 = GameObject.Find("P1----------------------------------");
             Joueur2 = GameObject.Find("P2-----------------------------------");
@@ -265,6 +253,14 @@ public class ManagerJoueur : MonoBehaviour {
 
             hudJ1Cash = GameObject.Find("CashJ1").GetComponent<Text>();
             hudJ2Cash = GameObject.Find("CashJ2").GetComponent<Text>();
+
+            if (hudJ1GameOver == null)
+            {
+                hudJ1GameOver = GameObject.Find("GameOverJ1");
+                hudJ2GameOver = GameObject.Find("GameOverJ2");
+                hudJ1GameOver.SetActive(false);
+                hudJ2GameOver.SetActive(false);
+            }
 
             lifeScript_J1 = GameObject.Find("LifeHUDJ1").GetComponent<Life>();
             lifeScript_J2 = GameObject.Find("LifeHUDJ2").GetComponent<Life>();
@@ -279,7 +275,7 @@ public class ManagerJoueur : MonoBehaviour {
             hudJ2Cash.text = "" + cashJ2;
 
         }
-      
+
     }
     #endregion
 }
