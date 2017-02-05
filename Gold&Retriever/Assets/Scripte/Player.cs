@@ -639,7 +639,7 @@ public class Player : MonoBehaviour {
 		if (onLadder) {
 			if (Input.GetKey (toucheHaut) || manetteUp())
 				rb.velocity = new Vector2 (0, acceleration * climbSpeed); 
-			else if (Input.GetKey (toucheAccroupi))
+			else if (Input.GetKey (toucheAccroupi) || manetteDown())
 				rb.velocity = new Vector2 (0, -acceleration * climbSpeed); 
 		
 			rb.gravityScale = 0;
@@ -680,7 +680,7 @@ public class Player : MonoBehaviour {
 
     bool manetteDown()
     {
-
+        Debug.Log(Input.GetAxis(manetteAxeY));
         return Input.GetAxis(manetteAxeY ) > 0.5;
     }
     bool manetteUp()
