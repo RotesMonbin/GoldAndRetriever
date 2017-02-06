@@ -65,12 +65,14 @@ public class ManagerJoueur : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+       
         changementScene(1);
     }
 
     // Update is called once per frame
     void Update()
     {
+       
     }
 
     void Restart()
@@ -103,6 +105,21 @@ public class ManagerJoueur : MonoBehaviour
 
         hudJ1Cash.text = "" + cashJ1;
         hudJ2Cash.text = "" + cashJ2;
+    }
+    public void cashDown(int cash, bool J1actif)
+    {
+        if (J1actif)
+            cashJ1 -= cash;
+        else
+            cashJ2 -= cash;
+
+        hudJ1Cash.text = "" + cashJ1;
+        hudJ2Cash.text = "" + cashJ2;
+    }
+
+    public int get_cash(bool J1actif)
+    {
+        return J1actif ? cashJ1 : cashJ2;  
     }
 
     #endregion
@@ -164,6 +181,16 @@ public class ManagerJoueur : MonoBehaviour
         return J1actif ? lifeJ1Max : lifeJ2Max;
     }
 
+    public void setLifeMax(int lifeplus , bool J1actif)
+    {
+        
+        if(J1actif)
+            lifeJ1Max += lifeplus; 
+        else
+            lifeJ2Max += lifeplus;
+
+        lifeUp(lifeplus, J1actif); 
+    }
     public int getLife(bool J1actif)
     {
         return J1actif ? lifeJ1 : lifeJ2;
@@ -245,6 +272,8 @@ public class ManagerJoueur : MonoBehaviour
 
         if (Joueur1 == null)
         {
+            cashJ1 = 200;
+            cashJ2 = 35;
             Joueur1 = GameObject.Find("P1----------------------------------");
             Joueur2 = GameObject.Find("P2-----------------------------------");
 

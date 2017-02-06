@@ -20,6 +20,7 @@ TagManager:
   - Box
   - Transition Menu Jeu
   - Transition Jeu Menu
+  - objetBuy
   layers:
   - Default
   - TransparentFX

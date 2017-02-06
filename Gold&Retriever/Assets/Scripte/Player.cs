@@ -32,7 +32,7 @@ public class Player : MonoBehaviour {
     public SpriteRenderer sprite;
 
     public float speedFallDamage;
-    private float jumpTime = 0f ; 
+
 	private bool isJumping = false;
 
     private bool gameOver = false;
@@ -359,9 +359,20 @@ public class Player : MonoBehaviour {
         }
     }
 
+    void OnTriggerStay2D(Collider2D coll)
+    {
+        
+        if (coll.CompareTag("objetBuy"))
+        {
+            if(Input.GetKeyDown(toucheAction) || Input.GetButtonDown(manetteAction))
+            {
+                coll.GetComponent<ObjectSeller>().gestion_cash(J1actif);
+            }     
+        }
+    }
     #endregion
 
-   
+
 
     #region Damage
     void enemieColision()

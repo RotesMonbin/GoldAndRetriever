@@ -17,19 +17,9 @@ public class Life : MonoBehaviour {
 		listHearth = new List<GameObject>() ; 
 		managerJoueur = GameObject.Find ("ManagerJoueur").GetComponent<ManagerJoueur> ();
 
-		int nblife = managerJoueur.getLifeMax(J1actif) ; 
-		GameObject LifeGameObj; 
-		while (nblife !=  0) {
-			LifeGameObj = Instantiate (gameObjLife_full); 
-			Vector3 temp = this.transform.position; 
-			temp.x += nblife - managerJoueur.getLifeMax(J1actif) + 2.25f; 
-			LifeGameObj.transform.parent = this.transform;
-			LifeGameObj.transform.position = temp; 
+        LifeAff(); 
 
-			listHearth.Add (LifeGameObj); 
-			nblife--;
-		}
-	}
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -56,15 +46,13 @@ public class Life : MonoBehaviour {
 			GameObject LifeGameObj; 
 			Vector3 temp; 
 
-			int pos = 1; 
-
+			int pos = 1;
 			while (pos != nblife+1) {
 				LifeGameObj = Instantiate (gameObjLife_full); 
-				temp = this.transform.position; 
+				temp = this.transform.position;
 
-				temp.x += pos - managerJoueur.getLifeMax (J1actif) + 2.25f; 
-
-				LifeGameObj.transform.parent = this.transform;
+                temp.x += pos-1 ;
+                LifeGameObj.transform.parent = this.transform;
 				LifeGameObj.transform.position = temp; 
 
 				listHearth.Add (LifeGameObj); 
@@ -76,7 +64,7 @@ public class Life : MonoBehaviour {
 				LifeGameObj = Instantiate (gameObjLife_empty); 
 				temp = this.transform.position; 
 
-				temp.x += pos - managerJoueur.getLifeMax (J1actif) + 2.25f; 
+				temp.x += pos - 1; 
 
 				LifeGameObj.transform.parent = this.transform;
 				LifeGameObj.transform.position = temp; 
