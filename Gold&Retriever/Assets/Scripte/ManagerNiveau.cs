@@ -14,6 +14,7 @@ public class ManagerNiveau : MonoBehaviour {
     // Tableau de prefable coin de map : 
     public List<GameObject> TabCoin;
 
+    public List<GameObject> TabSpecialHaut;
 
     // Tableau de prefable coin de map : 
     public GameObject TabDeb;
@@ -24,8 +25,13 @@ public class ManagerNiveau : MonoBehaviour {
     public GameObject laveGame; // un seul à gerer le parent de tout les prefabLave
     public GameObject prefabLave;
 
+    // special chunk 1 par map : 
+    private bool boolSpecialHaut;
+    private int ChanceChunkSpecial = 2; 
+
     // Use this for initialization
     void Start () {
+        boolSpecialHaut = false; 
 
         int maxLigne = 4;
         int maxColonne = 4;
@@ -48,9 +54,20 @@ public class ManagerNiveau : MonoBehaviour {
                 // ligne 
                 for (int j = 1; j <= rLigne; j++)
                 {
-                    int r = Random.Range(0, TabMilieu.Count); 
-                    InstanciateGameObjRandom(TabMilieu[r], new Vector3(indiceLigne, indiceColonne, 0), sens, 0);
-                    indiceLigne = indiceLigne + 40;
+                    if(i == 1 && Random.Range(0, ChanceChunkSpecial) == 0 && !boolSpecialHaut)
+                    {
+                        int r = Random.Range(0, TabSpecialHaut.Count);
+                        InstanciateGameObjRandom(TabSpecialHaut[r], new Vector3(indiceLigne, indiceColonne, 0), sens, 0);
+                        indiceLigne = indiceLigne + 40;
+                        boolSpecialHaut = true; 
+                    }
+                    else
+                    {
+                        int r = Random.Range(0, TabMilieu.Count);
+                        InstanciateGameObjRandom(TabMilieu[r], new Vector3(indiceLigne, indiceColonne, 0), sens, 0);
+                        indiceLigne = indiceLigne + 40;
+                    }
+                  
                 }
 
                 int rCoin = Random.Range(0, TabCoin.Count);

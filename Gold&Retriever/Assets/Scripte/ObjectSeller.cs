@@ -39,11 +39,20 @@ public class ObjectSeller : MonoBehaviour {
 
     void procedureAchat(bool J1actif)
     {
+        // life max up 
         if(numeroObject == 1)
         {
             managerJoueur.cashDown(price, J1actif);
             managerJoueur.setLifeMax(1, J1actif);
             Destroy(this.gameObject); 
+        }
+
+        // bombe
+        if (numeroObject == 2)
+        {
+            managerJoueur.cashDown(price, J1actif);
+            managerJoueur.bombeUp(1, J1actif); 
+            Destroy(this.gameObject);
         }
 
     }
