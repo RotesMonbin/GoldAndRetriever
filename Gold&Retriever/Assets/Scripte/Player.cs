@@ -14,7 +14,7 @@ public class Player : MonoBehaviour {
 	public Rigidbody2D rb; 
 	public GameObject feet ;
     public GameObject face ;
-    public CapsuleCollider2D capsuleCollider;
+    public BoxCollider2D boxCollider;
     public float gravityScale;
 
 
@@ -381,7 +381,7 @@ public class Player : MonoBehaviour {
         {
             invincible = invincible - Time.deltaTime<0 ?0: invincible - Time.deltaTime;
         }
-        Collider2D[] cols = Physics2D.OverlapCapsuleAll(capsuleCollider.transform.position, capsuleCollider.size, capsuleCollider.direction, 0,enemieLayer);
+        Collider2D[] cols = Physics2D.OverlapBoxAll(boxCollider.transform.position, boxCollider.size, 0,enemieLayer);
         foreach (Collider2D c in cols)
         {
             if (c.GetComponent<Worms>())
@@ -463,7 +463,7 @@ public class Player : MonoBehaviour {
         bool next = false;
         if (invincible == 0)
         {
-            Collider2D[] cols = Physics2D.OverlapCapsuleAll(capsuleCollider.transform.position, capsuleCollider.size, capsuleCollider.direction, 0, objectLayer);
+            Collider2D[] cols = Physics2D.OverlapBoxAll(boxCollider.transform.position, boxCollider.size, 0, objectLayer);
             foreach (Collider2D c in cols)
             {
                 next = false;
@@ -494,7 +494,7 @@ public class Player : MonoBehaviour {
     {
         bool toDelete = true;
         List<GameObject> objectsToDelete = new List<GameObject>();
-        Collider2D[] cols = Physics2D.OverlapCapsuleAll(capsuleCollider.transform.position, capsuleCollider.size, capsuleCollider.direction, 0, objectLayer);
+        Collider2D[] cols = Physics2D.OverlapBoxAll(boxCollider.transform.position, boxCollider.size, 0, objectLayer);
         foreach (GameObject obj in objectsLaunched)
         {
             foreach (Collider2D c in cols)
@@ -571,7 +571,7 @@ public class Player : MonoBehaviour {
         else
         {
             Collider2D col = null;
-            Collider2D[] cols = Physics2D.OverlapCapsuleAll(capsuleCollider.transform.position, capsuleCollider.size, capsuleCollider.direction, 0);
+            Collider2D[] cols = Physics2D.OverlapBoxAll(boxCollider.transform.position, boxCollider.size, 0);
             if (cols.Length > 1)
             {
                 foreach (Collider2D c in cols)
@@ -658,7 +658,7 @@ public class Player : MonoBehaviour {
 		
 	void touchLadder() 
 	{
-		Collider2D[] cols = Physics2D.OverlapCapsuleAll(capsuleCollider.transform.position, capsuleCollider.size, capsuleCollider.direction, 0);
+		Collider2D[] cols = Physics2D.OverlapBoxAll(boxCollider.transform.position, boxCollider.size, 0);
 
 		onLadder = false; 
 		foreach (Collider2D c in cols)
