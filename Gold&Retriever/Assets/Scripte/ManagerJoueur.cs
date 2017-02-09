@@ -50,6 +50,8 @@ public class ManagerJoueur : MonoBehaviour
     private int scene = 0;
     static ManagerJoueur me;
 
+    public bool test = false;
+
     void Awake()
     {
         if (me != null)
@@ -65,8 +67,11 @@ public class ManagerJoueur : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-       
-        changementScene(1);
+        if (!test)
+        {
+            changementScene(1);
+        }
+
     }
 
     // Update is called once per frame
