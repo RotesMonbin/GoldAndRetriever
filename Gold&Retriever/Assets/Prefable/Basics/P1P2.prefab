@@ -461,7 +461,7 @@ GameObject:
   - component: {fileID: 4479264035665996}
   - component: {fileID: 114541432008362874}
   m_Layer: 8
-  m_Name: obj Dedans (1)
+  m_Name: obj DedansJ2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -629,7 +629,7 @@ GameObject:
   - component: {fileID: 4375343959802872}
   - component: {fileID: 114063218490499118}
   m_Layer: 5
-  m_Name: obj Dedans
+  m_Name: obj DedansJ1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
