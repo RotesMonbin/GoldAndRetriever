@@ -177,6 +177,7 @@ MonoBehaviour:
   listObject:
   - {fileID: 1587687243459254, guid: ef274f4db41f18a47970428368fa96b2, type: 2}
   - {fileID: 1036304501380672, guid: cb37bf25fc631cc41a72d7a7d7a8803d, type: 2}
+  - {fileID: 0}
   postionObject: {fileID: 1349955470143706}
 --- !u!212 &212608153858778514
 SpriteRenderer:

@@ -451,6 +451,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1665419490358002
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4479264035665996}
+  - component: {fileID: 114541432008362874}
+  m_Layer: 8
+  m_Name: obj Dedans (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1669232033173952
 GameObject:
   m_ObjectHideFlags: 1
@@ -603,6 +619,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1944025447390734
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4375343959802872}
+  - component: {fileID: 114063218490499118}
+  m_Layer: 5
+  m_Name: obj Dedans
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1966641190161112
 GameObject:
   m_ObjectHideFlags: 1
@@ -646,7 +678,8 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 354, y: 41, z: -2025.777}
   m_LocalScale: {x: 22.508633, y: 22.508633, z: 22.508633}
-  m_Children: []
+  m_Children:
+  - {fileID: 4479264035665996}
   m_Father: {fileID: 224728927267584032}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -685,7 +718,8 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 354.3, y: 45.8, z: -2025.777}
   m_LocalScale: {x: 22.508633, y: 22.508633, z: 22.508633}
-  m_Children: []
+  m_Children:
+  - {fileID: 4375343959802872}
   m_Father: {fileID: 224869563129481690}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -776,6 +810,19 @@ Transform:
   m_Father: {fileID: 4242236428365076}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4375343959802872
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1944025447390734}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4047905621362340}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4408027576859300
 Transform:
   m_ObjectHideFlags: 1
@@ -831,6 +878,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4414897123682200}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4479264035665996
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1665419490358002}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.9721422, y: 0.285837, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4000987037012868}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4556074406372538
 Transform:
@@ -1244,6 +1304,18 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_EffectDistance: {x: 1, y: -1}
   m_UseGraphicAlpha: 1
+--- !u!114 &114063218490499118
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1944025447390734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 745617b9ab8a29b4191df432ecae813c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  arcSprite: {fileID: 1866008766572462, guid: bc031682e6fc934498ac7253616e6281, type: 2}
 --- !u!114 &114078909805914764
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1518,6 +1590,18 @@ MonoBehaviour:
   shakeTimer: 3
   shakeAmount: 0
   gem: 0
+--- !u!114 &114541432008362874
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1665419490358002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 745617b9ab8a29b4191df432ecae813c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  arcSprite: {fileID: 1866008766572462, guid: bc031682e6fc934498ac7253616e6281, type: 2}
 --- !u!114 &114600910580655286
 MonoBehaviour:
   m_ObjectHideFlags: 1

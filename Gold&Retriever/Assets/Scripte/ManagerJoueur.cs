@@ -4,7 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-
+public enum objectUtile{
+    none,
+    arc
+}
 public class ManagerJoueur : MonoBehaviour
 {
 
@@ -49,6 +52,12 @@ public class ManagerJoueur : MonoBehaviour
     // Scene 
     private int scene = 0;
     static ManagerJoueur me;
+
+    // Object actuel
+    private objectUtile objetUtileActuelJ1 = objectUtile.none;
+    private objectUtile objetUtileActuelJ2 = objectUtile.none;
+    private HudObjectUtile HUDitemJ1 ;
+    private HudObjectUtile HUDitemJ2 ; 
 
     public bool test = false;
 
@@ -246,7 +255,6 @@ public class ManagerJoueur : MonoBehaviour
     }
     #endregion
 
-
     #region Gestion Scene 
 
     // scene 0 ==> menu, scene = 1 gameplay niveau 1
@@ -277,13 +285,15 @@ public class ManagerJoueur : MonoBehaviour
 
         if (Joueur1 == null)
         {
-            cashJ1 = 200;
-            cashJ2 = 35;
+            cashJ1 = 200; 
             Joueur1 = GameObject.Find("P1----------------------------------");
             Joueur2 = GameObject.Find("P2-----------------------------------");
 
             hudJ1Bombe = GameObject.Find("BombeJ1").GetComponent<Text>();
             hudJ2Bombe = GameObject.Find("BombeJ2").GetComponent<Text>();
+
+            HUDitemJ1 = GameObject.Find("obj DedansJ1").GetComponent<HudObjectUtile>();
+            HUDitemJ2 = GameObject.Find("obj DedansJ2").GetComponent<HudObjectUtile>();
 
             hudJ1Cash = GameObject.Find("CashJ1").GetComponent<Text>();
             hudJ2Cash = GameObject.Find("CashJ2").GetComponent<Text>();
@@ -312,4 +322,28 @@ public class ManagerJoueur : MonoBehaviour
 
     }
     #endregion
+
+    #region Object utile , ex : arc ...
+
+    public void changementItemUtile(objectUtile obj, bool J1actif)
+    {
+        if(J1actif)
+        {
+            if(objetUtileActuelJ1 == objectUtile.none && obj != objetUtileActuelJ1)
+            {
+                objetUtileActuelJ1 = obj;
+                HUDitemJ1.changement(obj);
+            }
+        }else
+        {
+            if (objetUtileActuelJ2 == objectUtile.none && obj != objetUtileActuelJ2)
+            {
+                objetUtileActuelJ2 = obj;
+                HUDitemJ2.changement(obj);
+            }
+        }
+    }
+
+
+    #endregion 
 }

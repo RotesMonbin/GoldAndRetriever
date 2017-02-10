@@ -2095,7 +2095,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4104134782910614, guid: 0e2b1ccf47623224ca5625c1439c7966, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0e2b1ccf47623224ca5625c1439c7966, type: 2}
@@ -2137,7 +2137,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4144292428781594, guid: 9b22a2541a9fbe947bfd154ddec760c2, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 212724387148861970, guid: 9b22a2541a9fbe947bfd154ddec760c2,
         type: 2}
@@ -5154,8 +5154,14 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4132253457630138, guid: 199f86f6415f9b14c9ef1cac0564e42e, type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 114558469659780564, guid: 199f86f6415f9b14c9ef1cac0564e42e,
+        type: 2}
+      propertyPath: listObject.Array.data[2]
+      value: 
+      objectReference: {fileID: 1636388834539078, guid: a38c6ade4cef11d4d9da97dffae09b56,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 199f86f6415f9b14c9ef1cac0564e42e, type: 2}
   m_IsPrefabParent: 0
@@ -5224,7 +5230,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4915713720472548, guid: 854b5b7c298eee94f970741d39fcb48c, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 61634875595618072, guid: 854b5b7c298eee94f970741d39fcb48c, type: 2}
@@ -5268,6 +5274,14 @@ Prefab:
     - target: {fileID: 4288886605306802, guid: 6fb46e294feedba4b9619882cf74a91c, type: 2}
       propertyPath: m_RootOrder
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1944025447390734, guid: 6fb46e294feedba4b9619882cf74a91c, type: 2}
+      propertyPath: m_Name
+      value: obj DedansJ1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1665419490358002, guid: 6fb46e294feedba4b9619882cf74a91c, type: 2}
+      propertyPath: m_Name
+      value: obj DedansJ2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6fb46e294feedba4b9619882cf74a91c, type: 2}
