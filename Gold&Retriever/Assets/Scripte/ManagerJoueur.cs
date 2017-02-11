@@ -186,7 +186,7 @@ public class ManagerJoueur : MonoBehaviour
         else
         {
             lifeJ2 += lifeInscrease;
-            lifeScript_J1.LifeAff();
+            lifeScript_J2.LifeAff();
         }
     }
 
@@ -324,7 +324,6 @@ public class ManagerJoueur : MonoBehaviour
     #endregion
 
     #region Object utile , ex : arc ...
-
     public void changementItemUtile(objectUtile obj, bool J1actif)
     {
         if(J1actif)

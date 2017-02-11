@@ -40,7 +40,7 @@ public class HudObjectUtile : MonoBehaviour {
     void detruireEnfant()
     {
         int childcount = transform.childCount; 
-        for(int i = childcount - 1; i> 0 ; i-- )
+        for(int i = childcount - 1; i > 0 ; i--)
         {
             GameObject.Destroy(transform.GetChild(i).gameObject); 
         }
