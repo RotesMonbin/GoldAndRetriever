@@ -10,6 +10,7 @@ public class Player : MonoBehaviour {
     public float runningMaxSpeed;
     public float jumpPower ;
     public float throwPower;
+    private float jumpOnEnemy=20;
 
 	public Rigidbody2D rb; 
 	public GameObject feet ;
@@ -397,7 +398,7 @@ public class Player : MonoBehaviour {
                 {
                     if (invincible < 1.5)
                     {
-                        this.rb.velocity = new Vector2(this.rb.velocity.x, 8);
+                        this.rb.velocity = new Vector2(this.rb.velocity.x, jumpOnEnemy);
                         c.GetComponent<Worms>().dead();
                     }
                 }
@@ -416,7 +417,7 @@ public class Player : MonoBehaviour {
                 {
                     if (invincible < 1.5)
                     {
-                        this.rb.velocity = new Vector2(this.rb.velocity.x, 8);
+                        this.rb.velocity = new Vector2(this.rb.velocity.x, jumpOnEnemy);
                         c.GetComponent<Frog>().dead();
                     }
                 }

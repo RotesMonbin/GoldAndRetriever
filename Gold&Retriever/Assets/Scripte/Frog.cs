@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Frog : MonoBehaviour {
+public class Frog : MonoBehaviour
+{
 
     public Rigidbody2D rb;
     public BoxCollider2D feet;
@@ -11,20 +12,31 @@ public class Frog : MonoBehaviour {
 
     public float timeToJump;
     private float timer;
-	// Use this for initialization
-	void Start () {
+    private int direction;
+    // Use this for initialization
+    void Start()
+    {
+        Transform parent = this.gameObject.transform.parent;
+       direction = -(int)parent.localScale.x;
+        /*if (parent)
+        {
+            this.transform.localScale = new Vector3(this.transform.localScale.x * (parent.localScale.x / Mathf.Abs(parent.localScale.x))
+                                                    , this.transform.localScale.y
+                                                    , this.transform.localScale.z);
+        }*/
         timer = timeToJump;
-	}
-	
-	// Update is called once per frame
-	void FixedUpdate () {
+    }
+
+    // Update is called once per frame
+    void FixedUpdate()
+    {
         if (rb)
         {
             if (timer <= 0 && isTouchingGround())
             {
                 int r = Random.Range(0, 2);
                 this.transform.localScale = new Vector3(r == 0 ? -1 : 1, 1, 1);
-                rb.velocity = new Vector2(-this.transform.localScale.x * 4, 20);
+                rb.velocity = new Vector2(direction*this.transform.localScale.x * 4, 20);
                 timer = timeToJump;
             }
 
@@ -34,7 +46,7 @@ public class Frog : MonoBehaviour {
             }
             anime.SetBool("jump", !isTouchingGround());
         }
-	}
+    }
 
     bool isTouchingGround()
     {
