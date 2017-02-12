@@ -3,29 +3,30 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Player : MonoBehaviour {
+public class Player : MonoBehaviour
+{
 
-	public float acceleration ;
+    public float acceleration;
     public float walkingMaxSpeed;
     public float runningMaxSpeed;
-    public float jumpPower ;
+    public float jumpPower;
     public float throwPower;
-    private float jumpOnEnemy=20;
+    private float jumpOnEnemy = 20;
 
-	public Rigidbody2D rb; 
-	public GameObject feet ;
-    public GameObject face ;
+    public Rigidbody2D rb;
+    public GameObject feet;
+    public BoxCollider2D face;
     public BoxCollider2D boxCollider;
     public float gravityScale;
 
 
-	public LayerMask isJumpable ;
+    public LayerMask decorLayer;
     public LayerMask enemieLayer;
     public LayerMask spikeLayer;
     public LayerMask objectLayer;
 
-    public float jumpDuration = 0.2f ;
-	public Animator animator ;
+    public float jumpDuration = 0.2f;
+    public Animator animator;
     public GameObject bomb;
     public float bombThrow;
     public float invincibleTime;
@@ -34,19 +35,19 @@ public class Player : MonoBehaviour {
 
     public float speedFallDamage;
 
-	private bool isJumping = false;
+    private bool isJumping = false;
 
     private bool gameOver = false;
-    private bool holdSomething=false;
+    private bool holdSomething = false;
     private GameObject heldObject;
 
     // Touche clavier :
-	public bool J1actif; 
+    public bool J1actif;
 
-    public KeyCode toucheDroite; 
-	public KeyCode toucheGauche;
-	public KeyCode toucheHaut;
-	public KeyCode toucheSaut;
+    public KeyCode toucheDroite;
+    public KeyCode toucheGauche;
+    public KeyCode toucheHaut;
+    public KeyCode toucheSaut;
     public KeyCode toucheBomb;
     public KeyCode toucheAccroupi;
     public KeyCode toucheAction;
@@ -58,48 +59,49 @@ public class Player : MonoBehaviour {
     public string manetteAxeY;
     public string triggAxis;
 
-    private bool dontMove = false ;
+    private bool dontMove = false;
 
-    private float invincible=0;
+    private float invincible = 0;
     private int lastBlinkNumber;
     private bool damageNextTimeOnGround;
 
     private List<GameObject> listRope;
     private List<GameObject> objectsLaunched;
 
-	public bool onLadder { get ; set; } 
+    public bool onLadder { get; set; }
 
-	[SerializeField]
-	private float climbSpeed; 
+    [SerializeField]
+    private float climbSpeed;
 
-	private ManagerJoueur managerJoueur ; 
+    private ManagerJoueur managerJoueur;
 
-	[SerializeField]
-	private Camera cameraShakeJ1 ;
-	[SerializeField]
-	private Camera cameraShakeJ2 ; 
+    [SerializeField]
+    private Camera cameraShakeJ1;
+    [SerializeField]
+    private Camera cameraShakeJ2;
 
-	// Prefab : 
-	public GameObject rope ; 
-	public GameObject ropeDeb ;
- 
+    // Prefab : 
+    public GameObject rope;
+    public GameObject ropeDeb;
+
     // Use this for initialization
-    void Start () {
-		managerJoueur = GameObject.Find ("ManagerJoueur").GetComponent<ManagerJoueur> ();
+    void Start()
+    {
+        managerJoueur = GameObject.Find("ManagerJoueur").GetComponent<ManagerJoueur>();
 
         managerJoueur.chargementDonnee();
-        listRope = new List<GameObject>() ;
+        listRope = new List<GameObject>();
         objectsLaunched = new List<GameObject>();
 
     }
-	
-	// Update is called once per frame
-	void Update ()
-	{
-      
+
+    // Update is called once per frame
+    void Update()
+    {
+
         if (J1actif)
         {
-            if(managerJoueur.getLife(true) <= 0)
+            if (managerJoueur.getLife(true) <= 0)
             {
                 animator.SetBool("Dead", true);
                 this.dontMove = true;
@@ -113,21 +115,21 @@ public class Player : MonoBehaviour {
                 this.dontMove = true;
             }
         }
-		animator.SetBool ("Walk", 	rb.velocity.x != 0.0f ); // walk
-		animator.SetBool ("Jump", 	rb.velocity.y != 0.0f ); // walk
+        animator.SetBool("Walk", rb.velocity.x != 0.0f); // walk
+        animator.SetBool("Jump", rb.velocity.y != 0.0f); // walk
 
         // DEPLACE OBJET TENU
         if (holdSomething)
         {
             moveHeldObject();
         }
-		if (Physics2D.OverlapBox(new Vector2 (feet.transform.position.x, feet.transform.position.y), new Vector2 (0.728853f, 0.1633179f),0,isJumpable))
-			animator.SetBool ("Jump", false);
-		else 
-			animator.SetBool ("Jump", true);
-	
+        if (Physics2D.OverlapBox(new Vector2(feet.transform.position.x, feet.transform.position.y), new Vector2(0.728853f, 0.1633179f), 0, decorLayer))
+            animator.SetBool("Jump", false);
+        else
+            animator.SetBool("Jump", true);
+
         //invincibilityBlink
-        if (invincible > 0 && managerJoueur.getLife(J1actif)>0)
+        if (invincible > 0 && managerJoueur.getLife(J1actif) > 0)
         {
             blinkAnimation();
         }
@@ -135,7 +137,7 @@ public class Player : MonoBehaviour {
         {
             sprite.color = new Color(1, 1, 1, 1);
         }
-	}
+    }
 
     private void FixedUpdate()
     {
@@ -188,7 +190,7 @@ public class Player : MonoBehaviour {
         if (!dontMove)
         {
             if ((Input.GetKey(toucheSaut) || Input.GetButton(manetteSaut))
-            && (Physics2D.OverlapBox(new Vector2(feet.transform.position.x, feet.transform.position.y), new Vector2(0.728853f, 0.1633179f), 0, isJumpable)))
+            && (Physics2D.OverlapBox(new Vector2(feet.transform.position.x, feet.transform.position.y), new Vector2(0.728853f, 0.1633179f), 0, decorLayer)))
                 rb.velocity = new Vector2(rb.velocity.x, jumpPower);
 
             if (isTouchingGround())
@@ -207,7 +209,7 @@ public class Player : MonoBehaviour {
         Vector3 temp = this.transform.localScale;
         if (!dontMove)
         {
-            if ( (Input.GetKey(toucheGauche) || manetteLeft()))
+            if ((Input.GetKey(toucheGauche) || manetteLeft()))
             {
                 temp.x = -1;
                 this.transform.localScale = temp;
@@ -220,13 +222,13 @@ public class Player : MonoBehaviour {
                 }
 
             }
-            else if ( (Input.GetKey(toucheDroite) || manetteRight()) )
+            else if ((Input.GetKey(toucheDroite) || manetteRight()))
             {
                 temp.x = 1;
                 this.transform.localScale = temp;
                 if (!isFacingWall())
                 {
-                    if ((manetteRT() && rb.velocity.x < runningMaxSpeed )|| rb.velocity.x < walkingMaxSpeed)
+                    if ((manetteRT() && rb.velocity.x < runningMaxSpeed) || rb.velocity.x < walkingMaxSpeed)
                     {
                         rb.velocity += new Vector2(+acceleration, 0);
                     }
@@ -270,11 +272,11 @@ public class Player : MonoBehaviour {
     #endregion
 
     #region Touche action
-    void actionOn() 
-	{
-		//Action
-		if (Input.GetKeyDown(toucheAction) ||Input.GetButtonDown(manetteAction))
-		{
+    void actionOn()
+    {
+        //Action
+        if (Input.GetKeyDown(toucheAction) || Input.GetButtonDown(manetteAction))
+        {
             if (!J1actif)
             { // fille 
                 if (Input.GetKey(toucheAccroupi) || manetteDown())
@@ -290,38 +292,45 @@ public class Player : MonoBehaviour {
                 {
                     pickUpItem();
                 }
-			} else {
-				pickUpItem();
+            }
+            else
+            {
+                pickUpItem();
 
-			}
+            }
 
-		}
+        }
 
-		if (Input.GetKeyUp (toucheAction) || Input.GetButtonUp(manetteAction)) {
-			if (!J1actif) {
-				if (isTouchingGround ()) {
-					ropeActionReverse (); 
-					dontMove = false;
-				}
-			}
-		}
-	}
-	#endregion 
+        if (Input.GetKeyUp(toucheAction) || Input.GetButtonUp(manetteAction))
+        {
+            if (!J1actif)
+            {
+                if (isTouchingGround())
+                {
+                    ropeActionReverse();
+                    dontMove = false;
+                }
+            }
+        }
+    }
+    #endregion
 
-	#region Collision 2D
-	// ENEMIES
-	void OnCollisionEnter2D(Collision2D coll)
-	{
-	
-		if (coll.gameObject.tag == "Coins") {
-			managerJoueur.GetComponent<ManagerJoueur> ().cashUp (1, J1actif); 
-			Destroy (coll.gameObject); 
-		}	
+    #region Collision 2D
+    // ENEMIES
+    void OnCollisionEnter2D(Collision2D coll)
+    {
 
-		if (coll.gameObject.tag == "bombeCaisse") {
-			managerJoueur.GetComponent<ManagerJoueur> ().bombeUp (1, J1actif); 
-			Destroy (coll.gameObject); 
-		}
+        if (coll.gameObject.tag == "Coins")
+        {
+            managerJoueur.GetComponent<ManagerJoueur>().cashUp(1, J1actif);
+            Destroy(coll.gameObject);
+        }
+
+        if (coll.gameObject.tag == "bombeCaisse")
+        {
+            managerJoueur.GetComponent<ManagerJoueur>().bombeUp(1, J1actif);
+            Destroy(coll.gameObject);
+        }
 
         if (coll.gameObject.tag == "coeur de vie" && managerJoueur.getLifeMax(J1actif) != managerJoueur.getLife(J1actif))
         {
@@ -336,19 +345,19 @@ public class Player : MonoBehaviour {
         }
 
     }
-		
-	// Death zone 
-	void OnTriggerEnter2D(Collider2D coll)
-	{
-		if (coll.gameObject.tag == "GemmeBleu" )
-		{
-			cameraShakeJ1.GetComponent<CameraShake> ().gem = true;
-			cameraShakeJ2.GetComponent<CameraShake> ().gem = true;
+
+    // Death zone 
+    void OnTriggerEnter2D(Collider2D coll)
+    {
+        if (coll.gameObject.tag == "GemmeBleu")
+        {
+            cameraShakeJ1.GetComponent<CameraShake>().gem = true;
+            cameraShakeJ2.GetComponent<CameraShake>().gem = true;
             managerJoueur.gemUp();
 
-            
-            Destroy (coll.gameObject); 
-		}
+
+            Destroy(coll.gameObject);
+        }
         if (coll.gameObject.tag == "Lave")
         {
             takeDamage(4);
@@ -356,19 +365,19 @@ public class Player : MonoBehaviour {
 
         if (coll.gameObject.tag == "Transition Menu Jeu")
         {
-            managerJoueur.changementScene(2); 
+            managerJoueur.changementScene(2);
         }
     }
 
     void OnTriggerStay2D(Collider2D coll)
     {
-        
+
         if (coll.CompareTag("objetBuy"))
         {
-            if(Input.GetKeyDown(toucheAction) || Input.GetButtonDown(manetteAction))
+            if (Input.GetKeyDown(toucheAction) || Input.GetButtonDown(manetteAction))
             {
                 coll.GetComponent<ObjectSeller>().gestion_cash(J1actif);
-            }     
+            }
         }
     }
     #endregion
@@ -380,16 +389,17 @@ public class Player : MonoBehaviour {
     {
         if (invincible != 0)
         {
-            invincible = invincible - Time.deltaTime<0 ?0: invincible - Time.deltaTime;
+            invincible = invincible - Time.deltaTime < 0 ? 0 : invincible - Time.deltaTime;
         }
-        Collider2D[] cols = Physics2D.OverlapBoxAll(boxCollider.transform.position, boxCollider.size, 0,enemieLayer);
+        Collider2D[] cols = Physics2D.OverlapBoxAll(boxCollider.transform.position, boxCollider.size, 0, enemieLayer);
         foreach (Collider2D c in cols)
         {
             if (c.GetComponent<Worms>())
             {
-                if (c.transform.position.y > feet.transform.position.y+0.6)
+                if (c.transform.position.y > feet.transform.position.y + 0.6)
                 {
-                    if (invincible == 0) {
+                    if (invincible == 0)
+                    {
                         invincible = invincibleTime;
                         takeDamage(c.transform.position.x > feet.transform.position.x ? -1 : 1);
                     }
@@ -427,7 +437,7 @@ public class Player : MonoBehaviour {
     void SpikeColision()
     {
         if (Physics2D.OverlapBox(new Vector2(feet.transform.position.x, feet.transform.position.y)
-            , new Vector2(0.728853f, 0.1633179f), 0, spikeLayer) && rb.velocity.y<-0.5)
+            , new Vector2(0.728853f, 0.1633179f), 0, spikeLayer) && rb.velocity.y < -0.5)
         {
             killPlayer();
         }
@@ -441,19 +451,19 @@ public class Player : MonoBehaviour {
 
     void takeDamage(int direction)
     {
-        this.rb.velocity+=new Vector2 (direction * 4, 4);
+        this.rb.velocity += new Vector2(direction * 4, 4);
         managerJoueur.lifeDown(1, J1actif);
         lastBlinkNumber = (int)(5 * invincible);
     }
 
     void GameOver()
     {
-        if(managerJoueur.getLife(true)<=0 || managerJoueur.getLife(false) <= 0)
+        if (managerJoueur.getLife(true) <= 0 || managerJoueur.getLife(false) <= 0)
         {
             this.dontMove = true;
             gameOver = true;
         }
-        if(gameOver && (Input.GetButtonDown(manetteSaut) || Input.GetKeyDown(toucheSaut)))
+        if (gameOver && (Input.GetButtonDown(manetteSaut) || Input.GetKeyDown(toucheSaut)))
         {
             managerJoueur.changementScene(1);
         }
@@ -500,7 +510,7 @@ public class Player : MonoBehaviour {
         {
             foreach (Collider2D c in cols)
             {
-                if(obj == c.gameObject)
+                if (obj == c.gameObject)
                 {
                     toDelete = false;
                 }
@@ -510,7 +520,7 @@ public class Player : MonoBehaviour {
                 objectsToDelete.Add(obj);
             }
         }
-        foreach(GameObject obj in objectsToDelete)
+        foreach (GameObject obj in objectsToDelete)
         {
             objectsLaunched.Remove(obj);
         }
@@ -522,7 +532,7 @@ public class Player : MonoBehaviour {
         {
             damageNextTimeOnGround = true;
         }
-        if(isTouchingGround() && damageNextTimeOnGround)
+        if (isTouchingGround() && damageNextTimeOnGround)
         {
             invincible = invincibleTime;
             takeDamage((int)-this.transform.localScale.x);
@@ -566,7 +576,7 @@ public class Player : MonoBehaviour {
             }
             objectsLaunched.Add(heldObject);
             heldObject.GetComponent<Rigidbody2D>().isKinematic = false;
-            heldObject.GetComponent<Rigidbody2D>().velocity = new Vector2(throwPower * this.transform.localScale.x, throwPower/2);
+            heldObject.GetComponent<Rigidbody2D>().velocity = new Vector2(throwPower * this.transform.localScale.x, throwPower / 2);
             holdSomething = false;
         }
         else
@@ -579,16 +589,17 @@ public class Player : MonoBehaviour {
                 {
                     if (c.gameObject != this.gameObject)
                     {
-                        if ((c.gameObject.tag == "Player" && J1actif)|| c.gameObject.tag == "Pickup" || c.gameObject.tag == "Box") { 
+                        if ((c.gameObject.tag == "Player" && J1actif) || c.gameObject.tag == "Pickup" || c.gameObject.tag == "Box")
+                        {
                             col = c;
                         }
                     }
                 }
                 if (col)
                 {
-                    if(col.gameObject.tag == "Box")
+                    if (col.gameObject.tag == "Box")
                     {
-                        col.GetComponent<boxRandom>().held = true ;
+                        col.GetComponent<boxRandom>().held = true;
                     }
                     if (col.gameObject.tag == "Player")
                     {
@@ -603,119 +614,129 @@ public class Player : MonoBehaviour {
             }
         }
     }
-	#endregion
+    #endregion
 
-	#region Rope Action 
-	void ropeAction()
-	{
-		GameObject ropei = Instantiate (ropeDeb); 
-		Vector3 temp = this.transform.position; 
+    #region Rope Action 
+    void ropeAction()
+    {
+        GameObject ropei = Instantiate(ropeDeb);
+        Vector3 temp = this.transform.position;
 
-		Vector3 temp2 = this.transform.localScale; 
-		temp2.x = direction(); 
-		ropei.transform.localScale = temp2; 
-		temp.x = temp.x + direction() * 0.8f;
-		temp.y = temp.y - 0.373f;
-		ropei.transform.position = temp; 
-		listRope.Add (ropei); 
-	
-		Vector3 tempWhile = ropei.transform.position ; 
-		float ftemp = 0.0f; 
+        Vector3 temp2 = this.transform.localScale;
+        temp2.x = direction();
+        ropei.transform.localScale = temp2;
+        temp.x = temp.x + direction() * 0.8f;
+        temp.y = temp.y - 0.373f;
+        ropei.transform.position = temp;
+        listRope.Add(ropei);
 
-		while(!Physics2D.OverlapBox (new Vector2 (tempWhile.x,tempWhile.y - 1), new Vector2 (0.2409988f, 0.358952f), 0, isJumpable) && ftemp != -10.0f)
-		{
-			ftemp -= 1.0f; 
-			ropei = Instantiate (rope); 
-			temp = this.transform.position; 
-			temp2 = this.transform.localScale; 
+        Vector3 tempWhile = ropei.transform.position;
+        float ftemp = 0.0f;
 
-			ropei.transform.parent = listRope [0].transform; 
+        while (!Physics2D.OverlapBox(new Vector2(tempWhile.x, tempWhile.y - 1), new Vector2(0.2409988f, 0.358952f), 0, decorLayer) && ftemp != -10.0f)
+        {
+            ftemp -= 1.0f;
+            ropei = Instantiate(rope);
+            temp = this.transform.position;
+            temp2 = this.transform.localScale;
 
-			ropei.transform.localScale = temp2; 
-			temp.x = temp.x + direction() * 0.8f;
-			temp.y = temp.y - 0.373f + ftemp;
-			ropei.transform.position = temp; 
+            ropei.transform.parent = listRope[0].transform;
 
-			listRope.Add (ropei); 
-			tempWhile = ropei.transform.position ; 
-		}
+            ropei.transform.localScale = temp2;
+            temp.x = temp.x + direction() * 0.8f;
+            temp.y = temp.y - 0.373f + ftemp;
+            ropei.transform.position = temp;
 
-
-		BoxCollider2D c2D = listRope [0].AddComponent<BoxCollider2D>() ;
-		c2D.isTrigger = true;
-		c2D.size = new Vector2 (0.25f,listRope.Count); 
-		c2D.offset = new Vector2(0, -listRope.Count / 2 ) ; 
-	}
-
-	void ropeActionReverse()
-	{
-        if(listRope.Count > 0) { 
-		    for(int i = 1; i < listRope.Count ; i++)
-			    Destroy (listRope[i]) ; 
-		    Destroy (listRope[0]) ; 
-		    listRope.Clear () ;
+            listRope.Add(ropei);
+            tempWhile = ropei.transform.position;
         }
-    }	
-		
-	void touchLadder() 
-	{
-		Collider2D[] cols = Physics2D.OverlapBoxAll(boxCollider.transform.position, boxCollider.size, 0);
 
-		onLadder = false; 
-		foreach (Collider2D c in cols)
-			if (c.gameObject.tag == "rope") 
-				onLadder = true; 
-		
-		animator.SetBool ("Climb", onLadder);		
-		if (onLadder) {
-			if (Input.GetKey (toucheHaut) || manetteUp())
-				rb.velocity = new Vector2 (0, acceleration * climbSpeed); 
-			else if (Input.GetKey (toucheAccroupi) || manetteDown())
-				rb.velocity = new Vector2 (0, -acceleration * climbSpeed); 
-		
-			rb.gravityScale = 0;
-		} else {
-			rb.gravityScale = gravityScale;
-			animator.SetBool ("Climb", false);
-		}
 
-	}
-	#endregion 
+        BoxCollider2D c2D = listRope[0].AddComponent<BoxCollider2D>();
+        c2D.isTrigger = true;
+        c2D.size = new Vector2(0.25f, listRope.Count);
+        c2D.offset = new Vector2(0, -listRope.Count / 2);
+    }
 
-	#region Utile : direction, toucheGround...
-	// Direction du joueur ; 1 regarde à droite -1 à gauche 
-	float direction() 
-	{
-		return this.transform.localScale.x;
-	}
+    void ropeActionReverse()
+    {
+        if (listRope.Count > 0)
+        {
+            for (int i = 1; i < listRope.Count; i++)
+                Destroy(listRope[i]);
+            Destroy(listRope[0]);
+            listRope.Clear();
+        }
+    }
 
-	// si les pied touch le sol
-	bool isTouchingGround()
-	{
-		return (Physics2D.OverlapBox (new Vector2 (feet.transform.position.x, feet.transform.position.y), new Vector2 (0.728853f, 0.1633179f), 0, isJumpable));
-	}
+    void touchLadder()
+    {
+        Collider2D[] cols = Physics2D.OverlapBoxAll(boxCollider.transform.position, boxCollider.size, 0);
+
+        onLadder = false;
+        foreach (Collider2D c in cols)
+            if (c.gameObject.tag == "rope")
+                onLadder = true;
+
+        animator.SetBool("Climb", onLadder);
+        if (onLadder)
+        {
+            if (Input.GetKey(toucheHaut) || manetteUp())
+                rb.velocity = new Vector2(0, acceleration * climbSpeed);
+            else if (Input.GetKey(toucheAccroupi) || manetteDown())
+                rb.velocity = new Vector2(0, -acceleration * climbSpeed);
+
+            rb.gravityScale = 0;
+        }
+        else
+        {
+            rb.gravityScale = gravityScale;
+            animator.SetBool("Climb", false);
+        }
+
+    }
+    #endregion
+
+    #region Utile : direction, toucheGround...
+    // Direction du joueur ; 1 regarde à droite -1 à gauche 
+    float direction()
+    {
+        return this.transform.localScale.x;
+    }
+
+    // si les pied touch le sol
+    bool isTouchingGround()
+    {
+        return (Physics2D.OverlapBox(new Vector2(feet.transform.position.x, feet.transform.position.y), new Vector2(0.728853f, 0.1633179f),0, decorLayer));
+    }
 
     bool isFacingWall()
     {
-        return (Physics2D.OverlapCircle(new Vector2(face.transform.position.x, face.transform.position.y), 0.2f, isJumpable));
+        Collider2D[] cl;
+        if (J1actif)
+        {
+             cl = Physics2D.OverlapBoxAll(new Vector2(face.transform.position.x, face.transform.position.y), face.size, decorLayer);
+            //Debug.Log(Physics2D.OverlapBoxAll(new Vector2(face.transform.position.x, face.transform.position.y), face.size, decorLayer));
+        }
+        return (Physics2D.OverlapBox(new Vector2(face.transform.position.x, face.transform.position.y), face.size,0, decorLayer));
     }
 
     void blinkAnimation()
     {
-        if (lastBlinkNumber>(int)(5 * invincible))
+        if (lastBlinkNumber > (int)(5 * invincible))
         {
             lastBlinkNumber = (int)(5 * invincible);
-            sprite.color = new Color(1, 1, 1, sprite.color.a==1?0:1);
+            sprite.color = new Color(1, 1, 1, sprite.color.a == 1 ? 0 : 1);
         }
     }
 
     bool manetteDown()
     {
-        return Input.GetAxis(manetteAxeY ) > 0.5;
+        return Input.GetAxis(manetteAxeY) > 0.5;
     }
     bool manetteUp()
     {
-        return Input.GetAxis(manetteAxeY ) < - 0.5;
+        return Input.GetAxis(manetteAxeY) < -0.5;
     }
     bool manetteLeft()
     {
