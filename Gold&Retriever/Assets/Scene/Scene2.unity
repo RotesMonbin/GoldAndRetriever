@@ -3525,25 +3525,6 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
---- !u!1 &74254707 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1342051575532034, guid: 6fb46e294feedba4b9619882cf74a91c,
-    type: 2}
-  m_PrefabInternal: {fileID: 2099541615}
---- !u!61 &74254708
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 74254707}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Size: {x: 0.2, y: 1}
 --- !u!1 &79166214
 GameObject:
   m_ObjectHideFlags: 0
@@ -16957,7 +16938,7 @@ Prefab:
     - target: {fileID: 114246700614151844, guid: 0e2b1ccf47623224ca5625c1439c7966,
         type: 2}
       propertyPath: test
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0e2b1ccf47623224ca5625c1439c7966, type: 2}
@@ -93772,25 +93753,6 @@ ParticleSystem:
       minColor: {r: 1, g: 1, b: 1, a: 1}
       maxColor: {r: 0.52156866, g: 0.4392157, b: 0.4392157, a: 1}
       minMaxState: 0
---- !u!1 &1691567710 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1493506590576948, guid: 6fb46e294feedba4b9619882cf74a91c,
-    type: 2}
-  m_PrefabInternal: {fileID: 2099541615}
---- !u!61 &1691567711
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1691567710}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Size: {x: 0.2, y: 1.4}
 --- !u!1 &1694252354
 GameObject:
   m_ObjectHideFlags: 0
@@ -111736,58 +111698,7 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1386776746230816, guid: 6fb46e294feedba4b9619882cf74a91c, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1573958104209336, guid: 6fb46e294feedba4b9619882cf74a91c, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 58941833059777922, guid: 6fb46e294feedba4b9619882cf74a91c,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4469786819734274, guid: 6fb46e294feedba4b9619882cf74a91c, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: -0.135
-      objectReference: {fileID: 0}
-    - target: {fileID: 4469786819734274, guid: 6fb46e294feedba4b9619882cf74a91c, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 4680176953213386, guid: 6fb46e294feedba4b9619882cf74a91c, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 4680176953213386, guid: 6fb46e294feedba4b9619882cf74a91c, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: -0.135
-      objectReference: {fileID: 0}
-    - target: {fileID: 114617668565591090, guid: 6fb46e294feedba4b9619882cf74a91c,
-        type: 2}
-      propertyPath: face
-      value: 
-      objectReference: {fileID: 1691567711}
-    - target: {fileID: 114078909805914764, guid: 6fb46e294feedba4b9619882cf74a91c,
-        type: 2}
-      propertyPath: face
-      value: 
-      objectReference: {fileID: 74254708}
-    - target: {fileID: 114617668565591090, guid: 6fb46e294feedba4b9619882cf74a91c,
-        type: 2}
-      propertyPath: decorLayer.m_Bits
-      value: 1048576
-      objectReference: {fileID: 0}
-    - target: {fileID: 114078909805914764, guid: 6fb46e294feedba4b9619882cf74a91c,
-        type: 2}
-      propertyPath: decorLayer.m_Bits
-      value: 1048576
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 58941833059777922, guid: 6fb46e294feedba4b9619882cf74a91c, type: 2}
-    - {fileID: 58178524907200550, guid: 6fb46e294feedba4b9619882cf74a91c, type: 2}
+    m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6fb46e294feedba4b9619882cf74a91c, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &2101116109

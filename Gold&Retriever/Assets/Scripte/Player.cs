@@ -14,7 +14,7 @@ public class Player : MonoBehaviour
     private float jumpOnEnemy = 20;
 
     public Rigidbody2D rb;
-    public GameObject feet;
+    public BoxCollider2D feet;
     public BoxCollider2D face;
     public BoxCollider2D boxCollider;
     public float gravityScale;
@@ -123,7 +123,7 @@ public class Player : MonoBehaviour
         {
             moveHeldObject();
         }
-        if (Physics2D.OverlapBox(new Vector2(feet.transform.position.x, feet.transform.position.y), new Vector2(0.728853f, 0.1633179f), 0, decorLayer))
+        if (isTouchingGround())
             animator.SetBool("Jump", false);
         else
             animator.SetBool("Jump", true);
@@ -189,8 +189,7 @@ public class Player : MonoBehaviour
         // PIED SAUT 
         if (!dontMove)
         {
-            if ((Input.GetKey(toucheSaut) || Input.GetButton(manetteSaut))
-            && (Physics2D.OverlapBox(new Vector2(feet.transform.position.x, feet.transform.position.y), new Vector2(0.728853f, 0.1633179f), 0, decorLayer)))
+            if ((Input.GetKey(toucheSaut) || Input.GetButton(manetteSaut))&& isTouchingGround())
                 rb.velocity = new Vector2(rb.velocity.x, jumpPower);
 
             if (isTouchingGround())
@@ -207,6 +206,7 @@ public class Player : MonoBehaviour
     void DirectionControl()
     {
         Vector3 temp = this.transform.localScale;
+
         if (!dontMove)
         {
             if ((Input.GetKey(toucheGauche) || manetteLeft()))
@@ -217,7 +217,7 @@ public class Player : MonoBehaviour
                 {
                     if ((manetteRT() && rb.velocity.x > -runningMaxSpeed) || rb.velocity.x > -walkingMaxSpeed)
                     {
-                        rb.velocity += new Vector2(-acceleration, 0);
+                        rb.velocity -= new Vector2(acceleration, 0);
                     }
                 }
 
@@ -230,36 +230,26 @@ public class Player : MonoBehaviour
                 {
                     if ((manetteRT() && rb.velocity.x < runningMaxSpeed) || rb.velocity.x < walkingMaxSpeed)
                     {
-                        rb.velocity += new Vector2(+acceleration, 0);
+                        rb.velocity += new Vector2(acceleration, 0);
                     }
 
                 }
             }
             else
             {
-                if (isTouchingGround())
+                if (isTouchingGround() && rb.velocity.x != 0)
                 {
-                    if (rb.velocity.x > 0)
+                    if (rb.velocity.x - acceleration <= 0 || rb.velocity.x + acceleration >= 0)
                     {
-                        if (rb.velocity.x - acceleration <= 0)
-                        {
-                            rb.velocity -= new Vector2(rb.velocity.x, 0);
-                        }
-                        else
-                        {
-                            rb.velocity += new Vector2(-acceleration, 0);
-                        }
+                        rb.velocity = new Vector2(0, rb.velocity.y);
+                    }
+                    else if (rb.velocity.x > 0)
+                    {
+                        rb.velocity += new Vector2(-acceleration, 0);
                     }
                     else
                     {
-                        if (rb.velocity.x + acceleration >= 0)
-                        {
-                            rb.velocity += new Vector2(rb.velocity.x, 0);
-                        }
-                        else
-                        {
-                            rb.velocity += new Vector2(acceleration, 0);
-                        }
+                        rb.velocity += new Vector2(acceleration, 0);
                     }
                 }
                 else
@@ -437,7 +427,7 @@ public class Player : MonoBehaviour
     void SpikeColision()
     {
         if (Physics2D.OverlapBox(new Vector2(feet.transform.position.x, feet.transform.position.y)
-            , new Vector2(0.728853f, 0.1633179f), 0, spikeLayer) && rb.velocity.y < -0.5)
+            , feet.size, 0, spikeLayer) && rb.velocity.y < -0.5)
         {
             killPlayer();
         }
@@ -707,7 +697,7 @@ public class Player : MonoBehaviour
     // si les pied touch le sol
     bool isTouchingGround()
     {
-        return (Physics2D.OverlapBox(new Vector2(feet.transform.position.x, feet.transform.position.y), new Vector2(0.728853f, 0.1633179f),0, decorLayer));
+        return (Physics2D.OverlapBox(new Vector2(feet.transform.position.x, feet.transform.position.y), feet.size, 0, decorLayer));
     }
 
     bool isFacingWall()
@@ -715,10 +705,10 @@ public class Player : MonoBehaviour
         Collider2D[] cl;
         if (J1actif)
         {
-             cl = Physics2D.OverlapBoxAll(new Vector2(face.transform.position.x, face.transform.position.y), face.size, decorLayer);
+            cl = Physics2D.OverlapBoxAll(new Vector2(face.transform.position.x, face.transform.position.y), face.size, decorLayer);
             //Debug.Log(Physics2D.OverlapBoxAll(new Vector2(face.transform.position.x, face.transform.position.y), face.size, decorLayer));
         }
-        return (Physics2D.OverlapBox(new Vector2(face.transform.position.x, face.transform.position.y), face.size,0, decorLayer));
+        return (Physics2D.OverlapBox(new Vector2(face.transform.position.x, face.transform.position.y), face.size, 0, decorLayer));
     }
 
     void blinkAnimation()
