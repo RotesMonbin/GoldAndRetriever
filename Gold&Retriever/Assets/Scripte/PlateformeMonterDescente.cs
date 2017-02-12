@@ -10,42 +10,27 @@ public class PlateformeMonterDescente : MonoBehaviour {
     private float speed;
 
     private bool hautOui;
-    private float xPlatInit;
     private float yPlatInit;
-    private float tempy; 
     // Use this for initialization
     void Start () {
-        xPlatInit = this.transform.position.x;
         yPlatInit = this.transform.position.y;
         hautOui = false;
-        tempy = yPlatInit;
-
     }
 
     // Update is called once per frame
     void Update () {
 
-        float yMax = yPlatInit - distance;
-        float dt = speed * 0.1f; 
-        
-        if (tempy > yMax && !hautOui)
+        float yMax = yPlatInit + distance;
+        if (this.transform.position.y > yMax)
         {
-            tempy -= dt / 2;
-           this.transform.position = new Vector2(xPlatInit, tempy);
+            this.GetComponent<Rigidbody2D>().velocity = new Vector2(0, -speed);
+            hautOui = true;
         }
-        else
-            hautOui = true; 
-        
-
-        if (yPlatInit > tempy && hautOui)
+        if (this.transform.position.y <= yPlatInit || !hautOui)
         {
-            tempy += dt;
-            this.transform.position = new Vector2(xPlatInit, tempy);
+            this.GetComponent<Rigidbody2D>().velocity = new Vector2(0, speed);
+            
         }
-        else
-            hautOui = false;
-        
-
 
     }
 }

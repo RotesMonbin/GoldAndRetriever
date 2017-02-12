@@ -9,7 +9,7 @@ public class ObjectSeller : MonoBehaviour {
     private int price;
 
     [SerializeField]
-    [Header("1 : coeur, 2 : bombe, 3 : ...")]
+    [Header("1 : coeur, 2 : bombe, 3 : arc, 4 : ...")]
     private int numeroObject;
 
     private ManagerJoueur managerJoueur;
@@ -52,6 +52,12 @@ public class ObjectSeller : MonoBehaviour {
         {
             managerJoueur.cashDown(price, J1actif);
             managerJoueur.bombeUp(1, J1actif); 
+            Destroy(this.gameObject);
+        }
+        if (numeroObject == 3)
+        {
+            managerJoueur.cashDown(price, J1actif);
+            managerJoueur.changementItemUtile(objectUtile.arc, J1actif);
             Destroy(this.gameObject);
         }
 
