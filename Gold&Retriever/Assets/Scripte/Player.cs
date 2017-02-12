@@ -702,12 +702,6 @@ public class Player : MonoBehaviour
 
     bool isFacingWall()
     {
-        Collider2D[] cl;
-        if (J1actif)
-        {
-            cl = Physics2D.OverlapBoxAll(new Vector2(face.transform.position.x, face.transform.position.y), face.size, decorLayer);
-            //Debug.Log(Physics2D.OverlapBoxAll(new Vector2(face.transform.position.x, face.transform.position.y), face.size, decorLayer));
-        }
         return (Physics2D.OverlapBox(new Vector2(face.transform.position.x, face.transform.position.y), face.size, 0, decorLayer));
     }
 
