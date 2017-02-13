@@ -1,0 +1,43 @@
+Initialize engine version: 5.5.0f3 (38b4efef76f0)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: NVIDIA GeForce GTX 560 Ti (ID=0x1200)
+    Vendor:   NVIDIA
+    VRAM:     979 MB
+    Driver:   10.18.13.5445
+Begin MonoManager ReloadAssembly
+Platform assembly: C:\Users\nsaul\Desktop\GoldAndRetriver\GoldAndRetriever\Gold&Retriever\lol_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\nsaul\Desktop\GoldAndRetriver\GoldAndRetriever\Gold&Retriever\lol_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\nsaul\Desktop\GoldAndRetriver\GoldAndRetriever\Gold&Retriever\lol_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\nsaul\Desktop\GoldAndRetriver\GoldAndRetriever\Gold&Retriever\lol_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\nsaul\Desktop\GoldAndRetriver\GoldAndRetriever\Gold&Retriever\lol_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Users\nsaul\Desktop\GoldAndRetriver\GoldAndRetriever\Gold&Retriever\lol_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: C:\Users\nsaul\Desktop\GoldAndRetriver\GoldAndRetriever\Gold&Retriever\lol_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading C:\Users\nsaul\Desktop\GoldAndRetriver\GoldAndRetriever\Gold&Retriever\lol_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+Platform assembly: C:\Users\nsaul\Desktop\GoldAndRetriver\GoldAndRetriever\Gold&Retriever\lol_Data\Managed\UnityEngine.PlaymodeTestsRunner.dll (this message is harmless)
+Loading C:\Users\nsaul\Desktop\GoldAndRetriver\GoldAndRetriever\Gold&Retriever\lol_Data\Managed\UnityEngine.PlaymodeTestsRunner.dll into Unity Child Domain
+- Completed reload, in  0.022 seconds
+Platform assembly: C:\Users\nsaul\Desktop\GoldAndRetriver\GoldAndRetriever\Gold&Retriever\lol_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: C:\Users\nsaul\Desktop\GoldAndRetriver\GoldAndRetriever\Gold&Retriever\lol_Data\Managed\System.dll (this message is harmless)
+desktop: 1920x1200 59Hz; virtual: 3600x1200 at -1920,-150
+<RI> Initializing input.
+XInput1_3.dll not found. Trying XInput9_1_0.dll instead...
+<RI> Input initialized.
+<RI> Initialized touch support.
+UnloadTime: 1.969053 ms
+Unloading 4 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.239713 ms
+
+Unloading 3 unused Assets to reduce memory usage. Loaded Objects now: 2882.
+Total: 0.431961 ms (FindLiveObjects: 0.112244 ms CreateObjectMapping: 0.032538 ms MarkObjects: 0.281208 ms  DeleteObjects: 0.005671 ms)
+
+Unloading 4 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 6.024479 ms
+
+Unloading 13 unused Assets to reduce memory usage. Loaded Objects now: 60028.
+Total: 21.440470 ms (FindLiveObjects: 1.462460 ms CreateObjectMapping: 4.948903 ms MarkObjects: 14.885816 ms  DeleteObjects: 0.142693 ms)
+
+Setting up 2 worker threads for Enlighten.
+  Thread -> id: 594 -> priority: 1 
+  Thread -> id: 1784 -> priority: 1 
