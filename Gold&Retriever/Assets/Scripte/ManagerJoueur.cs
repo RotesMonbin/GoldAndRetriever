@@ -285,7 +285,7 @@ public class ManagerJoueur : MonoBehaviour
 
         if (Joueur1 == null)
         {
-            cashJ1 = 200; 
+            cashJ2 = 200; 
             Joueur1 = GameObject.Find("P1----------------------------------");
             Joueur2 = GameObject.Find("P2-----------------------------------");
 

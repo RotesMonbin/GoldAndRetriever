@@ -120,8 +120,8 @@ public class ManagerNiveau : MonoBehaviour {
         temp.x = direction;
 
 
-       /* if (direction == -1 && milCoinFin == 0)
-            position.x += 40;*/
+        if (direction == -1 && milCoinFin == 0)
+            position.x += 40;
 
         if (direction == -1 && milCoinFin == 1)
             position.x += 20;
