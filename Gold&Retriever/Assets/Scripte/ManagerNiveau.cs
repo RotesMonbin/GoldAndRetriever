@@ -82,7 +82,7 @@ public class ManagerNiveau : MonoBehaviour {
                 {
                     indiceLigne = indiceLigne - 40;
                     int r = Random.Range(0, TabMilieu.Count);
-                    InstanciateGameObjRandom(TabMilieu[r], new Vector3(indiceLigne, indiceColonne, 0), -sens, 0);
+                    InstanciateGameObjRandom(TabMilieu[r], new Vector3(indiceLigne, indiceColonne, 0), sens, 0);
                     
                 }
 

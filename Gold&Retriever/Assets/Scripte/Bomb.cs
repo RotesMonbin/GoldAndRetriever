@@ -10,6 +10,9 @@ public class Bomb : MonoBehaviour {
     public GameObject blowRadius;
     public LayerMask decor;
 
+    [SerializeField]
+    public GameObject bombeParticule; 
+
     private float timer=0;
 
 	// Use this for initialization
@@ -29,6 +32,9 @@ public class Bomb : MonoBehaviour {
         if (timer > timeToBlow)
         {
             anime.SetBool("blow", true);
+            GameObject particulego = Instantiate(bombeParticule);
+            Vector2 temp = this.transform.position;
+            particulego.transform.position = temp;
             Blow();
         }
 
