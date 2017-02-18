@@ -444,7 +444,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1417932993745482}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -38.2, y: 23.9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4378541227381478}
@@ -923,7 +923,7 @@ MonoBehaviour:
   toucheAction: 108
   manetteSaut: AButtonJ1
   manetteBombe: BButtonJ1
-  manetteAction: XActionJ1
+  manetteAction: XButtonJ1
   manetteAxeX: AxisXJ1
   manetteAxeY: AxisYJ1
   triggAxis: TriggAxisJ1

@@ -92,9 +92,10 @@ public class PlayerNoRb : MonoBehaviour
         speed = new Vector2(0, 0);
         managerJoueur = GameObject.Find("ManagerJoueur").GetComponent<ManagerJoueur>();
 
-        managerJoueur.chargementDonnee();
         listRope = new List<GameObject>();
         objectsLaunched = new List<GameObject>();
+
+        managerJoueur.chargementDonnee();
 
     }
 
