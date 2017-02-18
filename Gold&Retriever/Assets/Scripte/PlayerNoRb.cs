@@ -1,10 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-public class Player : MonoBehaviour
+public class PlayerNoRb : MonoBehaviour
 {
+
 
     public float acceleration;
     public float walkingMaxSpeed;
@@ -13,9 +13,9 @@ public class Player : MonoBehaviour
     public float throwPower;
     private float jumpOnEnemy = 20;
 
-    public Rigidbody2D rb;
     public BoxCollider2D feet;
     public BoxCollider2D face;
+    public BoxCollider2D head;
     public BoxCollider2D boxCollider;
     public float gravityScale;
 
@@ -41,6 +41,8 @@ public class Player : MonoBehaviour
     private bool holdSomething = false;
     private GameObject heldObject;
 
+    private Vector2 speed;
+
     // Touche clavier :
     public bool J1actif;
 
@@ -59,7 +61,7 @@ public class Player : MonoBehaviour
     public string manetteAxeY;
     public string triggAxis;
 
-    internal bool dontMove = false;
+    private bool dontMove = false;
 
     private float invincible = 0;
     private int lastBlinkNumber;
@@ -87,6 +89,7 @@ public class Player : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        speed = new Vector2(0, 0);
         managerJoueur = GameObject.Find("ManagerJoueur").GetComponent<ManagerJoueur>();
 
         managerJoueur.chargementDonnee();
@@ -115,8 +118,8 @@ public class Player : MonoBehaviour
                 this.dontMove = true;
             }
         }
-        animator.SetBool("Walk", rb.velocity.x != 0.0f); // walk
-        animator.SetBool("Jump", rb.velocity.y != 0.0f); // walk
+        animator.SetBool("Walk", speed.x != 0.0f); // walk
+        animator.SetBool("Jump", speed.y != 0.0f); // Jump
 
         // DEPLACE OBJET TENU
         if (holdSomething)
@@ -137,10 +140,19 @@ public class Player : MonoBehaviour
         {
             sprite.color = new Color(1, 1, 1, 1);
         }
+
+
     }
 
     private void FixedUpdate()
     {
+        Gravity();
+        HeadColision();
+        FaceColision();
+
+
+        UpdatePosition();
+
         DirectionControl();
         SautControl();
         touchLadder();
@@ -152,8 +164,72 @@ public class Player : MonoBehaviour
         enemieColision();
         DamageOnFall();
         GameOver();
-        isTouchinGroundRayCast();
     }
+    #region RB manager
+
+    private void UpdatePosition()
+    {
+        this.transform.Translate(speed * Time.deltaTime);
+    }
+
+    private bool AlreadyOnGround = false;
+    private void Gravity()
+    {
+        if (!isTouchingGround())
+        {
+            speed -= new Vector2(0, 9.81f * gravityScale * Time.deltaTime);
+            AlreadyOnGround = false;
+        }
+        else if (!AlreadyOnGround)
+        {
+            speed.y = 0;
+            Collider2D coll = Physics2D.OverlapBox(new Vector2(feet.transform.position.x, feet.transform.position.y), feet.size, 0, decorLayer);
+            Vector3 closestPoint=coll.bounds.ClosestPoint(this.transform.position);
+            float dist = closestPoint.y - (feet.transform.position.y - feet.size.y/2);
+            if (dist > 0)
+            {
+                this.transform.Translate(0, dist, 0);
+            }
+            AlreadyOnGround = true;
+        }
+    }
+
+    private bool AlreadyFacingWall = false;
+    private void FaceColision()
+    {
+        if (!isFacingWall())
+        {
+            AlreadyFacingWall = false;
+        }
+        else if (!AlreadyFacingWall)
+        {
+            speed.x = 0;
+            AlreadyFacingWall = true;
+        }
+    }
+
+    private bool AlreadyTouchingRoof = false;
+    private void HeadColision()
+    {
+        if (!isTouchingRoof())
+        {
+            AlreadyTouchingRoof = false;
+        }
+        else if (!AlreadyTouchingRoof)
+        {
+            speed.y = 0;
+            Collider2D coll = Physics2D.OverlapBox(new Vector2(head.transform.position.x, head.transform.position.y), head.size, 0, decorLayer);
+            Vector3 closestPoint = coll.bounds.ClosestPoint(this.transform.position);
+            float dist = (head.transform.position.y - head.size.y / 2) - closestPoint.y;
+            if (dist > 0)
+            {
+                this.transform.Translate(0, -dist, 0);
+            }
+            AlreadyTouchingRoof = true;
+        }
+    }
+
+    #endregion
 
     #region ToucheBomb
     void BombControl()
@@ -190,8 +266,8 @@ public class Player : MonoBehaviour
         // PIED SAUT 
         if (!dontMove)
         {
-            if ((Input.GetKey(toucheSaut) || Input.GetButton(manetteSaut))&& isTouchingGround())
-                rb.velocity = new Vector2(rb.velocity.x, jumpPower);
+            if ((Input.GetKey(toucheSaut) || Input.GetButton(manetteSaut)) && isTouchingGround())
+                speed = new Vector2(speed.x, jumpPower);
 
             if (isTouchingGround())
                 animator.SetBool("Jump", false);
@@ -203,6 +279,7 @@ public class Player : MonoBehaviour
     #endregion
 
     #region TouchesDirection
+
 
     void DirectionControl()
     {
@@ -216,11 +293,12 @@ public class Player : MonoBehaviour
                 this.transform.localScale = temp;
                 if (!isFacingWall())
                 {
-                    if ((manetteRT() && rb.velocity.x > -runningMaxSpeed) || rb.velocity.x > -walkingMaxSpeed)
+                    if ((manetteRT() && speed.x > -runningMaxSpeed) || speed.x > -walkingMaxSpeed)
                     {
-                        rb.velocity -= new Vector2(acceleration, 0);
+                        speed -= new Vector2(acceleration * Time.deltaTime, 0);
                     }
                 }
+
 
             }
             else if ((Input.GetKey(toucheDroite) || manetteRight()))
@@ -229,33 +307,34 @@ public class Player : MonoBehaviour
                 this.transform.localScale = temp;
                 if (!isFacingWall())
                 {
-                    if ((manetteRT() && rb.velocity.x < runningMaxSpeed) || rb.velocity.x < walkingMaxSpeed)
+                    if ((manetteRT() && speed.x < runningMaxSpeed) || speed.x < walkingMaxSpeed)
                     {
-                        rb.velocity += new Vector2(acceleration, 0);
+                        speed += new Vector2(acceleration * Time.deltaTime, 0);
                     }
 
                 }
+
             }
             else
             {
-                if (isTouchingGround() && rb.velocity.x != 0)
+                if (isTouchingGround() && speed.x != 0)
                 {
-                    if (rb.velocity.x - acceleration <= 0 || rb.velocity.x + acceleration >= 0)
+                    if ((speed.x > 0 && speed.x - acceleration * Time.deltaTime <= 0) || (speed.x < 0 && speed.x + acceleration * Time.deltaTime >= 0))
                     {
-                        rb.velocity = new Vector2(0, rb.velocity.y);
+                        speed = new Vector2(0, speed.y);
                     }
-                    else if (rb.velocity.x > 0)
+                    else if (speed.x > 0)
                     {
-                        rb.velocity += new Vector2(-acceleration, 0);
+                        speed += new Vector2(-acceleration * Time.deltaTime, 0);
                     }
                     else
                     {
-                        rb.velocity += new Vector2(acceleration, 0);
+                        speed += new Vector2(acceleration * Time.deltaTime, 0);
                     }
                 }
                 else
                 {
-                    rb.velocity -= new Vector2(rb.velocity.x / 20, 0);
+                    speed -= new Vector2(speed.x / 20, 0);
                 }
             }
         }
@@ -275,7 +354,7 @@ public class Player : MonoBehaviour
                     if (isTouchingGround())
                     {
                         ropeAction();
-                        rb.velocity = new Vector2(0, 0); // a voir si enlever ( fréinage direct) 
+                        speed = new Vector2(0, 0); // a voir si enlever ( fréinage direct) 
                         dontMove = true;
                     }
                 }
@@ -373,8 +452,6 @@ public class Player : MonoBehaviour
     }
     #endregion
 
-
-
     #region Damage
     void enemieColision()
     {
@@ -399,7 +476,7 @@ public class Player : MonoBehaviour
                 {
                     if (invincible < 1.5)
                     {
-                        this.rb.velocity = new Vector2(this.rb.velocity.x, jumpOnEnemy);
+                        speed = new Vector2(speed.x, jumpOnEnemy);
                         c.GetComponent<Worms>().dead();
                     }
                 }
@@ -418,7 +495,7 @@ public class Player : MonoBehaviour
                 {
                     if (invincible < 1.5)
                     {
-                        this.rb.velocity = new Vector2(this.rb.velocity.x, jumpOnEnemy);
+                        speed = new Vector2(speed.x, jumpOnEnemy);
                         c.GetComponent<Frog>().dead();
                     }
                 }
@@ -428,7 +505,7 @@ public class Player : MonoBehaviour
     void SpikeColision()
     {
         if (Physics2D.OverlapBox(new Vector2(feet.transform.position.x, feet.transform.position.y)
-            , feet.size, 0, spikeLayer) && rb.velocity.y < -0.5)
+            , feet.size, 0, spikeLayer) && speed.y < -0.5)
         {
             killPlayer();
         }
@@ -442,7 +519,7 @@ public class Player : MonoBehaviour
 
     void takeDamage(int direction)
     {
-        this.rb.velocity += new Vector2(direction * 4, 4);
+        speed += new Vector2(direction * 4, 4);
         managerJoueur.lifeDown(1, J1actif);
         lastBlinkNumber = (int)(5 * invincible);
     }
@@ -519,7 +596,7 @@ public class Player : MonoBehaviour
 
     private void DamageOnFall()
     {
-        if (rb.velocity.y < -speedFallDamage)
+        if (speed.y < -speedFallDamage)
         {
             damageNextTimeOnGround = true;
         }
@@ -673,15 +750,15 @@ public class Player : MonoBehaviour
         if (onLadder)
         {
             if (Input.GetKey(toucheHaut) || manetteUp())
-                rb.velocity = new Vector2(0, acceleration * climbSpeed);
+                speed = new Vector2(0, acceleration * climbSpeed);
             else if (Input.GetKey(toucheAccroupi) || manetteDown())
-                rb.velocity = new Vector2(0, -acceleration * climbSpeed);
+                speed = new Vector2(0, -acceleration * climbSpeed);
 
-            rb.gravityScale = 0;
+            //rb.gravityScale = 0; Gravity scale ------------------------------------------------------------------------------
         }
         else
         {
-            rb.gravityScale = gravityScale;
+            //rb.gravityScale = gravityScale; Gravity scale ------------------------------------------------------------------------------
             animator.SetBool("Climb", false);
         }
 
@@ -703,16 +780,22 @@ public class Player : MonoBehaviour
 
     bool isTouchinGroundRayCast()
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, -Vector2.up,5,decorLayer);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, -Vector2.up, 5, decorLayer);
         this.transform.Translate(0, 1f, 0);
-        Debug.DrawRay(transform.position, -Vector2.up,Color.black);
-        return hit.collider!=null;
+        Debug.DrawRay(transform.position, -Vector2.up, Color.black);
+        return hit.collider != null;
     }
+
 
 
     bool isFacingWall()
     {
         return (Physics2D.OverlapBox(new Vector2(face.transform.position.x, face.transform.position.y), face.size, 0, decorLayer));
+    }
+
+    bool isTouchingRoof()
+    {
+        return (Physics2D.OverlapBox(new Vector2(head.transform.position.x, head.transform.position.y), head.size, 0, decorLayer));
     }
 
     void blinkAnimation()
@@ -747,4 +830,3 @@ public class Player : MonoBehaviour
     #endregion
 
 }
-
