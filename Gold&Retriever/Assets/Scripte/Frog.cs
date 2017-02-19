@@ -17,13 +17,15 @@ public class Frog : MonoBehaviour
     void Start()
     {
         Transform parent = this.gameObject.transform.parent;
-       direction = -(int)parent.localScale.x;
-        /*if (parent)
+        if (parent)
         {
-            this.transform.localScale = new Vector3(this.transform.localScale.x * (parent.localScale.x / Mathf.Abs(parent.localScale.x))
-                                                    , this.transform.localScale.y
-                                                    , this.transform.localScale.z);
-        }*/
+            direction = -(int)parent.localScale.x;
+        }
+        else
+        {
+            direction = -1;
+        }
+
         timer = timeToJump;
     }
 

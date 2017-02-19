@@ -17,8 +17,15 @@ public class Worms : MonoBehaviour {
     // Use this for initialization
     void Start () {
         Transform parent = this.gameObject.transform.parent;
+        if (parent)
+        {
+            direction = -(int)parent.localScale.x;
+        }
+        else
+        {
+            direction = -1;
+        }
 
-        direction =-(int)parent.localScale.x;
     }
 	
 	// Update is called once per frame
