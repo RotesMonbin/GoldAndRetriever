@@ -19,6 +19,8 @@ public class PlayerNoRb : MonoBehaviour
     public BoxCollider2D boxCollider;
     public float gravityScale;
 
+    private float currentGravityScale;
+
 
     public LayerMask decorLayer;
     public LayerMask enemieLayer;
@@ -90,6 +92,7 @@ public class PlayerNoRb : MonoBehaviour
     void Start()
     {
         speed = new Vector2(0, 0);
+        currentGravityScale = gravityScale;
         managerJoueur = GameObject.Find("ManagerJoueur").GetComponent<ManagerJoueur>();
 
         listRope = new List<GameObject>();
@@ -178,7 +181,7 @@ public class PlayerNoRb : MonoBehaviour
     {
         if (!isTouchingGround())
         {
-            speed -= new Vector2(0, 9.81f * gravityScale * Time.deltaTime);
+            speed -= new Vector2(0, 9.81f * currentGravityScale * Time.deltaTime);
             AlreadyOnGround = false;
         }
         else if (!AlreadyOnGround)
@@ -751,15 +754,15 @@ public class PlayerNoRb : MonoBehaviour
         if (onLadder)
         {
             if (Input.GetKey(toucheHaut) || manetteUp())
-                speed = new Vector2(0, acceleration * climbSpeed);
+                speed = new Vector2(0, climbSpeed);
             else if (Input.GetKey(toucheAccroupi) || manetteDown())
-                speed = new Vector2(0, -acceleration * climbSpeed);
+                speed = new Vector2(0, -climbSpeed);
 
-            //rb.gravityScale = 0; Gravity scale ------------------------------------------------------------------------------
-        }
+            currentGravityScale = 0;
+        }   
         else
         {
-            //rb.gravityScale = gravityScale; Gravity scale ------------------------------------------------------------------------------
+            currentGravityScale = gravityScale;
             animator.SetBool("Climb", false);
         }
 
