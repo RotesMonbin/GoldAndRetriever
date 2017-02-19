@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerNoRb : MonoBehaviour
 {
-
+    private float maxFallingSpeed = -50;
 
     public float acceleration;
     public float walkingMaxSpeed;
@@ -150,10 +150,11 @@ public class PlayerNoRb : MonoBehaviour
 
     private void FixedUpdate()
     {
+        FaceColision();
         Gravity();
         HeadColision();
-        FaceColision();
 
+        Debug.Log(speed.y);
 
         UpdatePosition();
 
@@ -181,15 +182,18 @@ public class PlayerNoRb : MonoBehaviour
     {
         if (!isTouchingGround())
         {
-            speed -= new Vector2(0, 9.81f * currentGravityScale * Time.deltaTime);
+            if (speed.y > maxFallingSpeed)
+            {
+                speed -= new Vector2(0, 9.81f * currentGravityScale * Time.deltaTime);
+            }
             AlreadyOnGround = false;
         }
         else if (!AlreadyOnGround)
         {
             speed.y = 0;
             Collider2D coll = Physics2D.OverlapBox(new Vector2(feet.transform.position.x, feet.transform.position.y), feet.size, 0, decorLayer);
-            Vector3 closestPoint=coll.bounds.ClosestPoint(this.transform.position);
-            float dist = closestPoint.y - (feet.transform.position.y - feet.size.y/2);
+            Vector3 closestPoint = coll.bounds.ClosestPoint(this.transform.position);
+            float dist = closestPoint.y - (feet.transform.position.y - feet.size.y / 2);
             if (dist > 0)
             {
                 this.transform.Translate(0, dist, 0);
@@ -207,6 +211,13 @@ public class PlayerNoRb : MonoBehaviour
         }
         else if (!AlreadyFacingWall)
         {
+            Collider2D coll = Physics2D.OverlapBox(new Vector2(face.transform.position.x, face.transform.position.y), face.size, 0, decorLayer);
+            Vector3 closestPoint = coll.bounds.ClosestPoint(this.transform.position);
+            float dist = closestPoint.x - (face.transform.position.x - face.size.x / 2);
+            if ((speed.x > 0 && dist < 0) || (speed.x < 0 && dist > 0))
+            {
+                this.transform.Translate(dist, 0, 0);
+            }
             speed.x = 0;
             AlreadyFacingWall = true;
         }
@@ -215,11 +226,11 @@ public class PlayerNoRb : MonoBehaviour
     private bool AlreadyTouchingRoof = false;
     private void HeadColision()
     {
-        if (!isTouchingRoof())
+        if (!isTouchingRoof() && speed.y>0)
         {
             AlreadyTouchingRoof = false;
         }
-        else if (!AlreadyTouchingRoof)
+        else if (!AlreadyTouchingRoof && speed.y > 0)
         {
             speed.y = 0;
             Collider2D coll = Physics2D.OverlapBox(new Vector2(head.transform.position.x, head.transform.position.y), head.size, 0, decorLayer);
@@ -754,12 +765,23 @@ public class PlayerNoRb : MonoBehaviour
         if (onLadder)
         {
             if (Input.GetKey(toucheHaut) || manetteUp())
-                speed = new Vector2(0, climbSpeed);
-            else if (Input.GetKey(toucheAccroupi) || manetteDown())
-                speed = new Vector2(0, -climbSpeed);
+            {
+                if (isTouchingRoof())
+                {
+                    speed = new Vector2(0, 0);
+                }
+                else
+                {
+                    speed = new Vector2(0, climbSpeed);
+                }
 
+            }
+            else if (Input.GetKey(toucheAccroupi) || manetteDown())
+            {
+                speed = new Vector2(0, -climbSpeed);
+            }
             currentGravityScale = 0;
-        }   
+        }
         else
         {
             currentGravityScale = gravityScale;
