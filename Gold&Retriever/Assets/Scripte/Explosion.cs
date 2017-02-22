@@ -17,6 +17,8 @@ public class Explosion : MonoBehaviour
         Flash.Play();
         for (int i = 0; i < Debris.Length; i++)
             Debris[i].Play();
+
+        Destroy(this.gameObject); 
     }
 }
 

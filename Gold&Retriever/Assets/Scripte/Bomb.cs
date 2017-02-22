@@ -34,6 +34,7 @@ public class Bomb : MonoBehaviour {
             anime.SetBool("blow", true);
             GameObject particulego = Instantiate(bombeParticule);
             Vector2 temp = this.transform.position;
+            particulego.transform.parent = this.transform;
             particulego.transform.position = temp;
             Blow();
         }
