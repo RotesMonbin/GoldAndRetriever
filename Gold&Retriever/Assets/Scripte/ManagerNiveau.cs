@@ -8,6 +8,10 @@ public class ManagerNiveau : MonoBehaviour {
     // chunk Coin = 20 largeur , 40 hauteur 
     private int HAUTEURMAX = -20;
     private int LARGEURMAX = 40;
+
+    // Tableau de prefable annexe de map : 
+    public List<GameObject> TabAnnexe;
+
     // Tableau de prefable Milieu de map : 
     public List<GameObject> TabMilieu;
 
@@ -44,6 +48,8 @@ public class ManagerNiveau : MonoBehaviour {
         int indiceLigne = 40;
         int indiceColonne = 1;
 
+        int pourcentageChanceSpecialChunk = 20; 
+
         InstanciateGameObjRandom(TabDebGrotte , new Vector3(0,1,0) , 1 , 0);
         
         for (int i = 1;  i <=  rColonne; i++)
@@ -73,6 +79,10 @@ public class ManagerNiveau : MonoBehaviour {
                 int rCoin = Random.Range(0, TabCoin.Count);
                 InstanciateGameObjRandom(TabCoin[rCoin], new Vector3(indiceLigne, indiceColonne, 0), -sens, 1);
 
+                // Chunk Special : 
+                chunkAnnexe(indiceLigne,indiceColonne,sens,pourcentageChanceSpecialChunk,0); 
+
+
             }
             else
             {
@@ -88,7 +98,10 @@ public class ManagerNiveau : MonoBehaviour {
 
                 int rCoin = Random.Range(0, TabCoin.Count);
                 InstanciateGameObjRandom(TabCoin[rCoin], new Vector3(indiceLigne-20, indiceColonne, 0), -sens, 1);
-                
+
+                // Chunk Special : 
+                chunkAnnexe(indiceLigne, indiceColonne, sens, pourcentageChanceSpecialChunk,1);
+
             }
             sens = sens == 1 ? -1 : 1;
             indiceColonne = indiceColonne - 21;
@@ -142,5 +155,37 @@ public class ManagerNiveau : MonoBehaviour {
         gameobjTemp.transform.parent = laveGame.transform; 
         gameobjTemp.transform.position = position;
 
+    }
+
+    // Chunk Annexe 
+    void chunkAnnexe(float indiceLigne , float indiceColonne, int sens, int pourcentageChanceSpecialChunk, int sensAdaptation)
+    {
+        float modifLine = 1; 
+        int chanceSpecialChunk = Random.Range(0, 100);
+        if (sens == -1)
+            modifLine = -2;
+
+        if (chanceSpecialChunk < pourcentageChanceSpecialChunk)
+        {
+            int specialeChunk = Random.Range(1, TabAnnexe.Count);
+            InstanciateGameObjRandom(TabAnnexe[specialeChunk], new Vector3(indiceLigne + 20 * modifLine, indiceColonne, 0), sens, sensAdaptation);
+            InstanciateGameObjRandom(TabAnnexe[0], new Vector3(indiceLigne + 20 * modifLine, indiceColonne - 21, 0), sens, sensAdaptation);
+        }
+        else
+        {
+            InstanciateGameObjRandom(TabAnnexe[0], new Vector3(indiceLigne + 20 * modifLine, indiceColonne, 0), sens, sensAdaptation);
+
+            chanceSpecialChunk = Random.Range(0, 100);
+            if (chanceSpecialChunk < pourcentageChanceSpecialChunk)
+            {
+                int specialeChunk = Random.Range(1, TabAnnexe.Count);
+                InstanciateGameObjRandom(TabAnnexe[specialeChunk], new Vector3(indiceLigne + 20 * modifLine, indiceColonne - 21, 0), sens, sensAdaptation);
+            }
+            else
+            {
+                InstanciateGameObjRandom(TabAnnexe[0], new Vector3(indiceLigne + 20 * modifLine, indiceColonne - 21, 0), sens, sensAdaptation);
+                chanceSpecialChunk = Random.Range(0, 100);
+            }
+        }
     }
 }

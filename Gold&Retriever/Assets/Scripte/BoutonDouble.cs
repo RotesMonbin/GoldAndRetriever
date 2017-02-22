@@ -17,6 +17,12 @@ public class BoutonDouble : MonoBehaviour {
 
     private Transform traBase;
 
+    [SerializeField]
+    private List<GameObject> Destroy;
+
+    [SerializeField]
+    private float timeActif = 0.5f;
+
     // Use this for initialization
     void Start () {
         traBase = porte.transform; 
@@ -54,14 +60,16 @@ public class BoutonDouble : MonoBehaviour {
     void testles2()
     {
 
+
         if ((!actif1 || !actif2) && porte.transform.position != traBase.position)
         {
-            porte.transform.position = Vector2.Lerp(traFini.position, traBase.position, Time.deltaTime * 0.5f);
+
+            porte.transform.position = Vector2.Lerp(traFini.position, traBase.position, Time.deltaTime * timeActif);
         }
 
         if (actif1 && actif2)
         {
-            porte.transform.position = Vector2.Lerp(traBase.position, traFini.position, Time.deltaTime * 0.5f); 
+            porte.transform.position = Vector2.Lerp(traBase.position, traFini.position, Time.deltaTime * timeActif); 
         }
     }
 }
