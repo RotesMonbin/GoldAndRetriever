@@ -16,6 +16,8 @@ public class PlayerNoRb : MonoBehaviour
     public BoxCollider2D feet;
     public BoxCollider2D face;
     public BoxCollider2D head;
+    public BoxCollider2D back;
+
     public BoxCollider2D boxCollider;
     public float gravityScale;
 
@@ -43,7 +45,7 @@ public class PlayerNoRb : MonoBehaviour
     private bool holdSomething = false;
     private GameObject heldObject;
 
-    private Vector2 speed;
+    internal Vector2 speed;
 
     // Touche clavier :
     public bool J1actif;
@@ -145,16 +147,16 @@ public class PlayerNoRb : MonoBehaviour
             sprite.color = new Color(1, 1, 1, 1);
         }
 
+        actionOn();
 
     }
 
     private void FixedUpdate()
     {
-        FaceColision();
         Gravity();
+        FaceColision();
         HeadColision();
-
-        Debug.Log(speed.y);
+        BackColision();
 
         UpdatePosition();
 
@@ -165,7 +167,6 @@ public class PlayerNoRb : MonoBehaviour
         SpikeColision();
         DamageOnThrow();
         CleanObjectLaunched();
-        actionOn();
         enemieColision();
         DamageOnFall();
         GameOver();
@@ -203,6 +204,17 @@ public class PlayerNoRb : MonoBehaviour
     }
 
     private bool AlreadyFacingWall = false;
+
+    private void BackColision()
+    {
+        if (direction() * speed.x < 0)
+        {
+            if (isbackOnWall())
+            {
+                speed.x = 0;
+            }
+        }
+    }
     private void FaceColision()
     {
         if (!isFacingWall())
@@ -226,7 +238,7 @@ public class PlayerNoRb : MonoBehaviour
     private bool AlreadyTouchingRoof = false;
     private void HeadColision()
     {
-        if (!isTouchingRoof() && speed.y>0)
+        if (!isTouchingRoof() && speed.y > 0)
         {
             AlreadyTouchingRoof = false;
         }
@@ -332,19 +344,20 @@ public class PlayerNoRb : MonoBehaviour
             }
             else
             {
+                int slowPower = 4;
                 if (isTouchingGround() && speed.x != 0)
                 {
-                    if ((speed.x > 0 && speed.x - acceleration * Time.deltaTime <= 0) || (speed.x < 0 && speed.x + acceleration * Time.deltaTime >= 0))
+                    if ((speed.x > 0 && speed.x - acceleration * slowPower * Time.deltaTime <= 0) || (speed.x < 0 && speed.x + acceleration * slowPower * Time.deltaTime >= 0))
                     {
                         speed = new Vector2(0, speed.y);
                     }
                     else if (speed.x > 0)
                     {
-                        speed += new Vector2(-acceleration * Time.deltaTime, 0);
+                        speed += new Vector2(-acceleration * slowPower * Time.deltaTime, 0);
                     }
                     else
                     {
-                        speed += new Vector2(acceleration * Time.deltaTime, 0);
+                        speed += new Vector2(acceleration * slowPower * Time.deltaTime, 0);
                     }
                 }
                 else
@@ -644,25 +657,32 @@ public class PlayerNoRb : MonoBehaviour
     void pickUpItem()
     {
 
-        if (holdSomething)
+        
+        if (holdSomething) //Throw
         {
             moveHeldObject();
             if (heldObject.tag == "Player")
             {
-                heldObject.GetComponent<Player>().animator.SetBool("Held", false);
-                heldObject.GetComponent<Player>().dontMove = false;
+                heldObject.GetComponent<PlayerNoRb>().animator.SetBool("Held", false);
+                heldObject.GetComponent<PlayerNoRb>().dontMove = false;
+
+                heldObject.GetComponent<PlayerNoRb>().speed = new Vector2(throwPower * this.transform.localScale.x, throwPower / 3);
             }
-            if (heldObject.gameObject.tag == "Box")
+            else
             {
-                heldObject.GetComponent<boxRandom>().held = false;
-                heldObject.GetComponent<boxRandom>().thrown = true;
+                if (heldObject.gameObject.tag == "Box")
+                {
+                    heldObject.GetComponent<boxRandom>().held = false;
+                    heldObject.GetComponent<boxRandom>().thrown = true;
+                }
+                objectsLaunched.Add(heldObject);
+                heldObject.GetComponent<Rigidbody2D>().isKinematic = false;
+                heldObject.GetComponent<Rigidbody2D>().velocity = new Vector2(throwPower * this.transform.localScale.x, throwPower / 3);
             }
-            objectsLaunched.Add(heldObject);
-            heldObject.GetComponent<Rigidbody2D>().isKinematic = false;
-            heldObject.GetComponent<Rigidbody2D>().velocity = new Vector2(throwPower * this.transform.localScale.x, throwPower / 2);
             holdSomething = false;
+
         }
-        else
+        else //Catch
         {
             Collider2D col = null;
             Collider2D[] cols = Physics2D.OverlapBoxAll(boxCollider.transform.position, boxCollider.size, 0);
@@ -680,19 +700,27 @@ public class PlayerNoRb : MonoBehaviour
                 }
                 if (col)
                 {
-                    if (col.gameObject.tag == "Box")
-                    {
-                        col.GetComponent<boxRandom>().held = true;
-                    }
-                    if (col.gameObject.tag == "Player")
-                    {
-                        col.gameObject.GetComponent<Player>().animator.SetBool("Held", true);
-                        col.gameObject.GetComponent<Player>().dontMove = true;
-                    }
                     heldObject = col.gameObject;
-                    heldObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
-                    heldObject.GetComponent<Rigidbody2D>().isKinematic = true;
                     holdSomething = true;
+
+                    if (col.gameObject.tag == "Player") 
+                    {
+                        col.gameObject.GetComponent<PlayerNoRb>().animator.SetBool("Held", true);
+                        col.gameObject.GetComponent<PlayerNoRb>().dontMove = true;
+                        col.gameObject.GetComponent<PlayerNoRb>().speed = new Vector2(0, 0);
+
+                    }
+                    else
+                    {
+                        if (col.gameObject.tag == "Box")
+                        {
+                            col.GetComponent<boxRandom>().held = true;
+                        }
+                        heldObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+                        heldObject.GetComponent<Rigidbody2D>().angularVelocity = 0;
+                        heldObject.GetComponent<Rigidbody2D>().isKinematic = true;
+                    }
+
                 }
             }
         }
@@ -798,6 +826,8 @@ public class PlayerNoRb : MonoBehaviour
         return this.transform.localScale.x;
     }
 
+
+
     // si les pied touch le sol
     bool isTouchingGround()
     {
@@ -813,6 +843,10 @@ public class PlayerNoRb : MonoBehaviour
     }
 
 
+    bool isbackOnWall()
+    {
+        return (Physics2D.OverlapBox(new Vector2(back.transform.position.x, back.transform.position.y), back.size, 0, decorLayer));
+    }
 
     bool isFacingWall()
     {

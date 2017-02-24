@@ -54,8 +54,8 @@ public class Bomb : MonoBehaviour {
             }
             if(c.tag == "Player")
             {
-                c.GetComponent<Rigidbody2D>().velocity = new Vector2((c.transform.position.x - this.transform.position.x)*20, (c.transform.position.y - this.transform.position.y)*20);
-                c.GetComponent<Player>().killPlayer();
+                c.GetComponent<PlayerNoRb>().speed = new Vector2((c.transform.position.x - this.transform.position.x)*20, (c.transform.position.y - this.transform.position.y)*20);
+                c.GetComponent<PlayerNoRb>().killPlayer();
 
             }
             if(c.tag == "Enemie")
