@@ -181,7 +181,8 @@ public class PlayerNoRb : MonoBehaviour
     private bool AlreadyOnGround = false;
     private void Gravity()
     {
-        if (!isTouchingGround())
+        Collider2D coll = isTouchingGround();
+        if (!coll)
         {
             if (speed.y > maxFallingSpeed)
             {
@@ -192,7 +193,6 @@ public class PlayerNoRb : MonoBehaviour
         else if (!AlreadyOnGround)
         {
             speed.y = 0;
-            Collider2D coll = Physics2D.OverlapBox(new Vector2(feet.transform.position.x, feet.transform.position.y), feet.size, 0, decorLayer);
             Vector3 closestPoint = coll.bounds.ClosestPoint(this.transform.position);
             float dist = closestPoint.y - (feet.transform.position.y - feet.size.y / 2);
             if (dist > 0)
@@ -217,13 +217,13 @@ public class PlayerNoRb : MonoBehaviour
     }
     private void FaceColision()
     {
-        if (!isFacingWall())
+        Collider2D coll = isFacingWall();
+        if (!coll)
         {
             AlreadyFacingWall = false;
         }
         else if (!AlreadyFacingWall)
         {
-            Collider2D coll = Physics2D.OverlapBox(new Vector2(face.transform.position.x, face.transform.position.y), face.size, 0, decorLayer);
             Vector3 closestPoint = coll.bounds.ClosestPoint(this.transform.position);
             float dist = closestPoint.x - (face.transform.position.x - face.size.x / 2);
             if ((speed.x > 0 && dist < 0) || (speed.x < 0 && dist > 0))
@@ -238,14 +238,14 @@ public class PlayerNoRb : MonoBehaviour
     private bool AlreadyTouchingRoof = false;
     private void HeadColision()
     {
-        if (!isTouchingRoof() && speed.y > 0)
+        Collider2D coll = isTouchingRoof();
+        if (!coll && speed.y > 0)
         {
             AlreadyTouchingRoof = false;
         }
         else if (!AlreadyTouchingRoof && speed.y > 0)
         {
             speed.y = 0;
-            Collider2D coll = Physics2D.OverlapBox(new Vector2(head.transform.position.x, head.transform.position.y), head.size, 0, decorLayer);
             Vector3 closestPoint = coll.bounds.ClosestPoint(this.transform.position);
             float dist = (head.transform.position.y - head.size.y / 2) - closestPoint.y;
             if (dist > 0)
@@ -344,9 +344,16 @@ public class PlayerNoRb : MonoBehaviour
             }
             else
             {
-                int slowPower = 4;
-                if (isTouchingGround() && speed.x != 0)
+                Collider2D coll = isTouchingGround();
+
+                if (coll && speed.x != 0)
                 {
+                    float slowPower = 4;
+                    if (coll.tag == "Ice")
+                    {
+                        slowPower = 0.3f;
+                    }
+
                     if ((speed.x > 0 && speed.x - acceleration * slowPower * Time.deltaTime <= 0) || (speed.x < 0 && speed.x + acceleration * slowPower * Time.deltaTime >= 0))
                     {
                         speed = new Vector2(0, speed.y);
@@ -829,31 +836,22 @@ public class PlayerNoRb : MonoBehaviour
 
 
     // si les pied touch le sol
-    bool isTouchingGround()
+    Collider2D isTouchingGround()
     {
         return (Physics2D.OverlapBox(new Vector2(feet.transform.position.x, feet.transform.position.y), feet.size, 0, decorLayer));
     }
 
-    bool isTouchinGroundRayCast()
-    {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, -Vector2.up, 5, decorLayer);
-        this.transform.Translate(0, 1f, 0);
-        Debug.DrawRay(transform.position, -Vector2.up, Color.black);
-        return hit.collider != null;
-    }
-
-
-    bool isbackOnWall()
+    Collider2D isbackOnWall()
     {
         return (Physics2D.OverlapBox(new Vector2(back.transform.position.x, back.transform.position.y), back.size, 0, decorLayer));
     }
 
-    bool isFacingWall()
+    Collider2D isFacingWall()
     {
         return (Physics2D.OverlapBox(new Vector2(face.transform.position.x, face.transform.position.y), face.size, 0, decorLayer));
     }
 
-    bool isTouchingRoof()
+    Collider2D isTouchingRoof()
     {
         return (Physics2D.OverlapBox(new Vector2(head.transform.position.x, head.transform.position.y), head.size, 0, decorLayer));
     }

@@ -21,6 +21,7 @@ TagManager:
   - Transition Menu Jeu
   - Transition Jeu Menu
   - objetBuy
+  - Ice
   layers:
   - Default
   - TransparentFX
