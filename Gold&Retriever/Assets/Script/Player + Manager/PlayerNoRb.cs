@@ -535,6 +535,25 @@ public class PlayerNoRb : MonoBehaviour
                     }
                 }
             }
+            if (c.GetComponent<SpiderSimple>())
+            {
+                if (c.transform.position.y > feet.transform.position.y + 0.6)
+                {
+                    if (invincible == 0)
+                    {
+                        invincible = invincibleTime;
+                        takeDamage(c.transform.position.x > feet.transform.position.x ? -1 : 1);
+                    }
+                }
+                else
+                {
+                    if (invincible < 1.5)
+                    {
+                        speed = new Vector2(speed.x, jumpOnEnemy);
+                        c.GetComponent<SpiderSimple>().dead();
+                    }
+                }
+            }
         }
     }
     void SpikeColision()
