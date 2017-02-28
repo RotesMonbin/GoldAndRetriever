@@ -100,7 +100,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1973955357188604}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.177002, y: -0.245, z: 0}
+  m_LocalPosition: {x: -1.41, y: -0.245, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4891011827485060}
@@ -139,7 +139,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1641440548501468}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 139.21, y: 30.83, z: 0}
+  m_LocalPosition: {x: 139.21, y: 31.607, z: 0}
   m_LocalScale: {x: 1, y: -1, z: 1}
   m_Children:
   - {fileID: 4891011827485060}
@@ -181,7 +181,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!58 &58122074787224348
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -195,7 +195,7 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.1
+  m_Radius: 0.2
 --- !u!58 &58317731527556080
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -209,7 +209,7 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.1
+  m_Radius: 0.2
 --- !u!58 &58460166542066906
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -223,7 +223,7 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.1
+  m_Radius: 0.2
 --- !u!61 &61283225548661776
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -250,20 +250,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 50912364043320172}
-  speed: 0.2
-  timeAvantDescent: 1
-  distanceDeNonAgro: 5
+  speed: 10
+  timeAvantDescent: 2
+  distanceDeNonAgro: 10
   decor:
     serializedVersion: 2
     m_Bits: 1048576
   playerMask:
     serializedVersion: 2
     m_Bits: 1073741824
-  head: {fileID: 1973955357188604}
+  head: {fileID: 1974968802332286}
   headBas: {fileID: 1924088857192102}
-  eye: {fileID: 1974968802332286}
+  eye: {fileID: 1973955357188604}
   anime: {fileID: 0}
-  distanceDetection: 10
+  distanceDetection: 20
 --- !u!212 &212922737460508874
 SpriteRenderer:
   m_ObjectHideFlags: 1
