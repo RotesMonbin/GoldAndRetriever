@@ -72,6 +72,7 @@ public class SpiderHardCore : MonoBehaviour
             if (timeAvantDescent < timeTempDescent)
             {
                 rb.gravityScale = 1.2f;
+                this.transform.localScale = new Vector3(1, 1, 1); 
             }
         }
 
@@ -84,6 +85,7 @@ public class SpiderHardCore : MonoBehaviour
         {
             if (rb)
             {
+                
                 rb.velocity = new Vector2(direction * speed, rb.velocity.y);
             }
             wallDetection();
@@ -95,10 +97,11 @@ public class SpiderHardCore : MonoBehaviour
     void edgeDetection()
     {
         if (!Physics2D.OverlapCircle(new Vector2(head.transform.position.x, head.transform.position.y)
-             , 0.1f, decor) &&
+             , 0.2f, decor) &&
             !Physics2D.OverlapCircle(new Vector2(headBas.transform.position.x, headBas.transform.position.y)
-             , 0.1f, decor))
+             , 0.2f, decor))
         {
+          
             if (!falling)
             {
                 changeDirection();
@@ -113,7 +116,7 @@ public class SpiderHardCore : MonoBehaviour
     void wallDetection()
     {
         if (Physics2D.OverlapCircle(new Vector2(eye.transform.position.x, eye.transform.position.y)
-            , 0.1f, decor))
+            , 0.2f, decor))
         {
             changeDirection();
         }
@@ -123,6 +126,7 @@ public class SpiderHardCore : MonoBehaviour
     {
         if (!modRage)
         {
+            
             this.transform.localScale = new Vector3(-this.transform.localScale.x, this.transform.localScale.y,
             this.transform.localScale.z);
             direction = -direction;
@@ -133,11 +137,11 @@ public class SpiderHardCore : MonoBehaviour
     #region detection
     void detectionDessus()
     {
-
+      
         Vector2 point = eye.transform.position;
         float xPoint = point.x;
         float yPoint = point.y + 0.7f * -1;
-
+       
         RaycastHit2D hit = Physics2D.Raycast(new Vector2(xPoint, yPoint), Vector2.down, distanceDetection, playerMask);
 
         if (hit)
@@ -166,4 +170,6 @@ public class SpiderHardCore : MonoBehaviour
         }
     }
     #endregion  
+
+    
 }
