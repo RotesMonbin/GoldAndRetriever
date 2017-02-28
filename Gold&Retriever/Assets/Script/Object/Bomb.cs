@@ -31,10 +31,8 @@ public class Bomb : MonoBehaviour {
 
         if (timer > timeToBlow)
         {
-            anime.SetBool("blow", true);
             GameObject particulego = Instantiate(bombeParticule);
             Vector2 temp = this.transform.position;
-            particulego.transform.parent = this.transform;
             particulego.transform.position = temp;
             Blow();
         }
@@ -63,11 +61,7 @@ public class Bomb : MonoBehaviour {
                 Destroy(c.gameObject);
             }
         }
-
-    }
-
-    void Destruction()
-    {
         Destroy(this.gameObject);
+
     }
 }
