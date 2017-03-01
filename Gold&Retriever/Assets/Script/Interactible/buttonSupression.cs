@@ -20,7 +20,6 @@ public class buttonSupression : MonoBehaviour {
     // Use this for initialization
     void Start () {
         
-
     }
 	
 	// Update is called once per frame
@@ -74,7 +73,7 @@ public class buttonSupression : MonoBehaviour {
         {
             if (type == 1)
             {
-                animator.SetBool("OFF", true);
+                animator.SetBool("ON", false);
                 if (boutonNum == 0)
                     pereBoutonDouble.setDesActif1();
 

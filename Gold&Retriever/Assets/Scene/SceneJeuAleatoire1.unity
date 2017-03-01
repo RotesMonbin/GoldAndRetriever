@@ -135,7 +135,7 @@ Prefab:
     - target: {fileID: 114158643393723078, guid: d22ad5546d4627645ace3f300e6f50d6,
         type: 2}
       propertyPath: TabMilieu.Array.size
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 114158643393723078, guid: d22ad5546d4627645ace3f300e6f50d6,
         type: 2}
@@ -210,6 +210,12 @@ Prefab:
     - target: {fileID: 114158643393723078, guid: d22ad5546d4627645ace3f300e6f50d6,
         type: 2}
       propertyPath: TabMilieu.Array.data[9]
+      value: 
+      objectReference: {fileID: 1411111025943808, guid: 4f4ca4fbcf45a5145b75b8830858212b,
+        type: 2}
+    - target: {fileID: 114158643393723078, guid: d22ad5546d4627645ace3f300e6f50d6,
+        type: 2}
+      propertyPath: TabMilieu.Array.data[7]
       value: 
       objectReference: {fileID: 1411111025943808, guid: 4f4ca4fbcf45a5145b75b8830858212b,
         type: 2}

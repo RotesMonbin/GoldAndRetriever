@@ -18,7 +18,7 @@ public class BoutonDouble : MonoBehaviour {
     private Transform traBase;
 
     [SerializeField]
-    private List<GameObject> Destroy;
+    private List<GameObject> DestroyS;
 
     [SerializeField]
     private float timeActif = 0.5f;

@@ -14,6 +14,7 @@ public class ManagerNiveau : MonoBehaviour {
 
     // Tableau de prefable Milieu de map : 
     public List<GameObject> TabMilieu;
+    private List<bool> TabMilieuBool;
 
     // Tableau de prefable coin de map : 
     public List<GameObject> TabCoin;
@@ -35,6 +36,11 @@ public class ManagerNiveau : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        TabMilieuBool = new List<bool>();
+
+        initableauBoolTrue(ref TabMilieuBool,TabMilieu.Count);
+     
+
         boolSpecialHaut = false; 
 
         int maxLigne = 4;
@@ -69,7 +75,8 @@ public class ManagerNiveau : MonoBehaviour {
                     }
                     else
                     {
-                        int r = Random.Range(0, TabMilieu.Count);
+                        //int r = Random.Range(0, TabMilieu.Count);
+                        int r = renvoiUnRandomOk(ref TabMilieuBool, TabMilieu.Count);
                         InstanciateGameObjRandom(TabMilieu[r], new Vector3(indiceLigne, indiceColonne, 0), sens, 0);
                         indiceLigne = indiceLigne + 40;
                     }
@@ -91,7 +98,8 @@ public class ManagerNiveau : MonoBehaviour {
                 for (int j = 1; j <= rLigne; j++)
                 {
                     indiceLigne = indiceLigne - 40;
-                    int r = Random.Range(0, TabMilieu.Count);
+                    //int r = Random.Range(0, TabMilieu.Count);
+                    int r = renvoiUnRandomOk(ref TabMilieuBool, TabMilieu.Count);
                     InstanciateGameObjRandom(TabMilieu[r], new Vector3(indiceLigne, indiceColonne, 0), sens, 0);
                     
                 }
@@ -187,5 +195,61 @@ public class ManagerNiveau : MonoBehaviour {
                 chanceSpecialChunk = Random.Range(0, 100);
             }
         }
+    }
+
+    void initableauBoolTrue(ref List<bool> tab,int taille)
+    {
+        for (int i= 0; i < taille ; i++)
+            tab.Add(false);
+    }
+
+    void tableauBoolTrue(ref List<bool> tab)
+    {
+        for (int i = 0; i < tab.Count; i++)
+            tab[i] = false ; 
+    }
+
+
+    int renvoiUnRandomOk(ref List<bool> tab,int taille)
+    {
+       
+        if (toutEstUseTab(ref tab))
+            tableauBoolTrue(ref tab);
+
+        int RandInt = Random.Range(0, taille);
+
+        int fautPasAbuser = 0; 
+        while (fautPasAbuser < 100)
+        {
+            if (tab[RandInt] == false)
+            {
+                tab[RandInt] = true;
+                //afficheTab(tab);
+                return RandInt;
+            }
+            RandInt = Random.Range(0, taille);
+            fautPasAbuser++;
+        }
+        tableauBoolTrue(ref tab); 
+
+
+        return RandInt;
+    }
+
+    // renvoi vrai si tout est use 
+    bool toutEstUseTab(ref List<bool> tab)
+    {
+        for(int i= 0; i <tab.Count; i++)
+        {
+            if (tab[i] == false) // pas use
+                return false; 
+        }
+        return true; 
+    }
+
+    void afficheTab(List<bool> tab)
+    {
+        for (int i = 0; i < tab.Count; i++)
+            Debug.Log(" i : " + i + " tab : " + tab[i].ToString());
     }
 }
