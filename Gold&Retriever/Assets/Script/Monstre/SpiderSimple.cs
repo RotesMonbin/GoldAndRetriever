@@ -18,6 +18,9 @@ public class SpiderSimple : MonoBehaviour
     private bool posbool;
     private Vector3 posInit;
 
+    [SerializeField]
+    private float modeSpider = 1;
+
     private float timeDelta = 0;
 
     [SerializeField]
@@ -41,8 +44,12 @@ public class SpiderSimple : MonoBehaviour
         if (posYActu > posYMax && !posbool)
         {
             this.transform.position = new Vector2(this.transform.position.x, posYActu - dt);
-            web.transform.localScale = new Vector2(web.transform.localScale.x, web.transform.localScale.y + (speed * 0.05f) / 0.5f  );
-            web.transform.position = new Vector2(web.transform.position.x , web.transform.position.y + (speed * 0.025f) / 0.5f );
+            if(modeSpider == 1)
+            {
+                web.transform.localScale = new Vector2(web.transform.localScale.x, web.transform.localScale.y + (speed * 0.05f) / 0.5f);
+                web.transform.position = new Vector2(web.transform.position.x, web.transform.position.y + (speed * 0.025f) / 0.5f);
+            }
+            
             timeActif += dt;
         }
         else
@@ -53,9 +60,14 @@ public class SpiderSimple : MonoBehaviour
 
         if (posbool && posYActu < posInit.y)
         {
+
             this.transform.position = new Vector2(this.transform.position.x, posYActu + dt);
-            web.transform.localScale = new Vector2(web.transform.localScale.x, web.transform.localScale.y - (speed * 0.05f) / 0.5f);
-            web.transform.position = new Vector2(web.transform.position.x, web.transform.position.y - (speed * 0.025f) / 0.5f);
+            if (modeSpider == 1)
+            {
+                web.transform.localScale = new Vector2(web.transform.localScale.x, web.transform.localScale.y - (speed * 0.05f) / 0.5f);
+                web.transform.position = new Vector2(web.transform.position.x, web.transform.position.y - (speed * 0.025f) / 0.5f);
+            }
+
             timeActif += dt;
         }
         else

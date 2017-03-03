@@ -18,7 +18,7 @@ public class SolQuiTombe : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate() {
 
         if (Physics2D.OverlapBox(new Vector2(box.transform.position.x, box.transform.position.y), new Vector2(1, 0.2330246f), 0, player))
         {

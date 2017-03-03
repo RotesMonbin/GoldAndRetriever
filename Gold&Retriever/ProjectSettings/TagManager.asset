@@ -23,6 +23,7 @@ TagManager:
   - objetBuy
   - Ice
   - SolQuiTombe
+  - SolBrulant
   layers:
   - Default
   - TransparentFX

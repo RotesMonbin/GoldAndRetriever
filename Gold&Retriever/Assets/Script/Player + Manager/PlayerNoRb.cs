@@ -90,6 +90,12 @@ public class PlayerNoRb : MonoBehaviour
     public GameObject rope;
     public GameObject ropeDeb;
 
+
+    // Sol : 
+    private float timehitSolBrulant = 0;
+    [SerializeField]
+    private float timehitSolBrulantMaxTime = 2;
+
     // Use this for initialization
     void Start()
     {
@@ -465,7 +471,7 @@ public class PlayerNoRb : MonoBehaviour
         }
         if (coll.gameObject.tag == "Lave")
         {
-            takeDamage(4);
+            killPlayer(); 
         }
 
         if (coll.gameObject.tag == "Transition Menu Jeu")
@@ -484,11 +490,30 @@ public class PlayerNoRb : MonoBehaviour
                 coll.GetComponent<ObjectSeller>().gestion_cash(J1actif);
             }
         }
+
+        if (coll.CompareTag("SolBrulant"))
+        {
+            timehitSolBrulant += Time.deltaTime;
+
+            if (timehitSolBrulant > timehitSolBrulantMaxTime)
+            {
+                timehitSolBrulant = 0;
+                takeDamage(coll.transform.position.x > feet.transform.position.x ? -1 : 1);
+            }
+        }
     }
     #endregion
 
-    #region Damage
-    void enemieColision()
+    void OnTriggerExit2D(Collider2D coll)
+    {
+        if (coll.CompareTag("SolBrulant"))
+        {
+            timehitSolBrulant = 0;
+        }
+    }
+
+        #region Damage
+        void enemieColision()
     {
         if (invincible != 0)
         {
