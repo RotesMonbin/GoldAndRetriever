@@ -6,7 +6,11 @@ using UnityEngine;
 public class chestSpawn : MonoBehaviour
 {
     public List<GameObject> objlist;
-    int randomNbTaper; 
+    int randomNbTaper;
+
+    [SerializeField]
+    private GameObject parent; 
+
     // Use this for initialization
     void Start()
     {
@@ -19,10 +23,12 @@ public class chestSpawn : MonoBehaviour
 
     }
 
-    void OnCollisionEnter2D(Collision2D coll)
+    void OnTriggerEnter2D(Collider2D coll)
     {
+        Debug.Log("test"); 
         if (coll.gameObject.tag == "Player")
         {
+            
             if(randomNbTaper != 0)
             {
                 int r2 = Random.Range(5, 10);
@@ -39,6 +45,7 @@ public class chestSpawn : MonoBehaviour
                 randomNbTaper--;
             }else
             {
+                Destroy(parent.gameObject); 
                 Destroy(this.gameObject);
             }
           
