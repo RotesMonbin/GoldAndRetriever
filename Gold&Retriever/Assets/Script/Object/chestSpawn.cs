@@ -25,7 +25,7 @@ public class chestSpawn : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D coll)
     {
-        Debug.Log("test"); 
+        
         if (coll.gameObject.tag == "Player")
         {
             
