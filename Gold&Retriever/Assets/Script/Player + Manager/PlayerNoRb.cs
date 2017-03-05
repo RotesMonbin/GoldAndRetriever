@@ -96,6 +96,10 @@ public class PlayerNoRb : MonoBehaviour
     [SerializeField]
     private float timehitSolBrulantMaxTime = 2;
 
+    // Fleche
+    [SerializeField]
+    private GameObject javelinOrArrowPrefab; 
+
     // Use this for initialization
     void Start()
     {
@@ -154,6 +158,7 @@ public class PlayerNoRb : MonoBehaviour
         }
 
         actionOn();
+        weapownUsed(); 
 
     }
 
@@ -457,6 +462,7 @@ public class PlayerNoRb : MonoBehaviour
 
     }
 
+
     // Death zone 
     void OnTriggerEnter2D(Collider2D coll)
     {
@@ -502,7 +508,7 @@ public class PlayerNoRb : MonoBehaviour
             }
         }
     }
-    #endregion
+
 
     void OnTriggerExit2D(Collider2D coll)
     {
@@ -511,9 +517,10 @@ public class PlayerNoRb : MonoBehaviour
             timehitSolBrulant = 0;
         }
     }
+    #endregion
 
-        #region Damage
-        void enemieColision()
+    #region Damage
+    void enemieColision()
     {
         if (invincible != 0)
         {
@@ -931,4 +938,23 @@ public class PlayerNoRb : MonoBehaviour
     }
     #endregion
 
+
+    #region Arrow , lance ... touche Y 
+    void weapownUsed()
+    {
+
+        if (Input.GetKeyDown(toucheAction) || Input.GetButtonDown(manetteAction))
+        {
+
+            if(!J1actif)
+            {
+                GameObject arr = Instantiate(javelinOrArrowPrefab);
+                arr.transform.position = this.transform.position; 
+                arr.GetComponent<Arrow>().tirNormal(direction());
+
+            }
+           
+        }
+    }
+    #endregion
 }
