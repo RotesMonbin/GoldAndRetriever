@@ -950,13 +950,17 @@ public class PlayerNoRb : MonoBehaviour
         {
             if(!J1actif)
             {
+                dontMove = true; 
+                animator.SetBool("arrowBas", true);
                 // faire clignotement quand charge plus 
-                if(dejaLancer)
+                if (dejaLancer)
                     Destroy(arrowEnCour.gameObject);
 
                 float puissance = 0; // entre 0 et 1 ; 
-                if (Input.GetKey(toucheHaut) )//|| Input.GetButtonDown(manetteUp))
+                if (Input.GetKey(toucheHaut))// || Input.GetButtonDown(manetteUp))
                 {
+                    animator.SetBool("arrowBas", false);
+                    animator.SetBool("arrowHaut", true);
                     arrowEnCour = Instantiate(javelinOrArrowPrefab);
                     arrowEnCour.transform.position = this.transform.position;
                     
@@ -965,6 +969,8 @@ public class PlayerNoRb : MonoBehaviour
                 }
                 else
                 {
+                    animator.SetBool("arrowBas", true);
+                    animator.SetBool("arrowHaut", false);
                     arrowEnCour = Instantiate(javelinOrArrowPrefab);
                     arrowEnCour.transform.position = this.transform.position;
                     arrowEnCour.GetComponent<Arrow>().tirNormal(direction(), puissance);
@@ -972,6 +978,11 @@ public class PlayerNoRb : MonoBehaviour
                    
                 }
             }
+        }else
+        {
+            dontMove = false;
+            animator.SetBool("arrowBas", false);
+            animator.SetBool("arrowHaut", false);
         }
     }
     #endregion
