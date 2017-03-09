@@ -100,6 +100,8 @@ public class PlayerNoRb : MonoBehaviour
     [SerializeField]
     private GameObject javelinOrArrowPrefab;
     private GameObject arrowEnCour;
+
+
     private bool dejaLancer = false; 
     // Use this for initialization
     void Start()
@@ -946,17 +948,18 @@ public class PlayerNoRb : MonoBehaviour
 
         if (Input.GetKey(toucheAction) || Input.GetButtonDown(manetteAction))
         {
-
             if(!J1actif)
             {
+                // faire clignotement quand charge plus 
                 if(dejaLancer)
-                    Destroy(arrowEnCour.gameObject); 
+                    Destroy(arrowEnCour.gameObject);
 
-                float puissance = 1; // entre 0 et 1 ; 
+                float puissance = 0; // entre 0 et 1 ; 
                 if (Input.GetKey(toucheHaut) )//|| Input.GetButtonDown(manetteUp))
                 {
                     arrowEnCour = Instantiate(javelinOrArrowPrefab);
                     arrowEnCour.transform.position = this.transform.position;
+                    
                     arrowEnCour.GetComponent<Arrow>().tirHaut(puissance);
                     dejaLancer = true; 
                 }
@@ -965,12 +968,10 @@ public class PlayerNoRb : MonoBehaviour
                     arrowEnCour = Instantiate(javelinOrArrowPrefab);
                     arrowEnCour.transform.position = this.transform.position;
                     arrowEnCour.GetComponent<Arrow>().tirNormal(direction(), puissance);
-                    dejaLancer = true; 
+                    dejaLancer = true;
+                   
                 }
-            
-
             }
-           
         }
     }
     #endregion
