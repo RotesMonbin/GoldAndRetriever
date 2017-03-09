@@ -98,8 +98,9 @@ public class PlayerNoRb : MonoBehaviour
 
     // Fleche
     [SerializeField]
-    private GameObject javelinOrArrowPrefab; 
-
+    private GameObject javelinOrArrowPrefab;
+    private GameObject arrowEnCour;
+    private bool dejaLancer = false; 
     // Use this for initialization
     void Start()
     {
@@ -943,14 +944,30 @@ public class PlayerNoRb : MonoBehaviour
     void weapownUsed()
     {
 
-        if (Input.GetKeyDown(toucheAction) || Input.GetButtonDown(manetteAction))
+        if (Input.GetKey(toucheAction) || Input.GetButtonDown(manetteAction))
         {
 
             if(!J1actif)
             {
-                GameObject arr = Instantiate(javelinOrArrowPrefab);
-                arr.transform.position = this.transform.position; 
-                arr.GetComponent<Arrow>().tirNormal(direction());
+                if(dejaLancer)
+                    Destroy(arrowEnCour.gameObject); 
+
+                float puissance = 1; // entre 0 et 1 ; 
+                if (Input.GetKey(toucheHaut) )//|| Input.GetButtonDown(manetteUp))
+                {
+                    arrowEnCour = Instantiate(javelinOrArrowPrefab);
+                    arrowEnCour.transform.position = this.transform.position;
+                    arrowEnCour.GetComponent<Arrow>().tirHaut(puissance);
+                    dejaLancer = true; 
+                }
+                else
+                {
+                    arrowEnCour = Instantiate(javelinOrArrowPrefab);
+                    arrowEnCour.transform.position = this.transform.position;
+                    arrowEnCour.GetComponent<Arrow>().tirNormal(direction(), puissance);
+                    dejaLancer = true; 
+                }
+            
 
             }
            

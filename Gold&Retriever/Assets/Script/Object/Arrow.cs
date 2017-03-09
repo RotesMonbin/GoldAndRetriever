@@ -7,21 +7,15 @@ public class Arrow : MonoBehaviour
 
     [SerializeField]
     private Rigidbody2D rb;
-    [SerializeField]
-    private float force;
-
-    [SerializeField]
-    private float amplitude;
-
-
 
     [SerializeField]
     private LayerMask decors;
     [SerializeField]
     private GameObject box;
 
-
-
+    /*[SerializeField]
+    private Transform sprite;
+    */
     // Use this for initialization
     void Start()
     {
@@ -30,20 +24,22 @@ public class Arrow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(!(Mathf.Abs(rb.velocity.y + rb.velocity.x) < 2 ))
+        {
+            Vector2 dir = rb.velocity;
+            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        }
     }
 
-    public void tirNormal(float direction)
+    public void tirNormal(float direction, float indicePuissance)
     {
-        rb.gravityScale = force / 5;
-        rb.velocity = new Vector2((rb.velocity.x + force) * direction, Mathf.Sin(rb.velocity.y) * force + amplitude);
+        indicePuissance = 1 - indicePuissance;
+        rb.AddForce(new Vector2((300 + 300 * indicePuissance) * direction, 50 + 100 * (1 - indicePuissance)));
+    }
 
-        this.transform.localScale = new Vector2(this.transform.localScale.x * direction, this.transform.localScale.y); 
-        
-        if (Physics2D.OverlapBox(new Vector2(box.transform.position.x, box.transform.position.y), new Vector2(0.123973f, 0.1235231f), 0, decors))
-        {
-            rb.isKinematic = true; 
-        }
-
+    public void tirHaut(float indicePuissance)
+    {
+        rb.AddForce(new Vector2(1, 300 + 100 * indicePuissance));
     }
 }
