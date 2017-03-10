@@ -957,7 +957,7 @@ public class PlayerNoRb : MonoBehaviour
                     Destroy(arrowEnCour.gameObject);
 
                 float puissance = 0; // entre 0 et 1 ; 
-                if (Input.GetKey(toucheHaut))// || Input.GetButtonDown(manetteUp))
+                if (Input.GetKey(toucheHaut) || manetteUp())
                 {
                     animator.SetBool("arrowBas", false);
                     animator.SetBool("arrowHaut", true);
@@ -969,6 +969,7 @@ public class PlayerNoRb : MonoBehaviour
                 }
                 else
                 {
+                    
                     animator.SetBool("arrowBas", true);
                     animator.SetBool("arrowHaut", false);
                     arrowEnCour = Instantiate(javelinOrArrowPrefab);
