@@ -101,6 +101,7 @@ public class PlayerNoRb : MonoBehaviour
     private GameObject javelinOrArrowPrefab;
     private GameObject arrowEnCour;
 
+    private bool gotSpear = true;
 
     private bool dejaLancer = false; 
     // Use this for initialization
@@ -977,6 +978,27 @@ public class PlayerNoRb : MonoBehaviour
                     arrowEnCour.GetComponent<Arrow>().tirNormal(direction(), puissance);
                     dejaLancer = true;
                    
+                }
+            }
+            else
+            {   
+                if (gotSpear)
+                {
+                    GameObject spear = Instantiate(javelinOrArrowPrefab);
+                    spear.transform.position = this.transform.position;
+                    spear.GetComponent<Arrow>().tirNormal(direction(),0);
+                    gotSpear = false;
+                }
+                else
+                {
+                    Collider2D[] colls = Physics2D.OverlapBoxAll(boxCollider.transform.position, boxCollider.size, 0);
+                    foreach(Collider2D coll in colls)
+                    {
+                        if(coll.tag == "Spear"){
+                            this.gotSpear = true;
+                            Destroy(coll.gameObject);
+                        }
+                    }
                 }
             }
         }else
