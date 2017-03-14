@@ -57,10 +57,12 @@ public class PlayerNoRb : MonoBehaviour
     public KeyCode toucheBomb;
     public KeyCode toucheAccroupi;
     public KeyCode toucheAction;
+    public KeyCode toucheWeapon;
 
     public string manetteSaut;
     public string manetteBombe;
     public string manetteAction;
+    public string manetteWeapon;
     public string manetteAxeX;
     public string manetteAxeY;
     public string triggAxis;
@@ -947,7 +949,7 @@ public class PlayerNoRb : MonoBehaviour
     void weapownUsed()
     {
 
-        if (Input.GetKey(toucheAction) || Input.GetButtonDown(manetteAction))
+        if (Input.GetKey(toucheWeapon) || Input.GetButtonDown(manetteWeapon))
         {
             if(!J1actif)
             {

@@ -749,7 +749,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1953534199308142}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.75, y: 21.4, z: 0}
+  m_LocalPosition: {x: 55.991413, y: 20.071295, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4310855194695090}
@@ -1545,9 +1545,11 @@ MonoBehaviour:
   toucheBomb: 109
   toucheAccroupi: 274
   toucheAction: 108
+  toucheWeapon: 106
   manetteSaut: AButtonJ1
   manetteBombe: BButtonJ1
   manetteAction: XButtonJ1
+  manetteWeapon: YButtonJ1
   manetteAxeX: AxisXJ1
   manetteAxeY: AxisYJ1
   triggAxis: TriggAxisJ1
@@ -1957,9 +1959,11 @@ MonoBehaviour:
   toucheBomb: 102
   toucheAccroupi: 115
   toucheAction: 101
+  toucheWeapon: 114
   manetteSaut: AButtonJ2
   manetteBombe: BButtonJ2
   manetteAction: XButtonJ2
+  manetteWeapon: YButtonJ2
   manetteAxeX: AxisXJ2
   manetteAxeY: AxisYJ2
   triggAxis: TriggAxisJ2
@@ -1969,7 +1973,8 @@ MonoBehaviour:
   rope: {fileID: 1718647762000076, guid: 64b11e0ce7de94a4b94746f3c5ecbe63, type: 2}
   ropeDeb: {fileID: 1672038747845474, guid: 1a3271d546a28a54fb3ef8a90b02ba1a, type: 2}
   timehitSolBrulantMaxTime: 2
-  javelinOrArrowPrefab: {fileID: 0}
+  javelinOrArrowPrefab: {fileID: 1707347382228644, guid: 30dbca5a1ae5d5e46b51835b55f3f8c8,
+    type: 2}
 --- !u!114 &114852034902709694
 MonoBehaviour:
   m_ObjectHideFlags: 1

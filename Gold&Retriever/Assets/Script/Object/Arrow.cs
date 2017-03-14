@@ -10,8 +10,12 @@ public class Arrow : MonoBehaviour
 
     [SerializeField]
     private LayerMask decors;
+
     [SerializeField]
-    private GameObject box;
+    private LayerMask enemy;
+
+    [SerializeField]
+    private BoxCollider2D box;
 
     /*[SerializeField]
     private Transform sprite;
@@ -29,6 +33,14 @@ public class Arrow : MonoBehaviour
             Vector2 dir = rb.velocity;
             float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+
+            Collider2D coll = Physics2D.OverlapBox(box.transform.position, box.size, 0, enemy);
+            if (coll.transform != null)
+            {
+                //Faire une classe mère pour les ennemies
+                Destroy(coll.gameObject);
+            }
+            
         }
     }
 
