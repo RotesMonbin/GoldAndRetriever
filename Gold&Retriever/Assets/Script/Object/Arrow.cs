@@ -28,6 +28,7 @@ public class Arrow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+       
         if(!(Mathf.Abs(rb.velocity.y + rb.velocity.x) < 2 ))
         {
             Vector2 dir = rb.velocity;
@@ -35,7 +36,7 @@ public class Arrow : MonoBehaviour
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
             Collider2D coll = Physics2D.OverlapBox(box.transform.position, box.size, 0, enemy);
-            if (coll.transform != null)
+            if (coll != null)
             {
                 //Faire une classe mère pour les ennemies
                 Destroy(coll.gameObject);
