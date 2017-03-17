@@ -101,7 +101,18 @@ public class PlayerNoRb : MonoBehaviour
     // Fleche
     [SerializeField]
     private GameObject javelinOrArrowPrefab;
+    
     private GameObject arrowEnCour;
+
+    [SerializeField]
+    private float timeBtwArrow = 3 ;
+    private float timetempArrow = 0;
+
+    [SerializeField]
+    private float timeForceArrow = 3;
+    private float timeForcetemp = 0;
+
+    private bool rechargementEnCour = false; 
 
     private bool gotSpear = true;
 
@@ -187,6 +198,7 @@ public class PlayerNoRb : MonoBehaviour
         enemieColision();
         DamageOnFall();
         GameOver();
+        timetempArrow += Time.deltaTime;
     }
     #region RB manager
 
@@ -949,37 +961,45 @@ public class PlayerNoRb : MonoBehaviour
     void weapownUsed()
     {
 
-        if (Input.GetKey(toucheWeapon) || Input.GetButtonDown(manetteWeapon))
+        if (Input.GetKeyUp(toucheWeapon) || Input.GetButtonUp(manetteWeapon))
+        {
+            if (!rechargementEnCour)
+            {
+                dontMove = false; 
+                useArrow( (timeForcetemp / timeForceArrow ) > 1 ? 1 : timeForcetemp / timeForceArrow);
+                timeForcetemp = 0;
+            }
+        }
+
+        if (Input.GetKey(toucheWeapon) || Input.GetButton(manetteWeapon))
         {
             if(!J1actif)
             {
-                dontMove = true; 
-                animator.SetBool("arrowBas", true);
-                // faire clignotement quand charge plus 
-                if (dejaLancer)
-                    Destroy(arrowEnCour.gameObject);
 
-                float puissance = 0; // entre 0 et 1 ; 
-                if (Input.GetKey(toucheHaut) || manetteUp())
+                if(rechargementEnCour)
                 {
-                    animator.SetBool("arrowBas", false);
-                    animator.SetBool("arrowHaut", true);
-                    arrowEnCour = Instantiate(javelinOrArrowPrefab);
-                    arrowEnCour.transform.position = this.transform.position;
-                    
-                    arrowEnCour.GetComponent<Arrow>().tirHaut(puissance);
-                    dejaLancer = true; 
-                }
-                else
+                    if( timetempArrow > timeBtwArrow)
+                    {
+                        rechargementEnCour = false;
+                        timetempArrow = 0;
+                    }  
+                }else
                 {
-                    
-                    animator.SetBool("arrowBas", true);
-                    animator.SetBool("arrowHaut", false);
-                    arrowEnCour = Instantiate(javelinOrArrowPrefab);
-                    arrowEnCour.transform.position = this.transform.position;
-                    arrowEnCour.GetComponent<Arrow>().tirNormal(direction(), puissance);
-                    dejaLancer = true;
-                   
+                  
+                    if (!Input.GetKey(toucheHaut) || manetteUp())
+                    {
+                        animator.SetBool("arrowBas", true);
+                        animator.SetBool("arrowHaut", false);
+                    }
+
+                    else
+                    {
+                        animator.SetBool("arrowHaut", true);
+                        animator.SetBool("arrowBas", false);
+                    }
+                       
+
+                    timeForcetemp += Time.deltaTime;                  
                 }
             }
             else
@@ -1008,6 +1028,35 @@ public class PlayerNoRb : MonoBehaviour
             dontMove = false;
             animator.SetBool("arrowBas", false);
             animator.SetBool("arrowHaut", false);
+        }
+    }
+
+    // force entre 0 et 1 
+    void useArrow(float force)
+    {
+
+        // faire clignotement quand charge plus 
+        if (dejaLancer)
+            Destroy(arrowEnCour.gameObject);
+
+        if (Input.GetKey(toucheHaut) || manetteUp())
+        {
+
+            arrowEnCour = Instantiate(javelinOrArrowPrefab);
+            arrowEnCour.transform.position = this.transform.position;
+
+            arrowEnCour.GetComponent<Arrow>().tirHaut(force);
+            dejaLancer = true;
+            rechargementEnCour = true;
+        }
+        else
+        {
+            arrowEnCour = Instantiate(javelinOrArrowPrefab);
+            arrowEnCour.transform.position = this.transform.position;
+            arrowEnCour.GetComponent<Arrow>().tirNormal(direction(), force);
+            dejaLancer = true;
+            rechargementEnCour = true;
+
         }
     }
     #endregion

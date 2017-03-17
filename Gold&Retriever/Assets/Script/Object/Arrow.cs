@@ -47,12 +47,12 @@ public class Arrow : MonoBehaviour
 
     public void tirNormal(float direction, float indicePuissance)
     {
-        indicePuissance = 1 - indicePuissance;
-        rb.AddForce(new Vector2((300 + 300 * indicePuissance) * direction, 50 + 100 * (1 - indicePuissance)));
+        rb.AddForce(new Vector2((100 + (indicePuissance > 0.5f ? 200 : 50 ) * indicePuissance) * direction, 20 + (indicePuissance > 0.5f ? 150 : 50) * (1 - indicePuissance)));
     }
 
     public void tirHaut(float indicePuissance)
     {
-        rb.AddForce(new Vector2(1, 300 + 100 * indicePuissance));
+    
+        rb.AddForce(new Vector2(1, 100 + 100 * indicePuissance));
     }
 }
