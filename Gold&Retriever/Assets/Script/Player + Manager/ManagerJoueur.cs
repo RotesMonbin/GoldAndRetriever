@@ -285,7 +285,7 @@ public class ManagerJoueur : MonoBehaviour
 
         if (Joueur1 == null)
         {
-            cashJ2 = 200; 
+            
             Joueur1 = GameObject.Find("P1----------------------------------");
             Joueur2 = GameObject.Find("P2-----------------------------------");
 
@@ -318,6 +318,8 @@ public class ManagerJoueur : MonoBehaviour
             hudJ1Cash.text = "" + cashJ1;
             hudJ2Cash.text = "" + cashJ2;
 
+            changementItemUtile(objectUtile.arc, true);
+            changementItemUtile(objectUtile.arc, false);
         }
 
     }

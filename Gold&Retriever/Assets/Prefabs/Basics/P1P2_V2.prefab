@@ -1406,6 +1406,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   arcSprite: {fileID: 1052632375552690, guid: e83a1088b9175a040bd881f37b631749, type: 2}
+  spearSprite: {fileID: 1629228500482818, guid: 824236638f1c90c408d03cb6dccf2103,
+    type: 2}
 --- !u!114 &114081999861904990
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1561,6 +1563,8 @@ MonoBehaviour:
   timehitSolBrulantMaxTime: 2
   javelinOrArrowPrefab: {fileID: 1129069964394228, guid: 7bc6b742945833e4aa1dbc7596d4dd37,
     type: 2}
+  timeBtwArrow: 3
+  timeForceArrow: 3
 --- !u!114 &114378965856667160
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1801,6 +1805,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   arcSprite: {fileID: 1052632375552690, guid: 52fd6e9e51488e449b52cda5909bc9bd, type: 2}
+  spearSprite: {fileID: 1629228500482818, guid: e8a9f91cf65fa734486abd966027f0a9,
+    type: 2}
 --- !u!114 &114635670913924356
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1975,6 +1981,8 @@ MonoBehaviour:
   timehitSolBrulantMaxTime: 2
   javelinOrArrowPrefab: {fileID: 1707347382228644, guid: 30dbca5a1ae5d5e46b51835b55f3f8c8,
     type: 2}
+  timeBtwArrow: 3
+  timeForceArrow: 2
 --- !u!114 &114852034902709694
 MonoBehaviour:
   m_ObjectHideFlags: 1

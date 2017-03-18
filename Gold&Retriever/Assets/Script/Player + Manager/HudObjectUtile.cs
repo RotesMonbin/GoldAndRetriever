@@ -6,9 +6,11 @@ public class HudObjectUtile : MonoBehaviour {
 
     [SerializeField]
     private GameObject arcSprite;
+    [SerializeField]
+    private GameObject spearSprite;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
 		
 	}
 	
