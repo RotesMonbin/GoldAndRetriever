@@ -45,10 +45,9 @@ public class HudObjectUtile : MonoBehaviour {
 
     void detruireEnfant()
     {
-        int childcount = transform.childCount; 
-        for(int i = childcount - 1; i > 0 ; i--)
-        {
-            GameObject.Destroy(transform.GetChild(i).gameObject); 
-        }
+        for(int i = 0; i < transform.childCount; i++)
+        
+            Destroy(transform.GetChild(i).gameObject);
+
     }
 }

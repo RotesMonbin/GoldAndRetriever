@@ -331,18 +331,12 @@ public class ManagerJoueur : MonoBehaviour
     {
         if(J1actif)
         {
-            if(objetUtileActuelJ1 == objectUtile.none && obj != objetUtileActuelJ1)
-            {
-                objetUtileActuelJ1 = obj;
-                HUDitemJ1.changement(obj);
-            }
+            objetUtileActuelJ1 = obj;
+            HUDitemJ1.changement(obj);
         }else
         {
-            if (objetUtileActuelJ2 == objectUtile.none && obj != objetUtileActuelJ2)
-            {
-                objetUtileActuelJ2 = obj;
-                HUDitemJ2.changement(obj);
-            }
+            objetUtileActuelJ2 = obj;
+            HUDitemJ2.changement(obj);
         }
     }
 

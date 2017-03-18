@@ -1009,6 +1009,7 @@ public class PlayerNoRb : MonoBehaviour
                     GameObject spear = Instantiate(javelinOrArrowPrefab);
                     spear.transform.position = this.transform.position;
                     spear.GetComponent<Arrow>().tirNormal(direction(),0);
+                    managerJoueur.changementItemUtile(objectUtile.none, J1actif); 
                     gotSpear = false;
                 }
                 else
@@ -1017,8 +1018,11 @@ public class PlayerNoRb : MonoBehaviour
                     foreach(Collider2D coll in colls)
                     {
                         if(coll.tag == "Spear"){
-                            this.gotSpear = true;
+                      
                             Destroy(coll.gameObject);
+                            this.gotSpear = true;
+                            managerJoueur.changementItemUtile(objectUtile.spear, J1actif);
+
                         }
                     }
                 }
