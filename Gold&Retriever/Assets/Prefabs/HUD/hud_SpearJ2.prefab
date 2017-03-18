@@ -20,8 +20,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4917164200725238}
   - component: {fileID: 212851298266927444}
-  m_Layer: 5
-  m_Name: hud_SpearJ1
+  m_Layer: 8
+  m_Name: hud_SpearJ2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34,7 +34,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1629228500482818}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 88.278885, y: 22.688934, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

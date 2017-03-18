@@ -6,7 +6,8 @@ using UnityEngine.SceneManagement;
 
 public enum objectUtile{
     none,
-    arc
+    arc,
+    spear
 }
 public class ManagerJoueur : MonoBehaviour
 {
@@ -318,7 +319,7 @@ public class ManagerJoueur : MonoBehaviour
             hudJ1Cash.text = "" + cashJ1;
             hudJ2Cash.text = "" + cashJ2;
 
-            changementItemUtile(objectUtile.arc, true);
+            changementItemUtile(objectUtile.spear, true);
             changementItemUtile(objectUtile.arc, false);
         }
 

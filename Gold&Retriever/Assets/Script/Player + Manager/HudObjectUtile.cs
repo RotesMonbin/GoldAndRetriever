@@ -25,6 +25,10 @@ public class HudObjectUtile : MonoBehaviour {
         {
             changementInterface(arcSprite); 
         }
+        if (obj == objectUtile.spear)
+        {
+            changementInterface(spearSprite);
+        }
         if (obj == objectUtile.none)
         {
             detruireEnfant(); 
