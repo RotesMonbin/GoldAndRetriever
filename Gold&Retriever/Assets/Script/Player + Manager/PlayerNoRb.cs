@@ -68,6 +68,7 @@ public class PlayerNoRb : MonoBehaviour
     public string triggAxis;
 
     private bool dontMove = false;
+    internal bool held = false;
 
     private float invincible = 0;
     private int lastBlinkNumber;
@@ -101,22 +102,23 @@ public class PlayerNoRb : MonoBehaviour
     // Fleche
     [SerializeField]
     private GameObject javelinOrArrowPrefab;
-    
+
     private GameObject arrowEnCour;
 
     [SerializeField]
-    private float timeBtwArrow = 3 ;
+    private float timeBtwArrow = 3;
     private float timetempArrow = 0;
 
     [SerializeField]
     private float timeForceArrow = 3;
     private float timeForcetemp = 0;
 
-    private bool rechargementEnCour = false; 
+    private bool rechargementEnCour = false;
 
     private bool gotSpear = true;
+    private bool spearthrown = false;
 
-    private bool dejaLancer = false; 
+    private bool dejaLancer = false;
     // Use this for initialization
     void Start()
     {
@@ -175,7 +177,7 @@ public class PlayerNoRb : MonoBehaviour
         }
 
         actionOn();
-        weapownUsed(); 
+        weapownUsed();
 
     }
 
@@ -322,8 +324,15 @@ public class PlayerNoRb : MonoBehaviour
         // PIED SAUT 
         if (!dontMove)
         {
-            if ((Input.GetKey(toucheSaut) || Input.GetButton(manetteSaut)) && isTouchingGround())
+            if ((Input.GetKey(toucheSaut) || Input.GetButton(manetteSaut)) && (isTouchingGround() || held))
+            {
                 speed = new Vector2(speed.x, jumpPower);
+                if (held)
+                {
+                    held = false;
+                    animator.SetBool("Held", false);
+                }
+            }
 
             if (isTouchingGround())
                 animator.SetBool("Jump", false);
@@ -341,7 +350,7 @@ public class PlayerNoRb : MonoBehaviour
     {
         Vector3 temp = this.transform.localScale;
 
-        if (!dontMove)
+        if (!dontMove && !held)
         {
             if ((Input.GetKey(toucheGauche) || manetteLeft()))
             {
@@ -495,7 +504,7 @@ public class PlayerNoRb : MonoBehaviour
         }
         if (coll.gameObject.tag == "Lave")
         {
-            killPlayer(); 
+            killPlayer();
         }
 
         if (coll.gameObject.tag == "Transition Menu Jeu")
@@ -722,10 +731,25 @@ public class PlayerNoRb : MonoBehaviour
         }
         else
         {
-            Transform t = heldObject.transform;
-            t.position = new Vector3(this.transform.position.x + 0.2f * this.transform.localScale.x,
-                this.transform.position.y + 0.2f, this.transform.position.z);
-            t.localScale = this.transform.localScale;
+            bool moveItem = true;
+            PlayerNoRb girlRb = heldObject.GetComponent<PlayerNoRb>();
+            if (girlRb != null)
+            {
+                if (!girlRb.held)
+                {
+                    holdSomething = false;
+                    moveItem = false;
+                }
+            }
+
+            if (moveItem)
+            {
+                Transform t = heldObject.transform;
+                t.position = new Vector3(this.transform.position.x + 0.2f * this.transform.localScale.x,
+                    this.transform.position.y + 0.2f, this.transform.position.z);
+                t.localScale = this.transform.localScale;
+            }
+
         }
 
     }
@@ -733,14 +757,14 @@ public class PlayerNoRb : MonoBehaviour
     void pickUpItem()
     {
 
-        
+
         if (holdSomething) //Throw
         {
             moveHeldObject();
             if (heldObject.tag == "Player")
             {
                 heldObject.GetComponent<PlayerNoRb>().animator.SetBool("Held", false);
-                heldObject.GetComponent<PlayerNoRb>().dontMove = false;
+                heldObject.GetComponent<PlayerNoRb>().held = false;
 
                 heldObject.GetComponent<PlayerNoRb>().speed = new Vector2(throwPower * this.transform.localScale.x, throwPower / 3);
             }
@@ -779,10 +803,10 @@ public class PlayerNoRb : MonoBehaviour
                     heldObject = col.gameObject;
                     holdSomething = true;
 
-                    if (col.gameObject.tag == "Player") 
+                    if (col.gameObject.tag == "Player")
                     {
                         col.gameObject.GetComponent<PlayerNoRb>().animator.SetBool("Held", true);
-                        col.gameObject.GetComponent<PlayerNoRb>().dontMove = true;
+                        col.gameObject.GetComponent<PlayerNoRb>().held = true;
                         col.gameObject.GetComponent<PlayerNoRb>().speed = new Vector2(0, 0);
 
                     }
@@ -961,77 +985,127 @@ public class PlayerNoRb : MonoBehaviour
     void weapownUsed()
     {
 
-        if (Input.GetKeyUp(toucheWeapon) || Input.GetButtonUp(manetteWeapon))
+        if (!J1actif)
         {
-            if (!rechargementEnCour)
+            if (Input.GetKeyUp(toucheWeapon) || Input.GetButtonUp(manetteWeapon))
             {
-                dontMove = false; 
-                useArrow( (timeForcetemp / timeForceArrow ) > 1 ? 1 : timeForcetemp / timeForceArrow);
-                timeForcetemp = 0;
+                if (!rechargementEnCour)
+                {
+                    dontMove = false;
+                    useArrow((timeForcetemp / timeForceArrow) > 1 ? 1 : timeForcetemp / timeForceArrow);
+                    timeForcetemp = 0;
+                }
             }
-        }
 
-        if (Input.GetKey(toucheWeapon) || Input.GetButton(manetteWeapon))
-        {
-            if(!J1actif)
+            if (Input.GetKey(toucheWeapon) || Input.GetButton(manetteWeapon))
             {
+                if (!J1actif)
+                {
 
-                if(rechargementEnCour)
-                {
-                    if( timetempArrow > timeBtwArrow)
+                    if (rechargementEnCour)
                     {
-                        rechargementEnCour = false;
-                        timetempArrow = 0;
-                    }  
-                }else
-                {
-                  
-                    if (!Input.GetKey(toucheHaut) || manetteUp())
-                    {
-                        animator.SetBool("arrowBas", true);
-                        animator.SetBool("arrowHaut", false);
+                        if (timetempArrow > timeBtwArrow)
+                        {
+                            rechargementEnCour = false;
+                            timetempArrow = 0;
+                        }
                     }
-
                     else
                     {
-                        animator.SetBool("arrowHaut", true);
-                        animator.SetBool("arrowBas", false);
-                    }
-                       
 
-                    timeForcetemp += Time.deltaTime;                  
+                        if (!Input.GetKey(toucheHaut) || manetteUp())
+                        {
+                            animator.SetBool("arrowBas", true);
+                            animator.SetBool("arrowHaut", false);
+                        }
+
+                        else
+                        {
+                            animator.SetBool("arrowHaut", true);
+                            animator.SetBool("arrowBas", false);
+                        }
+
+
+                        timeForcetemp += Time.deltaTime;
+                    }
                 }
             }
             else
-            {   
+            {
+                dontMove = false;
+                animator.SetBool("arrowBas", false);
+                animator.SetBool("arrowHaut", false);
+            }
+        }
+        else
+        {
+            if (Input.GetKey(toucheWeapon) || Input.GetButton(manetteWeapon))
+            {
+                if (gotSpear)
+                {
+                    if (Input.GetKey(toucheHaut) || manetteUp())
+                    {
+
+                        //setanimator to J1 with spear Up
+                    }
+                    else
+                    {
+                        //setanimator to J1 with spear Down
+                    }
+                }
+
+
+            }
+
+            if (Input.GetKeyUp(toucheWeapon) || Input.GetButtonUp(manetteWeapon))
+            {
                 if (gotSpear)
                 {
                     GameObject spear = Instantiate(javelinOrArrowPrefab);
                     spear.transform.position = this.transform.position;
-                    spear.GetComponent<Arrow>().tirNormal(direction(),0);
-                    managerJoueur.changementItemUtile(objectUtile.none, J1actif); 
+                    if (Input.GetKey(toucheHaut) || manetteUp())
+                    {
+                        spear.GetComponent<Arrow>().tirHaut(1);
+                    }
+                    else
+                    {
+                        spear.GetComponent<Arrow>().tirNormal(direction(), 1);
+                    }
+
+                    managerJoueur.changementItemUtile(objectUtile.none, J1actif);
                     gotSpear = false;
                 }
-                else
+                else if (spearthrown)
                 {
-                    Collider2D[] colls = Physics2D.OverlapBoxAll(boxCollider.transform.position, boxCollider.size, 0);
-                    foreach(Collider2D coll in colls)
+                    Collider2D[] colls = Physics2D.OverlapBoxAll(boxCollider.transform.position, boxCollider.size * 1.2f, 0);
+                    foreach (Collider2D coll in colls)
                     {
-                        if(coll.tag == "Spear"){
-                      
+                        if (coll.tag == "Spear")
+                        {
+
                             Destroy(coll.gameObject);
-                            this.gotSpear = true;
+                            gotSpear = true;
+                            spearthrown = false;
                             managerJoueur.changementItemUtile(objectUtile.spear, J1actif);
 
                         }
                     }
                 }
             }
-        }else
-        {
-            dontMove = false;
-            animator.SetBool("arrowBas", false);
-            animator.SetBool("arrowHaut", false);
+
+            if (!gotSpear && !spearthrown && J1actif)
+            {
+                bool spearStillOnPlayer = false;
+                Collider2D[] colls = Physics2D.OverlapBoxAll(boxCollider.transform.position, boxCollider.size * 1.2f, 0);
+                foreach (Collider2D coll in colls)
+                {
+                    if (coll.tag == "Spear")
+                    {
+                        spearStillOnPlayer = true;
+                    }
+                }
+                spearthrown = !spearStillOnPlayer;
+            }
         }
     }
 
