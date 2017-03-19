@@ -17,6 +17,9 @@ public class Arrow : MonoBehaviour
     [SerializeField]
     private BoxCollider2D box;
 
+    [SerializeField]
+    private bool arrowOrNot = false; 
+
     /*[SerializeField]
     private Transform sprite;
     */
@@ -39,6 +42,8 @@ public class Arrow : MonoBehaviour
             if (coll != null)
             {
                 //Faire une classe mère pour les ennemies
+                if (arrowOrNot)
+                    Destroy(this.gameObject); 
                 Destroy(coll.gameObject);
             }
             

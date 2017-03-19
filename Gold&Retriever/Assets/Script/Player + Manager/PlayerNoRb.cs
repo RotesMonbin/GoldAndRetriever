@@ -980,7 +980,6 @@ public class PlayerNoRb : MonoBehaviour
     }
     #endregion
 
-
     #region Arrow , lance ... touche Y 
     void weapownUsed()
     {
@@ -1136,6 +1135,7 @@ public class PlayerNoRb : MonoBehaviour
             rechargementEnCour = true;
 
         }
+        managerJoueur.rechargementArrow(timeBtwArrow); 
     }
     #endregion
 }

@@ -58,7 +58,9 @@ public class ManagerJoueur : MonoBehaviour
     private objectUtile objetUtileActuelJ1 = objectUtile.none;
     private objectUtile objetUtileActuelJ2 = objectUtile.none;
     private HudObjectUtile HUDitemJ1 ;
-    private HudObjectUtile HUDitemJ2 ; 
+    private HudObjectUtile HUDitemJ2 ;
+
+    private ChargementArrow chargementBarreJ2;
 
     public bool test = false;
 
@@ -313,6 +315,8 @@ public class ManagerJoueur : MonoBehaviour
             gemGlobal = GameObject.Find("GEMME").GetComponent<GemmeBleuHUD>();
             lave = GameObject.Find("LaveDeplacement").GetComponent<Lave>();
 
+            chargementBarreJ2 = GameObject.Find("hudItemCaseLoadArrow").GetComponent<ChargementArrow>(); 
+
             hudJ1Bombe.text = "" + bombeJ1;
             hudJ2Bombe.text = "" + bombeJ2;
 
@@ -340,6 +344,10 @@ public class ManagerJoueur : MonoBehaviour
         }
     }
 
+    public void rechargementArrow(float tempsRecharge)
+    {
+        chargementBarreJ2.lancementChargement(tempsRecharge);
+    }
 
     #endregion 
 }
