@@ -178,6 +178,7 @@ public class PlayerNoRb : MonoBehaviour
 
         actionOn();
         weapownUsed();
+        BombControl();
 
     }
 
@@ -193,7 +194,7 @@ public class PlayerNoRb : MonoBehaviour
         DirectionControl();
         SautControl();
         touchLadder();
-        BombControl();
+
         SpikeColision();
         DamageOnThrow();
         CleanObjectLaunched();
@@ -984,6 +985,7 @@ public class PlayerNoRb : MonoBehaviour
     void weapownUsed()
     {
 
+        //Arrow J2
         if (!J1actif)
         {
             if (Input.GetKeyUp(toucheWeapon) || Input.GetButtonUp(manetteWeapon))
@@ -1012,7 +1014,7 @@ public class PlayerNoRb : MonoBehaviour
                     else
                     {
 
-                        if (!Input.GetKey(toucheHaut) || manetteUp())
+                        if (!Input.GetKey(toucheHaut) && !manetteUp())
                         {
                             animator.SetBool("arrowBas", true);
                             animator.SetBool("arrowHaut", false);
@@ -1092,7 +1094,7 @@ public class PlayerNoRb : MonoBehaviour
                 }
             }
 
-            if (!gotSpear && !spearthrown && J1actif)
+            if (!gotSpear && !spearthrown)
             {
                 bool spearStillOnPlayer = false;
                 Collider2D[] colls = Physics2D.OverlapBoxAll(boxCollider.transform.position, boxCollider.size * 1.2f, 0);
