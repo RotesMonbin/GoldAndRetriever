@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerNoRb : MonoBehaviour
 {
+    [Header("Reglage de base")]
     private float maxFallingSpeed = -50;
 
     public float acceleration;
@@ -13,6 +14,7 @@ public class PlayerNoRb : MonoBehaviour
     public float throwPower;
     private float jumpOnEnemy = 20;
 
+    [Header("Box detection")]
     public BoxCollider2D feet;
     public BoxCollider2D face;
     public BoxCollider2D head;
@@ -23,7 +25,7 @@ public class PlayerNoRb : MonoBehaviour
 
     private float currentGravityScale;
 
-
+    [Header("Detection Layer")]
     public LayerMask decorLayer;
     public LayerMask enemieLayer;
     public LayerMask spikeLayer;
@@ -50,6 +52,7 @@ public class PlayerNoRb : MonoBehaviour
     // Touche clavier :
     public bool J1actif;
 
+    [Header("Clavier Touche")]
     public KeyCode toucheDroite;
     public KeyCode toucheGauche;
     public KeyCode toucheHaut;
@@ -59,6 +62,7 @@ public class PlayerNoRb : MonoBehaviour
     public KeyCode toucheAction;
     public KeyCode toucheWeapon;
 
+    [Header("Manette Touche")]
     public string manetteSaut;
     public string manetteBombe;
     public string manetteAction;
@@ -84,22 +88,27 @@ public class PlayerNoRb : MonoBehaviour
 
     private ManagerJoueur managerJoueur;
 
+    [Header("Camera shake")]
     [SerializeField]
     private Camera cameraShakeJ1;
     [SerializeField]
     private Camera cameraShakeJ2;
 
+
     // Prefab : 
+    [Header("Rope")]
     public GameObject rope;
     public GameObject ropeDeb;
 
 
     // Sol : 
+    [Header("Sol")]
     private float timehitSolBrulant = 0;
     [SerializeField]
     private float timehitSolBrulantMaxTime = 2;
 
     // Fleche
+    [Header("Javelot and arrow")]
     [SerializeField]
     private GameObject javelinOrArrowPrefab;
 
@@ -108,7 +117,6 @@ public class PlayerNoRb : MonoBehaviour
     [SerializeField]
     private float timeBtwArrow = 3;
     private float timetempArrow = 0;
-
     [SerializeField]
     private float timeForceArrow = 3;
     private float timeForcetemp = 0;
@@ -119,6 +127,8 @@ public class PlayerNoRb : MonoBehaviour
     private bool spearthrown = false;
 
     private bool dejaLancer = false;
+
+
     // Use this for initialization
     void Start()
     {
@@ -990,11 +1000,13 @@ public class PlayerNoRb : MonoBehaviour
         {
             if (Input.GetKeyUp(toucheWeapon) || Input.GetButtonUp(manetteWeapon))
             {
+                
                 if (!rechargementEnCour)
                 {
                     dontMove = false;
                     useArrow((timeForcetemp / timeForceArrow) > 1 ? 1 : timeForcetemp / timeForceArrow);
                     timeForcetemp = 0;
+                    animator.SetFloat("ForceBow", timeForcetemp);
                 }
             }
 
@@ -1026,7 +1038,7 @@ public class PlayerNoRb : MonoBehaviour
                             animator.SetBool("arrowBas", false);
                         }
 
-
+                        animator.SetFloat("ForceBow",timeForcetemp);
                         timeForcetemp += Time.deltaTime;
                     }
                 }
@@ -1122,7 +1134,7 @@ public class PlayerNoRb : MonoBehaviour
         {
 
             arrowEnCour = Instantiate(javelinOrArrowPrefab);
-            arrowEnCour.transform.position = this.transform.position;
+            arrowEnCour.transform.position = new Vector2 (this.transform.position.x , this.transform.position.y ) ;
 
             arrowEnCour.GetComponent<Arrow>().tirHaut(force);
             dejaLancer = true;
@@ -1131,7 +1143,7 @@ public class PlayerNoRb : MonoBehaviour
         else
         {
             arrowEnCour = Instantiate(javelinOrArrowPrefab);
-            arrowEnCour.transform.position = this.transform.position;
+            arrowEnCour.transform.position = new Vector2(this.transform.position.x, this.transform.position.y - 0.4f);
             arrowEnCour.GetComponent<Arrow>().tirNormal(direction(), force);
             dejaLancer = true;
             rechargementEnCour = true;
@@ -1139,5 +1151,10 @@ public class PlayerNoRb : MonoBehaviour
         }
         managerJoueur.rechargementArrow(timeBtwArrow); 
     }
+
+
+ 
     #endregion
+
+
 }
