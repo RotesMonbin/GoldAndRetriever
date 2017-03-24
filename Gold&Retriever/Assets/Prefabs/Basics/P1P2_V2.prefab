@@ -1544,7 +1544,7 @@ MonoBehaviour:
   acceleration: 15
   walkingMaxSpeed: 8
   runningMaxSpeed: 14
-  jumpPower: 17
+  jumpPower: 15
   throwPower: 22
   feet: {fileID: 61266838841842174}
   face: {fileID: 61188429268724830}
@@ -1962,7 +1962,7 @@ MonoBehaviour:
   acceleration: 15
   walkingMaxSpeed: 8
   runningMaxSpeed: 14
-  jumpPower: 17
+  jumpPower: 15
   throwPower: 22
   feet: {fileID: 61686688874958840}
   face: {fileID: 61902949900358874}
