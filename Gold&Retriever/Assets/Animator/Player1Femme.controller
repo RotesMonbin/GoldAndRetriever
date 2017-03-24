@@ -102,7 +102,7 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 4
     m_ConditionEvent: ForceBow
-    m_EventTreshold: 1
+    m_EventTreshold: 0.55
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1102165929933389004}
   m_Solo: 0
@@ -246,7 +246,7 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 3
     m_ConditionEvent: ForceBow
-    m_EventTreshold: 2
+    m_EventTreshold: 1.25
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1102350675717101316}
   m_Solo: 0
@@ -369,7 +369,7 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 3
     m_ConditionEvent: ForceBow
-    m_EventTreshold: 2
+    m_EventTreshold: 1.25
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1102508237223062490}
   m_Solo: 0
@@ -417,7 +417,7 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 4
     m_ConditionEvent: ForceBow
-    m_EventTreshold: 1
+    m_EventTreshold: 0.55
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1102550678676204542}
   m_Solo: 0
@@ -660,7 +660,7 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 3
     m_ConditionEvent: ForceBow
-    m_EventTreshold: 1
+    m_EventTreshold: 0.55
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1102378036339975450}
   m_Solo: 0
@@ -735,7 +735,7 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 3
     m_ConditionEvent: ForceBow
-    m_EventTreshold: 1
+    m_EventTreshold: 0.55
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1102663573757893094}
   m_Solo: 0
@@ -834,7 +834,7 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 4
     m_ConditionEvent: ForceBow
-    m_EventTreshold: 1
+    m_EventTreshold: 0.5
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1102165929933389004}
   m_Solo: 0
@@ -1008,7 +1008,7 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 4
     m_ConditionEvent: ForceBow
-    m_EventTreshold: 1
+    m_EventTreshold: 0.5
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1102550678676204542}
   m_Solo: 0

@@ -1039,6 +1039,7 @@ public class PlayerNoRb : MonoBehaviour
                         }
 
                         animator.SetFloat("ForceBow",timeForcetemp);
+                       
                         timeForcetemp += Time.deltaTime;
                     }
                 }

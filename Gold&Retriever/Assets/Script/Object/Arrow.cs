@@ -38,13 +38,25 @@ public class Arrow : MonoBehaviour
             float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
-            Collider2D coll = Physics2D.OverlapBox(box.transform.position, box.size, 0, enemy);
+            Collider2D coll = Physics2D.OverlapBox(box.transform.position, box.size, 0);
             if (coll != null)
             {
                 //Faire une classe mère pour les ennemies
-                if (destroyOnKill)
-                    Destroy(this.gameObject); 
-                Destroy(coll.gameObject);
+                if (coll.gameObject.layer == LayerMask.NameToLayer("Enemies"))
+                {
+                    if (destroyOnKill)
+                        Destroy(this.gameObject);
+                    Destroy(coll.gameObject);
+                }
+                else if (coll.gameObject.layer == LayerMask.NameToLayer("decors"))
+                {
+                    this.enabled = false;
+                    rb.velocity = new Vector2(0, 0);
+                    rb.angularVelocity = 0;
+                    rb.gravityScale = 0;
+                    rb.isKinematic = true;
+                }
+
             }
             
         }

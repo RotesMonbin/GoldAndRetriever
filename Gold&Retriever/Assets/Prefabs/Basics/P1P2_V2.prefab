@@ -767,7 +767,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1953534199308142}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 72.48, y: 20.53281, z: 0}
+  m_LocalPosition: {x: 55.991413, y: 20.071295, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4310855194695090}
@@ -1541,11 +1541,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b9de2bfbfb579745adba0a33b92c5aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  acceleration: 50
-  walkingMaxSpeed: 15
-  runningMaxSpeed: 30
-  jumpPower: 20
-  throwPower: 50
+  acceleration: 15
+  walkingMaxSpeed: 8
+  runningMaxSpeed: 14
+  jumpPower: 17
+  throwPower: 22
   feet: {fileID: 61266838841842174}
   face: {fileID: 61188429268724830}
   head: {fileID: 61813866812863796}
@@ -1959,11 +1959,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b9de2bfbfb579745adba0a33b92c5aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  acceleration: 50
-  walkingMaxSpeed: 15
-  runningMaxSpeed: 30
-  jumpPower: 20
-  throwPower: 20
+  acceleration: 15
+  walkingMaxSpeed: 8
+  runningMaxSpeed: 14
+  jumpPower: 17
+  throwPower: 22
   feet: {fileID: 61686688874958840}
   face: {fileID: 61902949900358874}
   head: {fileID: 61760559013124818}
@@ -2014,7 +2014,7 @@ MonoBehaviour:
   javelinOrArrowPrefab: {fileID: 1707347382228644, guid: 30dbca5a1ae5d5e46b51835b55f3f8c8,
     type: 2}
   timeBtwArrow: 3
-  timeForceArrow: 2
+  timeForceArrow: 1.5
 --- !u!114 &114852034902709694
 MonoBehaviour:
   m_ObjectHideFlags: 1
