@@ -360,7 +360,17 @@ public class PlayerNoRb : MonoBehaviour
     void DirectionControl()
     {
         Vector3 temp = this.transform.localScale;
+        float slowPower = 4;
 
+        Collider2D coll = isTouchingGround();
+
+        if (coll != null)
+        {
+            if (coll.tag == "Ice")
+            {
+                slowPower = 0.3f;
+            }
+        }
         if (!dontMove && !held)
         {
             if ((Input.GetKey(toucheGauche) || manetteLeft()))
@@ -371,7 +381,15 @@ public class PlayerNoRb : MonoBehaviour
                 {
                     if ((manetteRT() && speed.x > -runningMaxSpeed) || speed.x > -walkingMaxSpeed)
                     {
-                        speed -= new Vector2(acceleration * Time.deltaTime, 0);
+                        if(speed.x > 0)
+                        {
+                            speed -= new Vector2(acceleration * slowPower *  Time.deltaTime, 0);
+                        }
+                        else
+                        {
+                            speed -= new Vector2(acceleration * Time.deltaTime, 0);
+                        }
+
                     }
                 }
 
@@ -385,7 +403,15 @@ public class PlayerNoRb : MonoBehaviour
                 {
                     if ((manetteRT() && speed.x < runningMaxSpeed) || speed.x < walkingMaxSpeed)
                     {
-                        speed += new Vector2(acceleration * Time.deltaTime, 0);
+                        if (speed.x < 0)
+                        {
+                            speed += new Vector2(acceleration * slowPower* Time.deltaTime, 0);
+                        }
+                        else
+                        {
+                            speed += new Vector2(acceleration * Time.deltaTime, 0);
+                        }
+
                     }
 
                 }
@@ -393,15 +419,11 @@ public class PlayerNoRb : MonoBehaviour
             }
             else
             {
-                Collider2D coll = isTouchingGround();
+
 
                 if (coll && speed.x != 0)
                 {
-                    float slowPower = 4;
-                    if (coll.tag == "Ice")
-                    {
-                        slowPower = 0.3f;
-                    }
+
 
                     if ((speed.x > 0 && speed.x - acceleration * slowPower * Time.deltaTime <= 0) || (speed.x < 0 && speed.x + acceleration * slowPower * Time.deltaTime >= 0))
                     {
