@@ -22,7 +22,8 @@ GameObject:
   - component: {fileID: 212922737460508874}
   - component: {fileID: 114950597192954376}
   - component: {fileID: 50912364043320172}
-  - component: {fileID: 61283225548661776}
+  - component: {fileID: 70495983308813974}
+  - component: {fileID: 95792513179688710}
   m_Layer: 10
   m_Name: SpiderHARDCORE
   m_TagString: Enemie
@@ -139,7 +140,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1641440548501468}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 139.21, y: 31.607, z: 0}
+  m_LocalPosition: {x: 120.31, y: 31.71, z: 0}
   m_LocalScale: {x: 1, y: -1, z: 1}
   m_Children:
   - {fileID: 4891011827485060}
@@ -224,8 +225,8 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.2
---- !u!61 &61283225548661776
-BoxCollider2D:
+--- !u!70 &70495983308813974
+CapsuleCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -235,9 +236,26 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Size: {x: 2, y: 1.40625}
+  m_Offset: {x: 0.027778625, y: -0.064805984}
+  m_Size: {x: 1.074228, y: 0.7952385}
+  m_Direction: 1
+--- !u!95 &95792513179688710
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1641440548501468}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8ba2cf1a88828b6439e6ff6d7121173b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114950597192954376
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -250,7 +268,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 50912364043320172}
-  speed: 10
+  speed: 5
   timeAvantDescent: 2
   distanceDeNonAgro: 10
   decor:
@@ -262,7 +280,7 @@ MonoBehaviour:
   head: {fileID: 1974968802332286}
   headBas: {fileID: 1924088857192102}
   eye: {fileID: 1973955357188604}
-  anime: {fileID: 0}
+  anime: {fileID: 95792513179688710}
   distanceDetection: 20
 --- !u!212 &212922737460508874
 SpriteRenderer:
@@ -295,7 +313,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300002, guid: 4702ea66a2764ca439621c1ec39722e1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4a4a274399e97d649a5a96fcae8e707d, type: 3}
   m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
