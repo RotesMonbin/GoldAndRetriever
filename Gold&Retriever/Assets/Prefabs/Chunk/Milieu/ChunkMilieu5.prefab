@@ -8977,7 +8977,7 @@ GameObject:
   - component: {fileID: 61559115607407260}
   - component: {fileID: 95112015111384220}
   - component: {fileID: 61789649774381206}
-  m_Layer: 20
+  m_Layer: 0
   m_Name: switchRed
   m_TagString: button
   m_Icon: {fileID: 0}
@@ -17014,7 +17014,7 @@ GameObject:
   - component: {fileID: 61943198543270966}
   - component: {fileID: 95245337393135932}
   - component: {fileID: 61941616181878126}
-  m_Layer: 20
+  m_Layer: 0
   m_Name: switchRed (1)
   m_TagString: button
   m_Icon: {fileID: 0}
@@ -31119,7 +31119,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1021904996168430}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 86.11618, y: 10.564995, z: 0}
+  m_LocalPosition: {x: 77.71388, y: 30.53, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4210250836357882}
@@ -49280,6 +49280,9 @@ MonoBehaviour:
   listGameObject:
   - {fileID: 1467736837809506}
   animator: {fileID: 95245337393135932}
+  type: 0
+  pereBoutonDouble: {fileID: 0}
+  boutonNum: 0
 --- !u!114 &114268092628019184
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -49311,6 +49314,9 @@ MonoBehaviour:
   listGameObject:
   - {fileID: 1465974291759258}
   animator: {fileID: 95112015111384220}
+  type: 0
+  pereBoutonDouble: {fileID: 0}
+  boutonNum: 0
 --- !u!114 &114289618988140310
 MonoBehaviour:
   m_ObjectHideFlags: 1
