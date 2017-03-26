@@ -16,6 +16,7 @@ public class ManagerNiveau : MonoBehaviour {
     public List<GameObject> TabMilieu;
     private List<bool> TabMilieuBool;
 
+    private List<bool> TabCoinBool;
     // Tableau de prefable coin de map : 
     public List<GameObject> TabCoin;
 
@@ -37,10 +38,9 @@ public class ManagerNiveau : MonoBehaviour {
     // Use this for initialization
     void Start () {
         TabMilieuBool = new List<bool>();
-
+        TabCoinBool = new List<bool>(); 
         initableauBoolTrue(ref TabMilieuBool,TabMilieu.Count);
-     
-
+        initableauBoolTrue(ref TabCoinBool, TabCoin.Count); 
         boolSpecialHaut = false; 
 
         int maxLigne = 4;
@@ -83,7 +83,9 @@ public class ManagerNiveau : MonoBehaviour {
                   
                 }
 
-                int rCoin = Random.Range(0, TabCoin.Count);
+                //int rCoin = Random.Range(0, TabCoin.Count);
+                int rCoin = renvoiUnRandomOk(ref TabCoinBool, TabCoin.Count);
+                
                 InstanciateGameObjRandom(TabCoin[rCoin], new Vector3(indiceLigne, indiceColonne, 0), -sens, 1);
 
                 // Chunk Special : 
@@ -104,7 +106,7 @@ public class ManagerNiveau : MonoBehaviour {
                     
                 }
 
-                int rCoin = Random.Range(0, TabCoin.Count);
+                int rCoin = renvoiUnRandomOk(ref TabCoinBool, TabCoin.Count);
                 InstanciateGameObjRandom(TabCoin[rCoin], new Vector3(indiceLigne-20, indiceColonne, 0), -sens, 1);
 
                 // Chunk Special : 
