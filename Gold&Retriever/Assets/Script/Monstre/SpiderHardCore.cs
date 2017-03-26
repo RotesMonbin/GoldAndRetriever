@@ -57,6 +57,8 @@ public class SpiderHardCore : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
+      
+        anime.SetFloat("move", Mathf.Abs(rb.velocity.x)); 
         if (!modRage)
         {
             detectionDessus();
@@ -80,6 +82,7 @@ public class SpiderHardCore : MonoBehaviour
         {
             float direction2 = Mathf.Clamp(Player.transform.position.x - this.transform.position.x, -1, 1);
             rb.velocity = new Vector2(direction2 * speed, rb.velocity.y);
+         
         }
         else
         {

@@ -932,6 +932,7 @@ public class PlayerNoRb : MonoBehaviour
 
     void touchLadder()
     {
+        
         Collider2D[] cols = Physics2D.OverlapBoxAll(boxCollider.transform.position, boxCollider.size, 0);
 
         onLadder = false;
@@ -942,7 +943,8 @@ public class PlayerNoRb : MonoBehaviour
         animator.SetBool("Climb", onLadder);
         if (onLadder)
         {
-            Debug.Log("speed : " + speed.y);
+            speed.y = 0;
+   
             if (Input.GetKey(toucheHaut) || manetteUp())
             {
                 if (isTouchingRoof())
@@ -951,24 +953,22 @@ public class PlayerNoRb : MonoBehaviour
                 }
                 else
                 {
-                    if (speed.y < -4)
-                        speed = new Vector2(0, 0);
-                    else
-                        speed = new Vector2(0, climbSpeed);
+                    speed = new Vector2(speed.x, climbSpeed);
                 }
 
             }
             else if (Input.GetKey(toucheAccroupi) || manetteDown())
             {
-               
-                if (speed.y > 4)
-                {
+
+                if (isTouchingGround())
                     speed = new Vector2(0, 0);
-                    
-                }
-                   
-                else
-                    speed = new Vector2(0, -climbSpeed);
+                else 
+                    speed = new Vector2(speed.x, -climbSpeed);
+            }
+            else
+            {
+                speed = new Vector2(speed.x, 0);
+
             }
             currentGravityScale = 0;
         }
