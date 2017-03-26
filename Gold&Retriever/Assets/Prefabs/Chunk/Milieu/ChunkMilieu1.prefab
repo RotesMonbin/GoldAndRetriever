@@ -10328,7 +10328,7 @@ GameObject:
   - component: {fileID: 61685644586094884}
   - component: {fileID: 95619482032060032}
   - component: {fileID: 61274426057485234}
-  m_Layer: 20
+  m_Layer: 0
   m_Name: switchRed
   m_TagString: button
   m_Icon: {fileID: 0}
@@ -33798,7 +33798,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1935275011622852}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 69.80556, y: 28.275356, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4592384965288230}

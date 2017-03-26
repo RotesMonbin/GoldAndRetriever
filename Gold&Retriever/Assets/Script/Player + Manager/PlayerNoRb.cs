@@ -211,7 +211,8 @@ public class PlayerNoRb : MonoBehaviour
         enemieColision();
         DamageOnFall();
         GameOver();
-        timetempArrow += Time.deltaTime;
+        if(rechargementEnCour)
+            timetempArrow += Time.deltaTime;
     }
     #region RB manager
 
@@ -1060,9 +1061,8 @@ public class PlayerNoRb : MonoBehaviour
                             animator.SetBool("arrowBas", false);
                         }
 
+                         timeForcetemp += Time.deltaTime;
                         animator.SetFloat("ForceBow",timeForcetemp);
-                       
-                        timeForcetemp += Time.deltaTime;
                     }
                 }
             }
