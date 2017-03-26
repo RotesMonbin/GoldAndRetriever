@@ -217,31 +217,37 @@ public class PlayerNoRb : MonoBehaviour
 
     private void UpdatePosition()
     {
-        this.transform.Translate(speed * Time.deltaTime);
+        if (!held)
+        {
+            this.transform.Translate(speed * Time.deltaTime);
+        }
     }
 
     private bool AlreadyOnGround = false;
     private void Gravity()
     {
-        Collider2D coll = isTouchingGround();
-        if (!coll)
+        if (!held)
         {
-            if (speed.y > maxFallingSpeed)
+            Collider2D coll = isTouchingGround();
+            if (!coll)
             {
-                speed -= new Vector2(0, 9.81f * currentGravityScale * Time.deltaTime);
+                if (speed.y > maxFallingSpeed)
+                {
+                    speed -= new Vector2(0, 9.81f * currentGravityScale * Time.deltaTime);
+                }
+                AlreadyOnGround = false;
             }
-            AlreadyOnGround = false;
-        }
-        else if (!AlreadyOnGround)
-        {
-            speed.y = 0;
-            Vector3 closestPoint = coll.bounds.ClosestPoint(this.transform.position);
-            float dist = closestPoint.y - (feet.transform.position.y - feet.size.y / 2);
-            if (dist > 0)
+            else if (!AlreadyOnGround)
             {
-                this.transform.Translate(0, dist, 0);
+                speed.y = 0;
+                Vector3 closestPoint = coll.bounds.ClosestPoint(this.transform.position);
+                float dist = closestPoint.y - (feet.transform.position.y - feet.size.y / 2);
+                if (dist > 0)
+                {
+                    this.transform.Translate(0, dist, 0);
+                }
+                AlreadyOnGround = true;
             }
-            AlreadyOnGround = true;
         }
     }
 
@@ -337,7 +343,7 @@ public class PlayerNoRb : MonoBehaviour
         {
             if ((Input.GetKey(toucheSaut) || Input.GetButton(manetteSaut)) && (isTouchingGround() || held))
             {
-                speed = new Vector2(speed.x, jumpPower);
+                speed += new Vector2(0, jumpPower);
                 if (held)
                 {
                     held = false;
@@ -772,6 +778,7 @@ public class PlayerNoRb : MonoBehaviour
                 {
                     holdSomething = false;
                     moveItem = false;
+                    girlRb.speed.x = speed.x;
                 }
             }
 
@@ -799,7 +806,7 @@ public class PlayerNoRb : MonoBehaviour
                 heldObject.GetComponent<PlayerNoRb>().animator.SetBool("Held", false);
                 heldObject.GetComponent<PlayerNoRb>().held = false;
 
-                heldObject.GetComponent<PlayerNoRb>().speed = new Vector2(throwPower * this.transform.localScale.x, throwPower / 3);
+                heldObject.GetComponent<PlayerNoRb>().speed = new Vector2(throwPower * this.transform.localScale.x, throwPower*0.8f );
             }
             else
             {
