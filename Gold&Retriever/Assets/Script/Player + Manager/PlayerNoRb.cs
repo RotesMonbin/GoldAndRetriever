@@ -338,6 +338,7 @@ public class PlayerNoRb : MonoBehaviour
         {
             if ((Input.GetKey(toucheSaut) || Input.GetButton(manetteSaut)) && (isTouchingGround() || held))
             {
+                ropeActionReverse();
                 speed = new Vector2(speed.x, jumpPower);
                 if (held)
                 {
@@ -374,8 +375,10 @@ public class PlayerNoRb : MonoBehaviour
         }
         if (!dontMove && !held)
         {
+           
             if ((Input.GetKey(toucheGauche) || manetteLeft()))
             {
+                ropeActionReverse();
                 temp.x = -1;
                 this.transform.localScale = temp;
                 if (!isFacingWall())
@@ -398,6 +401,7 @@ public class PlayerNoRb : MonoBehaviour
             }
             else if ((Input.GetKey(toucheDroite) || manetteRight()))
             {
+                ropeActionReverse();
                 temp.x = 1;
                 this.transform.localScale = temp;
                 if (!isFacingWall())
@@ -797,6 +801,7 @@ public class PlayerNoRb : MonoBehaviour
             moveHeldObject();
             if (heldObject.tag == "Player")
             {
+                heldObject.gameObject.GetComponent<PlayerNoRb>().ropeActionReverse();
                 heldObject.GetComponent<PlayerNoRb>().animator.SetBool("Held", false);
                 heldObject.GetComponent<PlayerNoRb>().held = false;
 
@@ -839,6 +844,7 @@ public class PlayerNoRb : MonoBehaviour
 
                     if (col.gameObject.tag == "Player")
                     {
+                        col.gameObject.GetComponent<PlayerNoRb>().ropeActionReverse();
                         col.gameObject.GetComponent<PlayerNoRb>().animator.SetBool("Held", true);
                         col.gameObject.GetComponent<PlayerNoRb>().held = true;
                         col.gameObject.GetComponent<PlayerNoRb>().speed = new Vector2(0, 0);
@@ -903,7 +909,7 @@ public class PlayerNoRb : MonoBehaviour
         c2D.offset = new Vector2(0, -listRope.Count / 2);
     }
 
-    void ropeActionReverse()
+    public void ropeActionReverse()
     {
         if (listRope.Count > 0)
         {
@@ -926,6 +932,7 @@ public class PlayerNoRb : MonoBehaviour
         animator.SetBool("Climb", onLadder);
         if (onLadder)
         {
+            Debug.Log("speed : " + speed.y);
             if (Input.GetKey(toucheHaut) || manetteUp())
             {
                 if (isTouchingRoof())
@@ -934,13 +941,24 @@ public class PlayerNoRb : MonoBehaviour
                 }
                 else
                 {
-                    speed = new Vector2(0, climbSpeed);
+                    if (speed.y < -4)
+                        speed = new Vector2(0, 0);
+                    else
+                        speed = new Vector2(0, climbSpeed);
                 }
 
             }
             else if (Input.GetKey(toucheAccroupi) || manetteDown())
             {
-                speed = new Vector2(0, -climbSpeed);
+               
+                if (speed.y > 4)
+                {
+                    speed = new Vector2(0, 0);
+                    
+                }
+                   
+                else
+                    speed = new Vector2(0, -climbSpeed);
             }
             currentGravityScale = 0;
         }
