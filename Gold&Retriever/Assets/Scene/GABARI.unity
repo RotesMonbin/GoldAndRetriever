@@ -7506,17 +7506,8 @@ Prefab:
       value: 41
       objectReference: {fileID: 0}
     - target: {fileID: 1376148308164858, guid: f4eee5f9e94c9cb4a937faf7850057a4, type: 2}
-      propertyPath: m_Layer
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 1376148308164858, guid: f4eee5f9e94c9cb4a937faf7850057a4, type: 2}
       propertyPath: m_Name
       value: SpikeQuiMonte (6)
-      objectReference: {fileID: 0}
-    - target: {fileID: 212594827149933162, guid: f4eee5f9e94c9cb4a937faf7850057a4,
-        type: 2}
-      propertyPath: m_SortingOrder
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f4eee5f9e94c9cb4a937faf7850057a4, type: 2}
