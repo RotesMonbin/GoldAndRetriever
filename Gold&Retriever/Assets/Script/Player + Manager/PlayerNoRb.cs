@@ -953,7 +953,7 @@ public class PlayerNoRb : MonoBehaviour
                 }
                 else
                 {
-                    speed = new Vector2(speed.x, climbSpeed);
+                    speed = new Vector2(0, climbSpeed);
                 }
 
             }
@@ -963,7 +963,7 @@ public class PlayerNoRb : MonoBehaviour
                 if (isTouchingGround())
                     speed = new Vector2(0, 0);
                 else 
-                    speed = new Vector2(speed.x, -climbSpeed);
+                    speed = new Vector2(0 , -climbSpeed);
             }
             else
             {
