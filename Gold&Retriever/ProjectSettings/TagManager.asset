@@ -25,6 +25,7 @@ TagManager:
   - SolQuiTombe
   - SolBrulant
   - Spear
+  - MovingPlateform
   layers:
   - Default
   - TransparentFX
