@@ -903,13 +903,20 @@ public class PlayerNoRb : MonoBehaviour
             if (c.gameObject.tag == "rope")
                 onLadder = true;
 
-        animator.SetBool("Climb", onLadder);
+        
         if (onLadder)
-        {
-            speed.y = 0;
-   
-            if (Input.GetKey(toucheHaut) || manetteUp())
+        { 
+            if(!isTouchingGround())
             {
+                speed = new Vector2(speed.x, 0);
+                animator.SetBool("Climb", true);
+            }
+    
+            if (Input.GetKey(toucheHaut) || manetteUp() )
+            {
+                currentGravityScale = 0;
+                animator.SetBool("Climb", onLadder);
+                speed.y = 0;
                 if (isTouchingRoof())
                 {
                     speed = new Vector2(0, 0);
@@ -922,7 +929,9 @@ public class PlayerNoRb : MonoBehaviour
             }
             else if (Input.GetKey(toucheAccroupi) || manetteDown())
             {
-
+                currentGravityScale = 0;
+                animator.SetBool("Climb", onLadder);
+                speed.y = 0;
                 if (isTouchingGround())
                     speed = new Vector2(0, 0);
                 else 
@@ -930,10 +939,12 @@ public class PlayerNoRb : MonoBehaviour
             }
             else
             {
-                speed = new Vector2(speed.x, 0);
+                currentGravityScale = gravityScale;
+                animator.SetBool("Climb", false);
+                speed = new Vector2(speed.x,0);
 
             }
-            currentGravityScale = 0;
+           
         }
         else
         {
