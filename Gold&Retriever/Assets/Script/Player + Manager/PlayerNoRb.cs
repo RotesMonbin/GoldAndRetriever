@@ -225,6 +225,7 @@ public class PlayerNoRb : MonoBehaviour
     }
 
     private bool AlreadyOnGround = false;
+    private Vector3 lastGroundPosition;
     private void Gravity()
     {
         if (!held)
@@ -248,6 +249,15 @@ public class PlayerNoRb : MonoBehaviour
                     this.transform.Translate(0, dist, 0);
                 }
                 AlreadyOnGround = true;
+                lastGroundPosition = coll.transform.position;
+            }
+            else
+            {
+                if (coll.tag == "MovingPlateform")
+                {
+                    transform.position += new Vector3(0, coll.transform.position.y - lastGroundPosition.y,0);
+                    lastGroundPosition = coll.transform.position;
+                }
             }
         }
     }
@@ -774,11 +784,12 @@ public class PlayerNoRb : MonoBehaviour
             moveHeldObject();
             if (heldObject.tag == "Player")
             {
-                heldObject.gameObject.GetComponent<PlayerNoRb>().ropeActionReverse();
-                heldObject.GetComponent<PlayerNoRb>().animator.SetBool("Held", false);
-                heldObject.GetComponent<PlayerNoRb>().held = false;
+                PlayerNoRb girl = heldObject.gameObject.GetComponent<PlayerNoRb>();
+                girl.ropeActionReverse();
+                girl.animator.SetBool("Held", false);
+                girl.held = false;
 
-                heldObject.GetComponent<PlayerNoRb>().speed = new Vector2(throwPower * this.transform.localScale.x, throwPower * 0.8f);
+                girl.speed = new Vector2(girl.runningMaxSpeed * this.transform.localScale.x, throwPower * 0.8f);
             }
             else
             {
