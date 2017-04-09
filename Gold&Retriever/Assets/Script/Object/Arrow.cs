@@ -46,7 +46,11 @@ public class Arrow : MonoBehaviour
                 {
                     if (destroyOnKill)
                         Destroy(this.gameObject);
-                    Destroy(coll.gameObject);
+                    Monstre m=coll.GetComponent<Monstre>();
+                    if (m != null)
+                    {
+                        m.dead();
+                    }
                 }
                 else if (coll.gameObject.layer == LayerMask.NameToLayer("decors"))
                 {

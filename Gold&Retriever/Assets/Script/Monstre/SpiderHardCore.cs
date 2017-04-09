@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpiderHardCore : MonoBehaviour
+public class SpiderHardCore : Monstre
 {
     [Header("Rigide Body")]
     [SerializeField]
@@ -163,7 +163,7 @@ public class SpiderHardCore : MonoBehaviour
 
 
     #region dead
-    public void dead()
+    public override void dead()
     {
         this.gameObject.layer = 0;
         Destroy(this.gameObject);

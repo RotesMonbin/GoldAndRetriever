@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Frog : MonoBehaviour
+public class Frog : Monstre
 {
 
     public Rigidbody2D rb;
@@ -55,7 +55,7 @@ public class Frog : MonoBehaviour
         return (Physics2D.OverlapBox(new Vector2(feet.transform.position.x, feet.transform.position.y), feet.size, 0, decors));
     }
 
-    public void dead()
+    public override void dead()
     {
         this.gameObject.layer = 0;
         Destroy(this.GetComponent<Rigidbody2D>());

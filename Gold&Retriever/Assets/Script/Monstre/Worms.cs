@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Worms : MonoBehaviour {
+public class Worms : Monstre {
 
     public Rigidbody2D rb;
     private int direction;
@@ -67,7 +67,7 @@ public class Worms : MonoBehaviour {
             this.transform.localScale.z);
         direction = -direction;
     }
-    public void dead()
+    public override void dead()
     {
         this.gameObject.layer = 0;
         Destroy(this.GetComponent<Rigidbody2D>());

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpiderSimple : MonoBehaviour
+public class SpiderSimple : Monstre
 { 
     [Header("Animation")]
     [SerializeField]
@@ -81,7 +81,7 @@ public class SpiderSimple : MonoBehaviour
 
 
     #region dead
-    public void dead()
+    public override void dead()
     {
         this.gameObject.layer = 0;
         Destroy(this.gameObject);
