@@ -903,16 +903,16 @@ public class PlayerNoRb : MonoBehaviour
             if (c.gameObject.tag == "rope")
                 onLadder = true;
 
-        
+
         if (onLadder)
-        { 
-            if(!isTouchingGround())
+        {
+            if (!isTouchingGround())
             {
                 speed = new Vector2(speed.x, 0);
                 animator.SetBool("Climb", true);
             }
-    
-            if (Input.GetKey(toucheHaut) || manetteUp() )
+
+            if (Input.GetKey(toucheHaut) || manetteUp())
             {
                 currentGravityScale = 0;
                 animator.SetBool("Climb", onLadder);
@@ -941,10 +941,10 @@ public class PlayerNoRb : MonoBehaviour
             {
                 currentGravityScale = gravityScale;
                 animator.SetBool("Climb", false);
-                speed = new Vector2(speed.x,0);
+                speed = new Vector2(speed.x, 0);
 
             }
-           
+
         }
         else
         {
@@ -1081,7 +1081,7 @@ public class PlayerNoRb : MonoBehaviour
             {
                 if (gotSpear)
                 {
-                    timeForcetemp += Time.deltaTime;
+                    timeForcetemp = Time.deltaTime + timeForcetemp >= 1.5f ? 1.5f : Time.deltaTime + timeForcetemp;
                     animator.SetFloat("spearCharge", timeForcetemp);
                 }
             }
@@ -1093,7 +1093,7 @@ public class PlayerNoRb : MonoBehaviour
 
                     GameObject spear = Instantiate(javelinOrArrowPrefab);
                     spear.transform.position = this.transform.position;
-                    spear.GetComponent<Arrow>().tirNormal(direction(), timeForcetemp*5);
+                    spear.GetComponent<Arrow>().tirSpear(direction(), timeForcetemp);
 
                     managerJoueur.changementItemUtile(objectUtile.none, J1actif);
                     gotSpear = false;
