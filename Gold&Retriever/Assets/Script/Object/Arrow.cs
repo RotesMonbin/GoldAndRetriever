@@ -71,6 +71,11 @@ public class Arrow : MonoBehaviour
         rb.AddForce(new Vector2((100 + (indicePuissance > 0.5f ? 200 : 50 ) * indicePuissance) * direction, 20 + (indicePuissance > 0.5f ? 150 : 50) * (1 - indicePuissance)));
     }
 
+    public void tirSpear(float direction, float indicePuissance)
+    {
+        rb.AddForce(new Vector2((100 + (indicePuissance > 0.5f ? 200 : 50) * indicePuissance) * direction, 20 + (indicePuissance > 0.5f ? 150 : 50) * (1 - indicePuissance)));
+    }
+
     public void tirHaut(float indicePuissance)
     {
     

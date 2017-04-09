@@ -211,7 +211,7 @@ public class PlayerNoRb : MonoBehaviour
         enemieColision();
         DamageOnFall();
         GameOver();
-        if(rechargementEnCour)
+        if (rechargementEnCour)
             timetempArrow += Time.deltaTime;
     }
     #region RB manager
@@ -384,7 +384,7 @@ public class PlayerNoRb : MonoBehaviour
         }
         if (!dontMove && !held)
         {
-           
+
             if ((Input.GetKey(toucheGauche) || manetteLeft()))
             {
                 ropeActionReverse();
@@ -394,9 +394,9 @@ public class PlayerNoRb : MonoBehaviour
                 {
                     if ((manetteRT() && speed.x > -runningMaxSpeed) || speed.x > -walkingMaxSpeed)
                     {
-                        if(speed.x > 0)
+                        if (speed.x > 0)
                         {
-                            speed -= new Vector2(acceleration * slowPower *  Time.deltaTime, 0);
+                            speed -= new Vector2(acceleration * slowPower * Time.deltaTime, 0);
                         }
                         else
                         {
@@ -419,7 +419,7 @@ public class PlayerNoRb : MonoBehaviour
                     {
                         if (speed.x < 0)
                         {
-                            speed += new Vector2(acceleration * slowPower* Time.deltaTime, 0);
+                            speed += new Vector2(acceleration * slowPower * Time.deltaTime, 0);
                         }
                         else
                         {
@@ -604,7 +604,7 @@ public class PlayerNoRb : MonoBehaviour
         foreach (Collider2D c in cols)
         {
             Monstre m = c.GetComponent<Monstre>();
-            if (m!=null)
+            if (m != null)
             {
                 if (!m.isUnderPlayer(feet.transform.position))
                 {
@@ -778,7 +778,7 @@ public class PlayerNoRb : MonoBehaviour
                 heldObject.GetComponent<PlayerNoRb>().animator.SetBool("Held", false);
                 heldObject.GetComponent<PlayerNoRb>().held = false;
 
-                heldObject.GetComponent<PlayerNoRb>().speed = new Vector2(throwPower * this.transform.localScale.x, throwPower*0.8f );
+                heldObject.GetComponent<PlayerNoRb>().speed = new Vector2(throwPower * this.transform.localScale.x, throwPower * 0.8f);
             }
             else
             {
@@ -895,7 +895,7 @@ public class PlayerNoRb : MonoBehaviour
 
     void touchLadder()
     {
-        
+
         Collider2D[] cols = Physics2D.OverlapBoxAll(boxCollider.transform.position, boxCollider.size, 0);
 
         onLadder = false;
@@ -907,7 +907,7 @@ public class PlayerNoRb : MonoBehaviour
         if (onLadder)
         {
             speed.y = 0;
-   
+
             if (Input.GetKey(toucheHaut) || manetteUp())
             {
                 if (isTouchingRoof())
@@ -925,8 +925,8 @@ public class PlayerNoRb : MonoBehaviour
 
                 if (isTouchingGround())
                     speed = new Vector2(0, 0);
-                else 
-                    speed = new Vector2(0 , -climbSpeed);
+                else
+                    speed = new Vector2(0, -climbSpeed);
             }
             else
             {
@@ -1014,7 +1014,7 @@ public class PlayerNoRb : MonoBehaviour
         {
             if (Input.GetKeyUp(toucheWeapon) || Input.GetButtonUp(manetteWeapon))
             {
-                
+
                 if (!rechargementEnCour)
                 {
                     dontMove = false;
@@ -1052,8 +1052,8 @@ public class PlayerNoRb : MonoBehaviour
                             animator.SetBool("arrowBas", false);
                         }
 
-                         timeForcetemp += Time.deltaTime;
-                        animator.SetFloat("ForceBow",timeForcetemp);
+                        timeForcetemp += Time.deltaTime;
+                        animator.SetFloat("ForceBow", timeForcetemp);
                     }
                 }
             }
@@ -1070,37 +1070,25 @@ public class PlayerNoRb : MonoBehaviour
             {
                 if (gotSpear)
                 {
-                    if (Input.GetKey(toucheHaut) || manetteUp())
-                    {
-
-                        //setanimator to J1 with spear Up
-                    }
-                    else
-                    {
-                        //setanimator to J1 with spear Down
-                    }
+                    timeForcetemp += Time.deltaTime;
+                    animator.SetFloat("spearCharge", timeForcetemp);
                 }
-
-
             }
 
             if (Input.GetKeyUp(toucheWeapon) || Input.GetButtonUp(manetteWeapon))
             {
                 if (gotSpear)
                 {
+
                     GameObject spear = Instantiate(javelinOrArrowPrefab);
                     spear.transform.position = this.transform.position;
-                    if (Input.GetKey(toucheHaut) || manetteUp())
-                    {
-                        spear.GetComponent<Arrow>().tirHaut(1);
-                    }
-                    else
-                    {
-                        spear.GetComponent<Arrow>().tirNormal(direction(), 1);
-                    }
+                    spear.GetComponent<Arrow>().tirNormal(direction(), timeForcetemp*5);
 
                     managerJoueur.changementItemUtile(objectUtile.none, J1actif);
                     gotSpear = false;
+                    timeForcetemp = 0;
+                    animator.SetFloat("spearCharge", timeForcetemp);
+
                 }
                 else if (spearthrown)
                 {
@@ -1148,7 +1136,7 @@ public class PlayerNoRb : MonoBehaviour
         {
 
             arrowEnCour = Instantiate(javelinOrArrowPrefab);
-            arrowEnCour.transform.position = new Vector2 (this.transform.position.x , this.transform.position.y ) ;
+            arrowEnCour.transform.position = new Vector2(this.transform.position.x, this.transform.position.y);
 
             arrowEnCour.GetComponent<Arrow>().tirHaut(force);
             dejaLancer = true;
@@ -1163,11 +1151,11 @@ public class PlayerNoRb : MonoBehaviour
             rechargementEnCour = true;
 
         }
-        managerJoueur.rechargementArrow(timeBtwArrow); 
+        managerJoueur.rechargementArrow(timeBtwArrow);
     }
 
 
- 
+
     #endregion
 
 
