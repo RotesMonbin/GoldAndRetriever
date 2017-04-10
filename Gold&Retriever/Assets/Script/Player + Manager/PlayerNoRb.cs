@@ -352,9 +352,9 @@ public class PlayerNoRb : MonoBehaviour
         // PIED SAUT 
         if (!dontMove)
         {
-            if ((Input.GetKey(toucheSaut) || Input.GetButton(manetteSaut)) && (isTouchingGround() || held))
+            if ((Input.GetKey(toucheSaut) || Input.GetButton(manetteSaut)) && (isTouchingGround() || held || onLadder))
             {
-
+                onLadder = false;
                 speed += new Vector2(0, jumpPower);
 
                 ropeActionReverse();
@@ -538,12 +538,7 @@ public class PlayerNoRb : MonoBehaviour
             Destroy(coll.gameObject);
         }
 
-        if (coll.gameObject.tag == "Transition Jeu Menu" && managerJoueur.possedeGem())
-        {
-            managerJoueur.changementScene(3);
-            managerJoueur.gemUp();
-        }
-
+   
     }
 
 
@@ -568,6 +563,12 @@ public class PlayerNoRb : MonoBehaviour
         {
             managerJoueur.changementScene(2);
         }
+        if (coll.gameObject.tag == "Transition Jeu Menu" && managerJoueur.possedeGem())
+        {
+            managerJoueur.changementScene(4);
+            managerJoueur.gemUp();
+        }
+
     }
 
     void OnTriggerStay2D(Collider2D coll)
@@ -914,7 +915,7 @@ public class PlayerNoRb : MonoBehaviour
             if (c.gameObject.tag == "rope")
                 onLadder = true;
 
-
+        //Inverser touche haut / onladder
         if (onLadder)
         {
             if (!isTouchingGround())
